@@ -1,0 +1,12 @@
+[
+  {
+    "id": "D-001",
+    "tema": "presión por tiempos",
+    "situacion": "Tienes una entrega programada y llevas retraso.",
+    "opciones": [
+      { "texto": "Aumentar la velocidad para recuperar tiempo", "efecto": { "puntos": -20, "retroceso": 2 } },
+      { "texto": "Mantener una conducción segura y reportar el retraso", "efecto": { "puntos": 15, "avance": 1 } },
+      { "texto": "Ignorar las condiciones de la vía", "efecto": { "puntos": -20, "pierde_turno": true } }
+    ]
+  }
+]

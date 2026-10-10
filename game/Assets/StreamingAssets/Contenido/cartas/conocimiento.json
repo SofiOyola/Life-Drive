@@ -1,0 +1,13 @@
+[
+  {
+    "id": "C-001",
+    "tema": "seguridad vial",
+    "pregunta": "¿Qué debe hacerse antes de iniciar una operación de transporte?",
+    "opciones": [
+      "Realizar la inspección preoperacional del vehículo",
+      "Salir de inmediato para evitar retrasos",
+      "Revisar solo el combustible"
+    ],
+    "correcta": 0
+  }
+]

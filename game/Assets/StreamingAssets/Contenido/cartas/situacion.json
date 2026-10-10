@@ -1,0 +1,14 @@
+[
+  {
+    "id": "S-001",
+    "tema": "protocolos de emergencia",
+    "situacion": "Se presenta una falla mecánica durante el recorrido. ¿Cuál es el procedimiento adecuado?",
+    "opciones": [
+      "Detenerse en un lugar seguro, señalizar y reportar",
+      "Seguir conduciendo hasta el siguiente pueblo",
+      "Detenerse en plena vía sin señalizar"
+    ],
+    "correcta": 0,
+    "penalizacion": { "puntos": -20, "pierde_turno": true }
+  }
+]

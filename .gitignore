@@ -1,0 +1,22 @@
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+
+# Unity
+game/[Ll]ibrary/
+game/[Tt]emp/
+game/[Oo]bj/
+game/[Bb]uild/
+game/[Bb]uilds/
+game/[Ll]ogs/
+game/[Uu]ser[Ss]ettings/
+game/.vs/
+game/.idea/
+game/*.csproj
+game/*.sln
+game/*.pidb
+game/*.suo
+game/*.user
+game/MemoryCaptures/
+game/Assets/Plugins/Android/*.keystore

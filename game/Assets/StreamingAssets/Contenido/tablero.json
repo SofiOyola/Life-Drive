@@ -1,0 +1,19 @@
+{
+  "casillas_total": 50,
+  "tipos": {
+    "trivia": { "icono": "🟦", "mazo": "conocimiento" },
+    "decision": { "icono": "🟨", "mazo": "decision" },
+    "emergencia": { "icono": "🚨", "mazo": "situacion" },
+    "seguridad": { "icono": "🟩", "puntos": 10 },
+    "riesgo": { "icono": "🚧", "mazo": "situacion" },
+    "buena_practica": { "icono": "⭐", "avance": 3, "puntos": 20 }
+  },
+  "puntaje": {
+    "destino": 50,
+    "trivia_correcta": 10,
+    "buena_decision": 15,
+    "buena_practica": 20,
+    "incidente": -20
+  },
+  "recorrido": []
+}
