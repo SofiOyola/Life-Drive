@@ -20,3 +20,18 @@ game/*.suo
 game/*.user
 game/MemoryCaptures/
 game/Assets/Plugins/Android/*.keystore
+
+# Unity - archivos generados localmente
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
+# IDE
+.vs/
+.vscode/
+*.csproj
+*.sln
+*.slnx
+*.user
