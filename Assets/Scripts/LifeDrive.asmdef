@@ -1,0 +1,9 @@
+{
+    "name": "LifeDrive",
+    "rootNamespace": "LifeDrive",
+    "references": [
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "autoReferenced": true
+}

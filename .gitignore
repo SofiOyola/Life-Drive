@@ -4,19 +4,23 @@ node_modules/
 .env
 
 # Unity
-game/[Ll]ibrary/
-game/[Tt]emp/
-game/[Oo]bj/
-game/[Bb]uild/
-game/[Bb]uilds/
-game/[Ll]ogs/
-game/[Uu]ser[Ss]ettings/
-game/.vs/
-game/.idea/
-game/*.csproj
-game/*.sln
-game/*.pidb
-game/*.suo
-game/*.user
-game/MemoryCaptures/
-game/Assets/Plugins/Android/*.keystore
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+.vs/
+.idea/
+*.csproj
+*.sln
+*.pidb
+*.suo
+*.user
+MemoryCaptures/
+Assets/Plugins/Android/*.keystore
+
+# Herramientas locales
+.claude/
+CLAUDE.md

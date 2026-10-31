@@ -1,0 +1,344 @@
+{
+  "personajes": [
+    {
+      "id": 1,
+      "nombre": "Andrés",
+      "descripcion": "Conductor con 10 años en carretera"
+    },
+    {
+      "id": 2,
+      "nombre": "Camila",
+      "descripcion": "Conductora de tractocamión"
+    },
+    {
+      "id": 3,
+      "nombre": "Miguel",
+      "descripcion": "Conductor de carga refrigerada"
+    },
+    {
+      "id": 4,
+      "nombre": "Valentina",
+      "descripcion": "Conductora de carga seca"
+    }
+  ],
+  "tramos": [
+    {
+      "id": 1,
+      "nombre": "Inicio de operación",
+      "descripcion": "Patio de la empresa: alistamiento del vehículo",
+      "es_salida": true,
+      "es_destino": false,
+      "siguiente_tramo_id": 2
+    },
+    {
+      "id": 2,
+      "nombre": "Vía principal",
+      "descripcion": "Autopista con derrumbe parcial reportado",
+      "es_salida": false,
+      "es_destino": false,
+      "siguiente_tramo_id": 4
+    },
+    {
+      "id": 3,
+      "nombre": "Vía alterna",
+      "descripcion": "Carretera secundaria, más larga y despejada",
+      "es_salida": false,
+      "es_destino": false,
+      "siguiente_tramo_id": 4
+    },
+    {
+      "id": 4,
+      "nombre": "Destino final",
+      "descripcion": "Centro de distribución del cliente",
+      "es_salida": false,
+      "es_destino": true,
+      "siguiente_tramo_id": 0
+    }
+  ],
+  "situaciones": [
+    {
+      "id": 1,
+      "tramo_id": 1,
+      "orden": 1,
+      "tipo": "PREGUNTA",
+      "tema": "MANTENIMIENTO",
+      "enunciado": "¿Qué debe hacerse antes de iniciar una operación de transporte?",
+      "validada": false,
+      "fecha_validacion": "",
+      "alternativas": [
+        {
+          "id": 1,
+          "descripcion": "Realizar la inspección preoperacional del vehículo",
+          "es_acertada": true,
+          "es_buena_practica": true,
+          "puntos": 20,
+          "retraso_min": 0,
+          "explicacion": "La inspección preoperacional detecta fallas antes de salir y es una buena práctica obligatoria.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 2,
+          "descripcion": "Salir de inmediato para evitar retrasos",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": 0,
+          "retraso_min": 0,
+          "explicacion": "Salir sin inspección expone a fallas de frenos, llantas o luces durante el recorrido.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 3,
+          "descripcion": "Revisar solo el combustible",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": 0,
+          "retraso_min": 0,
+          "explicacion": "El combustible no basta: también se revisan frenos, llantas, luces y amarres de la carga.",
+          "tramo_destino_id": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "tramo_id": 1,
+      "orden": 2,
+      "tipo": "DECISION_RUTA",
+      "tema": "SEGURIDAD_VIAL",
+      "enunciado": "El reporte vial indica un derrumbe parcial en la vía principal, con paso a un solo carril. La vía alterna es más larga.",
+      "validada": false,
+      "fecha_validacion": "",
+      "alternativas": [
+        {
+          "id": 4,
+          "descripcion": "Tomar la vía principal para ahorrar tiempo",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": -20,
+          "retraso_min": 0,
+          "explicacion": "Pasar junto a un derrumbe activo expone el vehículo y la carga a caída de material.",
+          "tramo_destino_id": 2
+        },
+        {
+          "id": 5,
+          "descripcion": "Tomar la vía alterna, más larga pero más segura",
+          "es_acertada": true,
+          "es_buena_practica": false,
+          "puntos": 15,
+          "retraso_min": 40,
+          "explicacion": "Elegiste la ruta segura: tardas más, pero evitas la zona de derrumbe.",
+          "tramo_destino_id": 3
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "tramo_id": 2,
+      "orden": 1,
+      "tipo": "RIESGO",
+      "tema": "NORMAS_EMPRESA",
+      "enunciado": "Tienes una entrega programada y llevas retraso.",
+      "validada": false,
+      "fecha_validacion": "",
+      "alternativas": [
+        {
+          "id": 6,
+          "descripcion": "Aumentar la velocidad para recuperar tiempo",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": -20,
+          "retraso_min": 0,
+          "explicacion": "Exceder la velocidad con carga aumenta la distancia de frenado y el riesgo de volcamiento.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 7,
+          "descripcion": "Mantener una conducción segura y reportar el retraso",
+          "es_acertada": true,
+          "es_buena_practica": true,
+          "puntos": 20,
+          "retraso_min": 10,
+          "explicacion": "Reportar el retraso es el procedimiento correcto: la entrega se reprograma sin poner en riesgo a nadie.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 8,
+          "descripcion": "Ignorar las condiciones de la vía",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": -20,
+          "retraso_min": 0,
+          "explicacion": "Las condiciones de la vía determinan la velocidad segura; ignorarlas provoca incidentes.",
+          "tramo_destino_id": 0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "tramo_id": 2,
+      "orden": 2,
+      "tipo": "DECISION_RUTA",
+      "tema": "SEGURIDAD_VIAL",
+      "enunciado": "Cae neblina densa y la visibilidad baja a pocos metros. Más adelante hay un retorno hacia la vía alterna.",
+      "validada": false,
+      "fecha_validacion": "",
+      "alternativas": [
+        {
+          "id": 9,
+          "descripcion": "Continuar sin reducir la velocidad",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": -20,
+          "retraso_min": 0,
+          "explicacion": "Con baja visibilidad no alcanzarías a frenar ante un obstáculo.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 10,
+          "descripcion": "Reducir la velocidad, encender luces y continuar",
+          "es_acertada": true,
+          "es_buena_practica": false,
+          "puntos": 15,
+          "retraso_min": 15,
+          "explicacion": "Adaptar la velocidad y hacerte visible reduce el riesgo en neblina.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 11,
+          "descripcion": "Tomar el retorno hacia la vía alterna",
+          "es_acertada": true,
+          "es_buena_practica": false,
+          "puntos": 15,
+          "retraso_min": 25,
+          "explicacion": "Cambiar a una vía con mejor visibilidad también es una decisión segura.",
+          "tramo_destino_id": 3
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "tramo_id": 3,
+      "orden": 1,
+      "tipo": "RIESGO",
+      "tema": "FATIGA_PAUSAS",
+      "enunciado": "Llevas cuatro horas conduciendo y sientes los ojos pesados.",
+      "validada": false,
+      "fecha_validacion": "",
+      "alternativas": [
+        {
+          "id": 12,
+          "descripcion": "Detenerse en un lugar seguro y hacer una pausa activa",
+          "es_acertada": true,
+          "es_buena_practica": true,
+          "puntos": 20,
+          "retraso_min": 15,
+          "explicacion": "La pausa activa recupera la atención; la fatiga causa una gran parte de los accidentes en carretera.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 13,
+          "descripcion": "Bajar la ventana y seguir conduciendo",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": -20,
+          "retraso_min": 0,
+          "explicacion": "El aire frío no elimina la fatiga; solo el descanso la reduce.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 14,
+          "descripcion": "Acelerar para llegar antes y descansar allá",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": -20,
+          "retraso_min": 0,
+          "explicacion": "Más velocidad con fatiga multiplica el riesgo de accidente.",
+          "tramo_destino_id": 0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "tramo_id": 4,
+      "orden": 1,
+      "tipo": "EMERGENCIA",
+      "tema": "EMERGENCIAS",
+      "enunciado": "A pocos kilómetros del destino se presenta una falla mecánica. ¿Cuál es el procedimiento adecuado?",
+      "validada": false,
+      "fecha_validacion": "",
+      "alternativas": [
+        {
+          "id": 15,
+          "descripcion": "Detenerse en un lugar seguro, señalizar y reportar",
+          "es_acertada": true,
+          "es_buena_practica": false,
+          "puntos": 15,
+          "retraso_min": 20,
+          "explicacion": "Ese es el protocolo: detenerse fuera de la vía, poner señales y reportar a la empresa.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 16,
+          "descripcion": "Seguir conduciendo hasta el siguiente pueblo",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": -20,
+          "retraso_min": 0,
+          "explicacion": "Conducir con una falla puede convertirla en un accidente.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 17,
+          "descripcion": "Detenerse en plena vía sin señalizar",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": -20,
+          "retraso_min": 0,
+          "explicacion": "Un vehículo detenido sin señales en la vía es un riesgo para los demás conductores.",
+          "tramo_destino_id": 0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "tramo_id": 4,
+      "orden": 2,
+      "tipo": "PREGUNTA",
+      "tema": "MANEJO_CARGA",
+      "enunciado": "Al llegar al destino, ¿qué se debe verificar antes de iniciar el descargue?",
+      "validada": false,
+      "fecha_validacion": "",
+      "alternativas": [
+        {
+          "id": 18,
+          "descripcion": "El estado de los amarres y la estabilidad de la carga",
+          "es_acertada": true,
+          "es_buena_practica": false,
+          "puntos": 10,
+          "retraso_min": 0,
+          "explicacion": "La carga puede haberse desplazado en el viaje; revisarla evita caídas al abrir.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 19,
+          "descripcion": "Solo que el cliente firme la remisión",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": 0,
+          "retraso_min": 0,
+          "explicacion": "La remisión es necesaria, pero primero se verifica que el descargue sea seguro.",
+          "tramo_destino_id": 0
+        },
+        {
+          "id": 20,
+          "descripcion": "Nada, el descargue lo hace el cliente",
+          "es_acertada": false,
+          "es_buena_practica": false,
+          "puntos": 0,
+          "retraso_min": 0,
+          "explicacion": "El conductor sigue siendo responsable de entregar la carga en condiciones seguras.",
+          "tramo_destino_id": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "LifeDrive.Editor",
+    "rootNamespace": "LifeDrive.Editor",
+    "references": [
+        "LifeDrive"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ]
+}
