@@ -11,15 +11,19 @@ node_modules/
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
+MemoryCaptures/
+Assets/Plugins/Android/*.keystore
+
+# IDE
 .vs/
+.vscode/
 .idea/
 *.csproj
 *.sln
+*.slnx
 *.pidb
 *.suo
 *.user
-MemoryCaptures/
-Assets/Plugins/Android/*.keystore
 
 # Herramientas locales
 .claude/
