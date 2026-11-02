@@ -13,10 +13,33 @@ MonoBehaviour:
   m_Name: DELIVERY
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: DELIVERY
-  nombre: DELIVERY
-  descripcion: "Fondo planificado. PLACEHOLDER: imagen y conexiones pendientes de definici\xF3n."
+  nombre: "Centro de distribuci\xF3n"
+  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
   categoria: 4
   fondo: {fileID: 0}
   miniatura: {fileID: 0}
   origen: {fileID: 0}
   siguientes: []
+  entrada: {x: 0, y: 0.5}
+  salida: {x: 1, y: 0.5}
+  anchoViaPixeles: 32
+  trayectoria:
+  - {x: 0, y: 0.5}
+  - {x: 0.18, y: 0.5}
+  - {x: 0.38, y: 0.5}
+  - {x: 0.62, y: 0.5}
+  - {x: 0.82, y: 0.5}
+  - {x: 1, y: 0.5}
+  paisaje: "Acceso \xFAnico a patio log\xEDstico; muelles fuera de trayectoria."
+  vegetacionRelieve: Jardines bajos y explanada.
+  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
+  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  origenes:
+  - {fileID: 11400000, guid: 617313aac7171764393f4935e97f70ef, type: 2}
+  - {fileID: 11400000, guid: ebbca65acc092104a90ea31c4c0ac25d, type: 2}
+  - {fileID: 11400000, guid: 236bc5c1215e4b74597a2e140190d900, type: 2}
+  - {fileID: 11400000, guid: a0fdbf41912ab5340957aade8d25e049, type: 2}
+  - {fileID: 11400000, guid: 4c7c9c1a26bb0f04988ce64040832aea, type: 2}
+  - {fileID: 11400000, guid: 9607fb6c28838af4495108b8fbf4a0d8, type: 2}
+  - {fileID: 11400000, guid: be29c6ca84dd9fd428f503b716240d21, type: 2}
+  - {fileID: 11400000, guid: 4fc88176f16f30d4abea67d80f3766cf, type: 2}

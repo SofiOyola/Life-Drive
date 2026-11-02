@@ -16,5 +16,16 @@ namespace LifeDrive.Mapas
         public Texture2D miniatura;
         public MapaVisual origen;
         public MapaVisual[] siguientes = new MapaVisual[0];
+        [Header("Continuidad visual · coordenadas normalizadas, Y hacia arriba")]
+        public Vector2 entrada = new Vector2(0, .5f);
+        public Vector2 salida = new Vector2(1, .5f);
+        public float anchoViaPixeles = 32;
+        public Vector2[] trayectoria = new Vector2[0];
+        [TextArea] public string paisaje;
+        [TextArea] public string vegetacionRelieve;
+        [TextArea] public string caracteristicasVia;
+        [TextArea] public string continuidad;
+        [Tooltip("DELIVERY admite varios predecesores; origen solo representa el padre único de las ramas.")]
+        public MapaVisual[] origenes = new MapaVisual[0];
     }
 }

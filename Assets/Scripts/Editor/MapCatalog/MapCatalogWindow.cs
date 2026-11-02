@@ -48,6 +48,8 @@ namespace LifeDrive.Editor
         {
             catalogo = (CatalogoMapas)EditorGUILayout.ObjectField("Catálogo", catalogo, typeof(CatalogoMapas), false);
             if (catalogo == null) { EditorGUILayout.HelpBox("Selecciona un catálogo.", MessageType.Info); return; }
+            var problemas = ValidadorContinuidad.Revisar(catalogo);
+            EditorGUILayout.HelpBox(problemas.Count == 0 ? "Continuidad: 16 fondos y árbol completo válidos." : string.Join("\n", problemas), problemas.Count == 0 ? MessageType.Info : MessageType.Warning);
             EditorGUILayout.LabelField($"{catalogo.mapas.Length} fondos · clic para ampliar", EditorStyles.boldLabel);
             if (GUILayout.Button("Seleccionar catálogo y editar asociaciones en Inspector")) Selection.activeObject = catalogo;
             scroll = EditorGUILayout.BeginScrollView(scroll, GUILayout.Height(235));

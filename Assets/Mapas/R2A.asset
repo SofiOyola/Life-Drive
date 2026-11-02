@@ -13,10 +13,28 @@ MonoBehaviour:
   m_Name: R2A
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R2A
-  nombre: R2A
-  descripcion: "Fondo planificado. PLACEHOLDER: imagen y conexiones pendientes de definici\xF3n."
+  nombre: Ribera del valle
+  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
   categoria: 2
   fondo: {fileID: 0}
   miniatura: {fileID: 0}
-  origen: {fileID: 0}
-  siguientes: []
+  origen: {fileID: 11400000, guid: 7c2d886d61b1b314fb3a544cbade0694, type: 2}
+  siguientes:
+  - {fileID: 11400000, guid: 617313aac7171764393f4935e97f70ef, type: 2}
+  - {fileID: 11400000, guid: ebbca65acc092104a90ea31c4c0ac25d, type: 2}
+  entrada: {x: 0, y: 0.5}
+  salida: {x: 1, y: 0.5}
+  anchoViaPixeles: 32
+  trayectoria:
+  - {x: 0, y: 0.5}
+  - {x: 0.18, y: 0.5}
+  - {x: 0.38, y: 0.7}
+  - {x: 0.62, y: 0.55}
+  - {x: 0.82, y: 0.5}
+  - {x: 1, y: 0.5}
+  paisaje: "R\xEDo al norte, paralelo a carretera."
+  vegetacionRelieve: Guadua y cultivos bajos.
+  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
+  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  origenes:
+  - {fileID: 11400000, guid: 7c2d886d61b1b314fb3a544cbade0694, type: 2}

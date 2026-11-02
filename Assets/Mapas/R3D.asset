@@ -13,10 +13,27 @@ MonoBehaviour:
   m_Name: R3D
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R3D
-  nombre: R3D
-  descripcion: "Fondo planificado. PLACEHOLDER: imagen y conexiones pendientes de definici\xF3n."
+  nombre: Quebrada rural
+  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
   categoria: 3
   fondo: {fileID: 0}
   miniatura: {fileID: 0}
-  origen: {fileID: 0}
-  siguientes: []
+  origen: {fileID: 11400000, guid: ca448b15b02ad9340a6bb8d2b576e1d4, type: 2}
+  siguientes:
+  - {fileID: 11400000, guid: 31ca77cdf2d9cd449ae78d2d88acbeb3, type: 2}
+  entrada: {x: 0, y: 0.5}
+  salida: {x: 1, y: 0.5}
+  anchoViaPixeles: 32
+  trayectoria:
+  - {x: 0, y: 0.5}
+  - {x: 0.18, y: 0.5}
+  - {x: 0.38, y: 0.65}
+  - {x: 0.62, y: 0.4}
+  - {x: 0.82, y: 0.5}
+  - {x: 1, y: 0.5}
+  paisaje: "Quebrada al sur; v\xEDa sobre terraza."
+  vegetacionRelieve: "Guadua y peque\xF1os taludes."
+  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
+  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  origenes:
+  - {fileID: 11400000, guid: ca448b15b02ad9340a6bb8d2b576e1d4, type: 2}
