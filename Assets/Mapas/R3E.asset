@@ -43,16 +43,12 @@ MonoBehaviour:
   - {x: 0.5887265, y: 0.52416354}
   - {x: 0.6325678, y: 0.50446093}
   - {x: 0.65553236, y: 0.5}
-  - {x: 0.6868476, y: 0.5}
-  - {x: 0.6889353, y: 0.5033457}
-  - {x: 0.697286, y: 0.50520444}
-  - {x: 0.6993737, y: 0.5026022}
-  - {x: 0.7557411, y: 0.5092937}
-  - {x: 0.7599165, y: 0.5152417}
-  - {x: 0.76617956, y: 0.5137546}
-  - {x: 0.7724426, y: 0.5055762}
-  - {x: 0.81628394, y: 0.49814126}
-  - {x: 0.9749478, y: 0.5}
+  - {x: 0.69, y: 0.501}
+  - {x: 0.72, y: 0.507}
+  - {x: 0.75, y: 0.51}
+  - {x: 0.78, y: 0.504}
+  - {x: 0.82, y: 0.5}
+  - {x: 0.9, y: 0.5}
   - {x: 1, y: 0.5}
   paisaje: "Descenso despu\xE9s del descanso"
   vegetacionRelieve: "Vegetaci\xF3n andina, taludes verdes y valle abierto."
@@ -60,3 +56,9 @@ MonoBehaviour:
   continuidad: "Entrada (0,.5), salida (1,.5), tangentes hacia este; ancho nominal 32 px sobre 640x360. \xDAnico siguiente DELIVERY por futura transici\xF3n de escena. Ver R3EFGHContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: 42a4f7378f7bbff4a89e20af6c947565, type: 2}
+  zonaEntrega:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0

@@ -27,10 +27,27 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.65}
-  - {x: 0.62, y: 0.65}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.1, y: 0.5}
+  - {x: 0.16, y: 0.5}
+  - {x: 0.19, y: 0.503}
+  - {x: 0.22, y: 0.515}
+  - {x: 0.25, y: 0.537}
+  - {x: 0.28, y: 0.57}
+  - {x: 0.31, y: 0.598}
+  - {x: 0.34, y: 0.62}
+  - {x: 0.37, y: 0.632}
+  - {x: 0.4, y: 0.634}
+  - {x: 0.5, y: 0.634}
+  - {x: 0.59, y: 0.634}
+  - {x: 0.62, y: 0.632}
+  - {x: 0.65, y: 0.62}
+  - {x: 0.68, y: 0.598}
+  - {x: 0.71, y: 0.57}
+  - {x: 0.74, y: 0.537}
+  - {x: 0.77, y: 0.515}
+  - {x: 0.8, y: 0.503}
+  - {x: 0.84, y: 0.5}
+  - {x: 0.92, y: 0.5}
   - {x: 1, y: 0.5}
   paisaje: Valle abierto con fincas dispersas.
   vegetacionRelieve: "Potreros y \xE1rboles aislados."
@@ -38,3 +55,9 @@ MonoBehaviour:
   continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
   origenes:
   - {fileID: 11400000, guid: 40a837d8c1e141f45af776797d13ebb0, type: 2}
+  zonaEntrega:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
