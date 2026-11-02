@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: S0
   nombre: Patio de salida
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  descripcion: "PROTOTIPO VISUAL generado con IA. Cuadr\xEDcula 480x270, exportaci\xF3n nearest-neighbor 1920x1080. Pendiente corregir perspectiva cenital estricta y verificar ancho exacto antes de arte definitivo."
   categoria: 0
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: 36f33500b79d0c747824a52eab08ad29, type: 3}
+  miniatura: {fileID: 2800000, guid: 82dd9d35f1a91f4448058bb39afd2756, type: 3}
   origen: {fileID: 0}
   siguientes:
   - {fileID: 11400000, guid: 7c2d886d61b1b314fb3a544cbade0694, type: 2}
