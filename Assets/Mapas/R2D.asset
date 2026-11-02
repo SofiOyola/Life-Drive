@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R2D
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R2D
-  nombre: Meseta rural
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: Corredor rural industrial
+  descripcion: PROTOTIPO VISUAL. IA con S0, R1A y R1B como referencias. 480x270 escalado nearest-neighbor a 1920x1080. Trayectoria trazada sobre el PNG; ver R2Continuidad.md.
   categoria: 2
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: 0f2c2ab88b4495542b13b04bb9f9fa5f, type: 3}
+  miniatura: {fileID: 2800000, guid: f8cec03e5cba1b84fa799df2f286c5b1, type: 3}
   origen: {fileID: 11400000, guid: 9464a1d4146033f439140d3640f6933f, type: 2}
   siguientes:
   - {fileID: 11400000, guid: be29c6ca84dd9fd428f503b716240d21, type: 2}
@@ -27,14 +27,27 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.3}
-  - {x: 0.62, y: 0.4}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.1, y: 0.5}
+  - {x: 0.17, y: 0.5}
+  - {x: 0.21, y: 0.48}
+  - {x: 0.25, y: 0.43}
+  - {x: 0.29, y: 0.37}
+  - {x: 0.33, y: 0.33}
+  - {x: 0.37, y: 0.315}
+  - {x: 0.41, y: 0.315}
+  - {x: 0.45, y: 0.325}
+  - {x: 0.5, y: 0.345}
+  - {x: 0.55, y: 0.365}
+  - {x: 0.6, y: 0.395}
+  - {x: 0.65, y: 0.43}
+  - {x: 0.7, y: 0.47}
+  - {x: 0.75, y: 0.495}
+  - {x: 0.8, y: 0.5}
+  - {x: 0.9, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: Meseta con parcelas.
+  paisaje: Corredor rural industrial
   vegetacionRelieve: Pastos altos y cercas.
   caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  continuidad: "Entrada (0,.5) y salida (1,.5), rumbo este, ancho nominal 32 en 640x360. Enlace a R3G/R3H. Prototipo con tolerancia de raster de 3 px l\xF3gicos. Ver R2Continuidad.md."
   origenes:
   - {fileID: 11400000, guid: 9464a1d4146033f439140d3640f6933f, type: 2}

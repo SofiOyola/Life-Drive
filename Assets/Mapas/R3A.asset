@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R3A
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R3A
-  nombre: Puente de ribera
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: Corredor prudente
+  descripcion: "PROTOTIPO VISUAL generado con IA tomando R2A/R2B como referencias PNG. Base 480x270 y exportaci\xF3n nearest-neighbor 1920x1080. Ver R3ABCDContinuidad.md."
   categoria: 3
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: bb873c37465f45943b5fdb464bd3d1cf, type: 3}
+  miniatura: {fileID: 2800000, guid: a6c02c926f048c2469d40ec1a3c56422, type: 3}
   origen: {fileID: 11400000, guid: 58276c966fd648647b5c24586d36bb77, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 31ca77cdf2d9cd449ae78d2d88acbeb3, type: 2}
@@ -26,14 +26,69 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.5}
-  - {x: 0.62, y: 0.5}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.016701462, y: 0.5}
+  - {x: 0.033402923, y: 0.5}
+  - {x: 0.050104383, y: 0.49628252}
+  - {x: 0.06680585, y: 0.49628252}
+  - {x: 0.08350731, y: 0.49628252}
+  - {x: 0.10020877, y: 0.49628252}
+  - {x: 0.11691023, y: 0.49628252}
+  - {x: 0.1336117, y: 0.49814126}
+  - {x: 0.15031315, y: 0.4992565}
+  - {x: 0.16701461, y: 0.504461}
+  - {x: 0.18371607, y: 0.5100372}
+  - {x: 0.20041753, y: 0.5197026}
+  - {x: 0.217119, y: 0.53048325}
+  - {x: 0.23382045, y: 0.54275095}
+  - {x: 0.25052193, y: 0.5576208}
+  - {x: 0.2672234, y: 0.5724907}
+  - {x: 0.28392485, y: 0.58698887}
+  - {x: 0.3006263, y: 0.60185874}
+  - {x: 0.31732777, y: 0.61598516}
+  - {x: 0.33402923, y: 0.62899625}
+  - {x: 0.3507307, y: 0.63977695}
+  - {x: 0.36743215, y: 0.65055764}
+  - {x: 0.3841336, y: 0.66431224}
+  - {x: 0.40083507, y: 0.667658}
+  - {x: 0.41753653, y: 0.6736059}
+  - {x: 0.434238, y: 0.67695165}
+  - {x: 0.45093945, y: 0.68215615}
+  - {x: 0.4676409, y: 0.6851301}
+  - {x: 0.48434237, y: 0.6858736}
+  - {x: 0.50104386, y: 0.6858736}
+  - {x: 0.5177453, y: 0.6858736}
+  - {x: 0.5344468, y: 0.6843866}
+  - {x: 0.55114824, y: 0.68215615}
+  - {x: 0.5678497, y: 0.6773234}
+  - {x: 0.58455116, y: 0.6780669}
+  - {x: 0.6012526, y: 0.66877323}
+  - {x: 0.6179541, y: 0.6635688}
+  - {x: 0.63465554, y: 0.6509294}
+  - {x: 0.651357, y: 0.64126396}
+  - {x: 0.66805845, y: 0.63048327}
+  - {x: 0.6847599, y: 0.61635685}
+  - {x: 0.7014614, y: 0.60260224}
+  - {x: 0.71816283, y: 0.5873606}
+  - {x: 0.7348643, y: 0.57211894}
+  - {x: 0.75156575, y: 0.55650556}
+  - {x: 0.7682672, y: 0.5416357}
+  - {x: 0.7849687, y: 0.5289963}
+  - {x: 0.80167013, y: 0.5182156}
+  - {x: 0.8183716, y: 0.5092937}
+  - {x: 0.83507305, y: 0.50408924}
+  - {x: 0.8517745, y: 0.4992565}
+  - {x: 0.868476, y: 0.49814126}
+  - {x: 0.88517743, y: 0.4959108}
+  - {x: 0.9018789, y: 0.49628252}
+  - {x: 0.91858035, y: 0.49628252}
+  - {x: 0.9352818, y: 0.49628252}
+  - {x: 0.9519833, y: 0.49628252}
+  - {x: 0.96868473, y: 0.5}
+  - {x: 0.9853862, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: Puente recto sobre cauce norte-sur en x=.5.
-  vegetacionRelieve: "Vegetaci\xF3n riparia sin cubrir calzada."
-  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  paisaje: Corredor prudente
+  vegetacionRelieve: "Vegetaci\xF3n tropical y andina densa, taludes estables."
+  caracteristicasVia: Asfalto mantenido, centro amarillo y bordes blancos; carriles despejados.
+  continuidad: "Entrada (0,.5) y salida (1,.5), rumbo este, ancho nominal 32 px sobre 640x360. DELIVERY solo mediante futura transici\xF3n de escena. Sin uni\xF3n f\xEDsica con otros R3. Ver R3ABCDContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: 58276c966fd648647b5c24586d36bb77, type: 2}

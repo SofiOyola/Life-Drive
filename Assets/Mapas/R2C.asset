@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R2C
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R2C
-  nombre: Ladera rocosa
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: Zona de servicio
+  descripcion: PROTOTIPO VISUAL. IA con S0, R1A y R1B como referencias. 480x270 escalado nearest-neighbor a 1920x1080. Trayectoria trazada sobre el PNG; ver R2Continuidad.md.
   categoria: 2
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: 4702a060228692a419a2ac6fe7b2b9af, type: 3}
+  miniatura: {fileID: 2800000, guid: 600b43de6f0f03543b145fff5faa4c60, type: 3}
   origen: {fileID: 11400000, guid: 9464a1d4146033f439140d3640f6933f, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 4c7c9c1a26bb0f04988ce64040832aea, type: 2}
@@ -27,14 +27,29 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.65}
-  - {x: 0.62, y: 0.35}
+  - {x: 0.1, y: 0.5}
+  - {x: 0.17, y: 0.5}
+  - {x: 0.22, y: 0.54}
+  - {x: 0.26, y: 0.59}
+  - {x: 0.3, y: 0.64}
+  - {x: 0.34, y: 0.66}
+  - {x: 0.38, y: 0.655}
+  - {x: 0.42, y: 0.615}
+  - {x: 0.46, y: 0.545}
+  - {x: 0.5, y: 0.475}
+  - {x: 0.54, y: 0.42}
+  - {x: 0.58, y: 0.385}
+  - {x: 0.62, y: 0.375}
+  - {x: 0.66, y: 0.38}
+  - {x: 0.7, y: 0.4}
+  - {x: 0.74, y: 0.44}
+  - {x: 0.78, y: 0.48}
   - {x: 0.82, y: 0.5}
+  - {x: 0.9, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: Talud contenido al sur.
+  paisaje: Zona de servicio
   vegetacionRelieve: Arbustos y roca expuesta estable.
   caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  continuidad: "Entrada (0,.5) y salida (1,.5), rumbo este, ancho nominal 32 en 640x360. Enlace a R3E/R3F. Prototipo con tolerancia de raster de 3 px l\xF3gicos. Ver R2Continuidad.md."
   origenes:
   - {fileID: 11400000, guid: 9464a1d4146033f439140d3640f6933f, type: 2}

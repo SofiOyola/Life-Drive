@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R3C
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R3C
-  nombre: Loma cafetera
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: "V\xEDa rural abierta"
+  descripcion: "PROTOTIPO VISUAL generado con IA tomando R2A/R2B como referencias PNG. Base 480x270 y exportaci\xF3n nearest-neighbor 1920x1080. Ver R3ABCDContinuidad.md."
   categoria: 3
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: c09ddc4563823a648953823826c5a2c6, type: 3}
+  miniatura: {fileID: 2800000, guid: d6b419fc1505adf4daa4c2e5eeefd5d1, type: 3}
   origen: {fileID: 11400000, guid: ca448b15b02ad9340a6bb8d2b576e1d4, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 31ca77cdf2d9cd449ae78d2d88acbeb3, type: 2}
@@ -26,14 +26,69 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.3}
-  - {x: 0.62, y: 0.35}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.016701462, y: 0.5}
+  - {x: 0.033402923, y: 0.5}
+  - {x: 0.050104383, y: 0.49628252}
+  - {x: 0.06680585, y: 0.49628252}
+  - {x: 0.08350731, y: 0.49628252}
+  - {x: 0.10020877, y: 0.49628252}
+  - {x: 0.11691023, y: 0.49628252}
+  - {x: 0.1336117, y: 0.49665427}
+  - {x: 0.15031315, y: 0.49665427}
+  - {x: 0.16701461, y: 0.4959108}
+  - {x: 0.18371607, y: 0.49256507}
+  - {x: 0.20041753, y: 0.48550186}
+  - {x: 0.217119, y: 0.4747212}
+  - {x: 0.23382045, y: 0.46133828}
+  - {x: 0.25052193, y: 0.44609666}
+  - {x: 0.2672234, y: 0.42893448}
+  - {x: 0.28392485, y: 0.41003716}
+  - {x: 0.3006263, y: 0.39330855}
+  - {x: 0.31732777, y: 0.37657994}
+  - {x: 0.33402923, y: 0.36319703}
+  - {x: 0.3507307, y: 0.3520446}
+  - {x: 0.36743215, y: 0.34163567}
+  - {x: 0.3841336, y: 0.332342}
+  - {x: 0.40083507, y: 0.32565054}
+  - {x: 0.41753653, y: 0.3204461}
+  - {x: 0.434238, y: 0.31524163}
+  - {x: 0.45093945, y: 0.31301114}
+  - {x: 0.4676409, y: 0.31040892}
+  - {x: 0.48434237, y: 0.3070632}
+  - {x: 0.50104386, y: 0.30669144}
+  - {x: 0.5177453, y: 0.3070632}
+  - {x: 0.5344468, y: 0.31040892}
+  - {x: 0.55114824, y: 0.31226766}
+  - {x: 0.5678497, y: 0.31635687}
+  - {x: 0.58455116, y: 0.3204461}
+  - {x: 0.6012526, y: 0.32565054}
+  - {x: 0.6179541, y: 0.33271375}
+  - {x: 0.63465554, y: 0.34349442}
+  - {x: 0.651357, y: 0.3542751}
+  - {x: 0.66805845, y: 0.36579925}
+  - {x: 0.6847599, y: 0.38141263}
+  - {x: 0.7014614, y: 0.39851302}
+  - {x: 0.71816283, y: 0.41524163}
+  - {x: 0.7348643, y: 0.4345725}
+  - {x: 0.75156575, y: 0.4520446}
+  - {x: 0.7682672, y: 0.4669145}
+  - {x: 0.7849687, y: 0.47918215}
+  - {x: 0.80167013, y: 0.48810408}
+  - {x: 0.8183716, y: 0.4929539}
+  - {x: 0.83507305, y: 0.49628252}
+  - {x: 0.8517745, y: 0.49628252}
+  - {x: 0.868476, y: 0.49628252}
+  - {x: 0.88517743, y: 0.49628252}
+  - {x: 0.9018789, y: 0.49628252}
+  - {x: 0.91858035, y: 0.49628252}
+  - {x: 0.9352818, y: 0.49628252}
+  - {x: 0.9519833, y: 0.49628252}
+  - {x: 0.96868473, y: 0.5}
+  - {x: 0.9853862, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: Curva amplia alrededor de loma.
-  vegetacionRelieve: "Caf\xE9 y \xE1rboles de sombra."
-  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  paisaje: "V\xEDa rural abierta"
+  vegetacionRelieve: "Potreros, cultivos, cercas y \xE1rboles tropicales."
+  caracteristicasVia: Asfalto mantenido, centro amarillo y bordes blancos; carriles despejados.
+  continuidad: "Entrada (0,.5) y salida (1,.5), rumbo este, ancho nominal 32 px sobre 640x360. DELIVERY solo mediante futura transici\xF3n de escena. Sin uni\xF3n f\xEDsica con otros R3. Ver R3ABCDContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: ca448b15b02ad9340a6bb8d2b576e1d4, type: 2}

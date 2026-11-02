@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R3D
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R3D
-  nombre: Quebrada rural
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: "V\xEDa rural exigente"
+  descripcion: "PROTOTIPO VISUAL generado con IA tomando R2A/R2B como referencias PNG. Base 480x270 y exportaci\xF3n nearest-neighbor 1920x1080. Ver R3ABCDContinuidad.md."
   categoria: 3
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: ca839b4d695547e448516bb8d2f1d284, type: 3}
+  miniatura: {fileID: 2800000, guid: d25c1964de867214da4ecc94281da7d7, type: 3}
   origen: {fileID: 11400000, guid: ca448b15b02ad9340a6bb8d2b576e1d4, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 31ca77cdf2d9cd449ae78d2d88acbeb3, type: 2}
@@ -26,14 +26,69 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.65}
-  - {x: 0.62, y: 0.4}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.016701462, y: 0.5}
+  - {x: 0.033402923, y: 0.5}
+  - {x: 0.050104383, y: 0.49628252}
+  - {x: 0.06680585, y: 0.49628252}
+  - {x: 0.08350731, y: 0.49628252}
+  - {x: 0.10020877, y: 0.49628252}
+  - {x: 0.11691023, y: 0.49628252}
+  - {x: 0.1336117, y: 0.49628252}
+  - {x: 0.15031315, y: 0.5}
+  - {x: 0.16701461, y: 0.5092937}
+  - {x: 0.18371607, y: 0.52230483}
+  - {x: 0.20041753, y: 0.54275095}
+  - {x: 0.217119, y: 0.5669145}
+  - {x: 0.23382045, y: 0.5929368}
+  - {x: 0.25052193, y: 0.61710036}
+  - {x: 0.2672234, y: 0.6394052}
+  - {x: 0.28392485, y: 0.65799254}
+  - {x: 0.3006263, y: 0.669145}
+  - {x: 0.31732777, y: 0.67843866}
+  - {x: 0.33402923, y: 0.68401486}
+  - {x: 0.3507307, y: 0.68773234}
+  - {x: 0.36743215, y: 0.6858736}
+  - {x: 0.3841336, y: 0.6802974}
+  - {x: 0.40083507, y: 0.67286247}
+  - {x: 0.41753653, y: 0.6598513}
+  - {x: 0.434238, y: 0.6431227}
+  - {x: 0.45093945, y: 0.62081784}
+  - {x: 0.4676409, y: 0.5929368}
+  - {x: 0.48434237, y: 0.55947953}
+  - {x: 0.50104386, y: 0.52230483}
+  - {x: 0.5177453, y: 0.48884758}
+  - {x: 0.5344468, y: 0.45724908}
+  - {x: 0.55114824, y: 0.4330855}
+  - {x: 0.5678497, y: 0.41449815}
+  - {x: 0.58455116, y: 0.39962825}
+  - {x: 0.6012526, y: 0.38847584}
+  - {x: 0.6179541, y: 0.37918216}
+  - {x: 0.63465554, y: 0.37546468}
+  - {x: 0.651357, y: 0.37360594}
+  - {x: 0.66805845, y: 0.37546468}
+  - {x: 0.6847599, y: 0.38289964}
+  - {x: 0.7014614, y: 0.39033458}
+  - {x: 0.71816283, y: 0.40334573}
+  - {x: 0.7348643, y: 0.42007434}
+  - {x: 0.75156575, y: 0.43866172}
+  - {x: 0.7682672, y: 0.46096656}
+  - {x: 0.7849687, y: 0.47583643}
+  - {x: 0.80167013, y: 0.48698884}
+  - {x: 0.8183716, y: 0.4944238}
+  - {x: 0.83507305, y: 0.49628252}
+  - {x: 0.8517745, y: 0.49628252}
+  - {x: 0.868476, y: 0.49628252}
+  - {x: 0.88517743, y: 0.49628252}
+  - {x: 0.9018789, y: 0.49628252}
+  - {x: 0.91858035, y: 0.49628252}
+  - {x: 0.9352818, y: 0.49628252}
+  - {x: 0.9519833, y: 0.49628252}
+  - {x: 0.96868473, y: 0.5}
+  - {x: 0.9853862, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: "Quebrada al sur; v\xEDa sobre terraza."
-  vegetacionRelieve: "Guadua y peque\xF1os taludes."
-  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  paisaje: "V\xEDa rural exigente"
+  vegetacionRelieve: "Vegetaci\xF3n tropical y andina densa, taludes estables."
+  caracteristicasVia: "V\xEDa encajonada con bermas reducidas y l\xEDnea amarilla continua."
+  continuidad: "Entrada (0,.5) y salida (1,.5), rumbo este, ancho nominal 32 px sobre 640x360. DELIVERY solo mediante futura transici\xF3n de escena. Sin uni\xF3n f\xEDsica con otros R3. Ver R3ABCDContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: ca448b15b02ad9340a6bb8d2b576e1d4, type: 2}

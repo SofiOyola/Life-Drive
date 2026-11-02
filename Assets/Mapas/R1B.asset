@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R1B
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R1B
-  nombre: Piedemonte
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: Salida apresurada
+  descripcion: "PROTOTIPO VISUAL generado con IA usando S0 como referencia obligatoria. Base 480x270, exportaci\xF3n nearest-neighbor 1920x1080. Pendiente ajuste fino de trayectoria y perspectiva compartida con S0."
   categoria: 1
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: 6d4bf986b289edf44b7824b3e1fed598, type: 3}
+  miniatura: {fileID: 2800000, guid: 48b4acdfde33c594a9fd39ebed8aec1c, type: 3}
   origen: {fileID: 11400000, guid: 40a837d8c1e141f45af776797d13ebb0, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 42a4f7378f7bbff4a89e20af6c947565, type: 2}

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R2A
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R2A
-  nombre: Ribera del valle
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: Corredor principal
+  descripcion: PROTOTIPO VISUAL. IA con S0, R1A y R1B como referencias. 480x270 escalado nearest-neighbor a 1920x1080. Trayectoria trazada sobre el PNG; ver R2Continuidad.md.
   categoria: 2
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: b90b45d008895634699e9a373a524bd1, type: 3}
+  miniatura: {fileID: 2800000, guid: 5dfbb2bfee3ac87449158877a13cd5d3, type: 3}
   origen: {fileID: 11400000, guid: 7c2d886d61b1b314fb3a544cbade0694, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 617313aac7171764393f4935e97f70ef, type: 2}
@@ -27,14 +27,27 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.7}
-  - {x: 0.62, y: 0.55}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.1, y: 0.5}
+  - {x: 0.14, y: 0.5}
+  - {x: 0.2, y: 0.54}
+  - {x: 0.25, y: 0.61}
+  - {x: 0.3, y: 0.67}
+  - {x: 0.35, y: 0.695}
+  - {x: 0.4, y: 0.69}
+  - {x: 0.45, y: 0.65}
+  - {x: 0.5, y: 0.59}
+  - {x: 0.55, y: 0.535}
+  - {x: 0.6, y: 0.518}
+  - {x: 0.65, y: 0.51}
+  - {x: 0.7, y: 0.5}
+  - {x: 0.75, y: 0.5}
+  - {x: 0.8, y: 0.5}
+  - {x: 0.85, y: 0.5}
+  - {x: 0.9, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: "R\xEDo al norte, paralelo a carretera."
+  paisaje: Corredor principal
   vegetacionRelieve: Guadua y cultivos bajos.
   caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  continuidad: "Entrada (0,.5) y salida (1,.5), rumbo este, ancho nominal 32 en 640x360. Enlace a R3A/R3B. Prototipo con tolerancia de raster de 3 px l\xF3gicos. Ver R2Continuidad.md."
   origenes:
   - {fileID: 11400000, guid: 7c2d886d61b1b314fb3a544cbade0694, type: 2}
