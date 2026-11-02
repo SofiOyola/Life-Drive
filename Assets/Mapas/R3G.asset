@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R3G
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R3G
-  nombre: Fincas ganaderas
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: "Corredor despu\xE9s de la inspecci\xF3n"
+  descripcion: PROTOTIPO VISUAL generado con IA, usando PNG de predecesor y R3 aprobados como referencias. 480x270 escalado nearest-neighbor a 1920x1080. Ver R3EFGHContinuidad.md.
   categoria: 3
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: 7599e22780aed3e46ac3bf948a639deb, type: 3}
+  miniatura: {fileID: 2800000, guid: 1b92809334a450f4f80c24230dadfaae, type: 3}
   origen: {fileID: 11400000, guid: 8ae89c9e4546a39408233b2b00b83439, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 31ca77cdf2d9cd449ae78d2d88acbeb3, type: 2}
@@ -26,14 +26,68 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.3}
-  - {x: 0.62, y: 0.6}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.025052192, y: 0.5}
+  - {x: 0.1440501, y: 0.50148696}
+  - {x: 0.16701461, y: 0.49567404}
+  - {x: 0.17536534, y: 0.4966543}
+  - {x: 0.18580376, y: 0.49152178}
+  - {x: 0.18997912, y: 0.49219328}
+  - {x: 0.1920668, y: 0.49591076}
+  - {x: 0.24425887, y: 0.45947954}
+  - {x: 0.24634655, y: 0.46133828}
+  - {x: 0.2546973, y: 0.45539033}
+  - {x: 0.25678498, y: 0.45018587}
+  - {x: 0.30688936, y: 0.41115242}
+  - {x: 0.33194155, y: 0.39405206}
+  - {x: 0.33402923, y: 0.39702603}
+  - {x: 0.34029227, y: 0.39330855}
+  - {x: 0.34446764, y: 0.38624537}
+  - {x: 0.348643, y: 0.38401487}
+  - {x: 0.3507307, y: 0.38698885}
+  - {x: 0.35908142, y: 0.3825279}
+  - {x: 0.3611691, y: 0.37732342}
+  - {x: 0.36325678, y: 0.38029742}
+  - {x: 0.3716075, y: 0.37583643}
+  - {x: 0.3736952, y: 0.37100372}
+  - {x: 0.41127348, y: 0.35650557}
+  - {x: 0.41544884, y: 0.3620818}
+  - {x: 0.4217119, y: 0.36022305}
+  - {x: 0.42588726, y: 0.35315984}
+  - {x: 0.43632567, y: 0.34981412}
+  - {x: 0.4926931, y: 0.34498143}
+  - {x: 0.53235906, y: 0.34758365}
+  - {x: 0.5427975, y: 0.3542751}
+  - {x: 0.5490605, y: 0.3494424}
+  - {x: 0.5532359, y: 0.35018587}
+  - {x: 0.565762, y: 0.35315984}
+  - {x: 0.56993735, y: 0.3620818}
+  - {x: 0.5762004, y: 0.36431226}
+  - {x: 0.5803758, y: 0.3579926}
+  - {x: 0.5887265, y: 0.36431226}
+  - {x: 0.6012526, y: 0.36576143}
+  - {x: 0.60334027, y: 0.36951673}
+  - {x: 0.611691, y: 0.3732342}
+  - {x: 0.6137787, y: 0.37137547}
+  - {x: 0.6179541, y: 0.37769517}
+  - {x: 0.6263048, y: 0.38178438}
+  - {x: 0.62839246, y: 0.3788104}
+  - {x: 0.67014617, y: 0.40520447}
+  - {x: 0.67432153, y: 0.4085502}
+  - {x: 0.6764092, y: 0.41449815}
+  - {x: 0.69311064, y: 0.42193308}
+  - {x: 0.697286, y: 0.43011153}
+  - {x: 0.7035491, y: 0.43494424}
+  - {x: 0.70563674, y: 0.43197024}
+  - {x: 0.736952, y: 0.45501858}
+  - {x: 0.7494781, y: 0.46914497}
+  - {x: 0.7599165, y: 0.47137547}
+  - {x: 0.79123175, y: 0.49219328}
+  - {x: 0.8517745, y: 0.50148696}
+  - {x: 0.9749478, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: "Potreros divididos y dep\xF3sitos agr\xEDcolas."
-  vegetacionRelieve: "Pastos y \xE1rboles dispersos."
-  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  paisaje: "Corredor despu\xE9s de la inspecci\xF3n"
+  vegetacionRelieve: "Vegetaci\xF3n tropical y andina, taludes y bodegas dispersas."
+  caracteristicasVia: Asfalto mantenido, curva suave e infraestructura de servicio lateral.
+  continuidad: "Entrada (0,.5), salida (1,.5), tangentes hacia este; ancho nominal 32 px sobre 640x360. \xDAnico siguiente DELIVERY por futura transici\xF3n de escena. Ver R3EFGHContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: 8ae89c9e4546a39408233b2b00b83439, type: 2}

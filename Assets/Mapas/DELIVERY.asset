@@ -13,27 +13,32 @@ MonoBehaviour:
   m_Name: DELIVERY
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: DELIVERY
-  nombre: "Centro de distribuci\xF3n"
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: "Centro log\xEDstico de entrega"
+  descripcion: "PROTOTIPO VISUAL compartido por los ocho R3 mediante futura transici\xF3n de escena. Porter\xEDa, bodegas y zona de descarga vac\xEDa. IA con referencias S0/R3G/R3E. Ver DELIVERYContinuidad.md."
   categoria: 4
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: 5a3a636a6f98c5b4c91cc370752150da, type: 3}
+  miniatura: {fileID: 2800000, guid: b01bb59ce9c02d04ebdf33cece4f7070, type: 3}
   origen: {fileID: 0}
   siguientes: []
-  entrada: {x: 0, y: 0.5}
-  salida: {x: 1, y: 0.5}
+  entrada: {x: 0, y: 0.45}
+  salida: {x: 0.8, y: 0.52}
   anchoViaPixeles: 32
   trayectoria:
-  - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.5}
-  - {x: 0.62, y: 0.5}
-  - {x: 0.82, y: 0.5}
-  - {x: 1, y: 0.5}
-  paisaje: "Acceso \xFAnico a patio log\xEDstico; muelles fuera de trayectoria."
-  vegetacionRelieve: Jardines bajos y explanada.
-  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  - {x: 0, y: 0.45}
+  - {x: 0.1, y: 0.45}
+  - {x: 0.2, y: 0.45}
+  - {x: 0.28, y: 0.45}
+  - {x: 0.36, y: 0.45}
+  - {x: 0.44, y: 0.455}
+  - {x: 0.52, y: 0.47}
+  - {x: 0.6, y: 0.49}
+  - {x: 0.68, y: 0.505}
+  - {x: 0.74, y: 0.515}
+  - {x: 0.8, y: 0.52}
+  paisaje: "Centro log\xEDstico colombiano, dos bodegas, porter\xEDa y gran patio de descarga vac\xEDo."
+  vegetacionRelieve: "Palmas, vegetaci\xF3n tropical y andina, jardines y laderas verdes perif\xE9ricas."
+  caracteristicasVia: Acceso asfaltado oscuro de dos carriles que desemboca en explanada de concreto libre.
+  continuidad: "Transici\xF3n de escena compartida desde cualquier R3, sin convergencia f\xEDsica. Entrada (0,.45), fin interior (.8,.52). ZonaEntrega normalizada, Y hacia arriba. Sin siguientes; salida significa punto final interior."
   origenes:
   - {fileID: 11400000, guid: 617313aac7171764393f4935e97f70ef, type: 2}
   - {fileID: 11400000, guid: ebbca65acc092104a90ea31c4c0ac25d, type: 2}
@@ -43,3 +48,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9607fb6c28838af4495108b8fbf4a0d8, type: 2}
   - {fileID: 11400000, guid: be29c6ca84dd9fd428f503b716240d21, type: 2}
   - {fileID: 11400000, guid: 4fc88176f16f30d4abea67d80f3766cf, type: 2}
+  zonaEntrega:
+    serializedVersion: 2
+    x: 0.7
+    y: 0.4
+    width: 0.18
+    height: 0.18

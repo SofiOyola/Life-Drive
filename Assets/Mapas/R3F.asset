@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R3F
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R3F
-  nombre: "Terraza de monta\xF1a"
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: Descenso con fatiga
+  descripcion: PROTOTIPO VISUAL generado con IA, usando PNG de predecesor y R3 aprobados como referencias. 480x270 escalado nearest-neighbor a 1920x1080. Ver R3EFGHContinuidad.md.
   categoria: 3
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: 16259a8e4caf1c64bad836b22f6fa3f2, type: 3}
+  miniatura: {fileID: 2800000, guid: 1d3b626dd45d3764b815f9dbf84f99a4, type: 3}
   origen: {fileID: 11400000, guid: 42a4f7378f7bbff4a89e20af6c947565, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 31ca77cdf2d9cd449ae78d2d88acbeb3, type: 2}
@@ -26,14 +26,41 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.35}
-  - {x: 0.62, y: 0.3}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.025052192, y: 0.5}
+  - {x: 0.11899791, y: 0.49984515}
+  - {x: 0.15240084, y: 0.48959106}
+  - {x: 0.1920668, y: 0.45539033}
+  - {x: 0.21294363, y: 0.43122676}
+  - {x: 0.22964509, y: 0.40520447}
+  - {x: 0.24217118, y: 0.39144984}
+  - {x: 0.2526096, y: 0.38455182}
+  - {x: 0.26304802, y: 0.370095}
+  - {x: 0.27139875, y: 0.36282527}
+  - {x: 0.29227558, y: 0.35120818}
+  - {x: 0.32150313, y: 0.34126395}
+  - {x: 0.3716075, y: 0.34423792}
+  - {x: 0.41127348, y: 0.36677933}
+  - {x: 0.43632567, y: 0.39281288}
+  - {x: 0.4572025, y: 0.42267656}
+  - {x: 0.47181627, y: 0.44742438}
+  - {x: 0.5052192, y: 0.51226765}
+  - {x: 0.51983297, y: 0.5464684}
+  - {x: 0.5469729, y: 0.59107804}
+  - {x: 0.565762, y: 0.6156134}
+  - {x: 0.6012526, y: 0.6475836}
+  - {x: 0.6367432, y: 0.6637118}
+  - {x: 0.651357, y: 0.6666302}
+  - {x: 0.6889353, y: 0.6628253}
+  - {x: 0.70563674, y: 0.6534641}
+  - {x: 0.79123175, y: 0.54622054}
+  - {x: 0.8141962, y: 0.5244981}
+  - {x: 0.8434238, y: 0.50520444}
+  - {x: 0.8830898, y: 0.5000676}
+  - {x: 0.9749478, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: Terraza amplia con vista cenital de pendientes.
-  vegetacionRelieve: Bosque fragmentado y pastos.
-  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  paisaje: Descenso con fatiga
+  vegetacionRelieve: Bosque cerrado, taludes y sectores de sombra.
+  caracteristicasVia: "Curvas repetidas, bermas reducidas y se\xF1ales preventivas sin texto."
+  continuidad: "Entrada (0,.5), salida (1,.5), tangentes hacia este; ancho nominal 32 px sobre 640x360. \xDAnico siguiente DELIVERY por futura transici\xF3n de escena. Ver R3EFGHContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: 42a4f7378f7bbff4a89e20af6c947565, type: 2}

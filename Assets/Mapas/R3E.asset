@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R3E
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R3E
-  nombre: "Corte de monta\xF1a"
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: "Descenso despu\xE9s del descanso"
+  descripcion: PROTOTIPO VISUAL generado con IA, usando PNG de predecesor y R3 aprobados como referencias. 480x270 escalado nearest-neighbor a 1920x1080. Ver R3EFGHContinuidad.md.
   categoria: 3
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: 46f290a292a0f864a9f7f25a0d9d7ec8, type: 3}
+  miniatura: {fileID: 2800000, guid: a11046aeb95efe24cb772c167ee56b0b, type: 3}
   origen: {fileID: 11400000, guid: 42a4f7378f7bbff4a89e20af6c947565, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 31ca77cdf2d9cd449ae78d2d88acbeb3, type: 2}
@@ -26,14 +26,37 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.7}
-  - {x: 0.62, y: 0.6}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.025052192, y: 0.5}
+  - {x: 0.13778706, y: 0.49814126}
+  - {x: 0.17536534, y: 0.505948}
+  - {x: 0.1920668, y: 0.5163568}
+  - {x: 0.217119, y: 0.54014874}
+  - {x: 0.25887266, y: 0.5884758}
+  - {x: 0.302714, y: 0.6330855}
+  - {x: 0.3361169, y: 0.65613383}
+  - {x: 0.36743215, y: 0.6672862}
+  - {x: 0.3966597, y: 0.6654275}
+  - {x: 0.4321503, y: 0.65055764}
+  - {x: 0.46137786, y: 0.6282528}
+  - {x: 0.52400833, y: 0.57174724}
+  - {x: 0.55949897, y: 0.5434944}
+  - {x: 0.5887265, y: 0.52416354}
+  - {x: 0.6325678, y: 0.50446093}
+  - {x: 0.65553236, y: 0.5}
+  - {x: 0.6868476, y: 0.5}
+  - {x: 0.6889353, y: 0.5033457}
+  - {x: 0.697286, y: 0.50520444}
+  - {x: 0.6993737, y: 0.5026022}
+  - {x: 0.7557411, y: 0.5092937}
+  - {x: 0.7599165, y: 0.5152417}
+  - {x: 0.76617956, y: 0.5137546}
+  - {x: 0.7724426, y: 0.5055762}
+  - {x: 0.81628394, y: 0.49814126}
+  - {x: 0.9749478, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: Corte estable en roca.
-  vegetacionRelieve: "Matorral de monta\xF1a."
-  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  paisaje: "Descenso despu\xE9s del descanso"
+  vegetacionRelieve: "Vegetaci\xF3n andina, taludes verdes y valle abierto."
+  caracteristicasVia: "Asfalto conservado, guardarra\xEDles y drenajes."
+  continuidad: "Entrada (0,.5), salida (1,.5), tangentes hacia este; ancho nominal 32 px sobre 640x360. \xDAnico siguiente DELIVERY por futura transici\xF3n de escena. Ver R3EFGHContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: 42a4f7378f7bbff4a89e20af6c947565, type: 2}

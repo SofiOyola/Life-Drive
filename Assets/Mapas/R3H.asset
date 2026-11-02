@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: R3H
   m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.MapaVisual
   id: R3H
-  nombre: Corredor industrial rural
-  descripcion: "PLACEHOLDER. Composici\xF3n definida en ContinuidadVisual.md."
+  nombre: "Corredor de mayor exposici\xF3n"
+  descripcion: PROTOTIPO VISUAL generado con IA, usando PNG de predecesor y R3 aprobados como referencias. 480x270 escalado nearest-neighbor a 1920x1080. Ver R3EFGHContinuidad.md.
   categoria: 3
-  fondo: {fileID: 0}
-  miniatura: {fileID: 0}
+  fondo: {fileID: 2800000, guid: 118203c8b94552f48be483a032e07a71, type: 3}
+  miniatura: {fileID: 2800000, guid: 35957fa293921894f9970ec22213a992, type: 3}
   origen: {fileID: 11400000, guid: 8ae89c9e4546a39408233b2b00b83439, type: 2}
   siguientes:
   - {fileID: 11400000, guid: 31ca77cdf2d9cd449ae78d2d88acbeb3, type: 2}
@@ -26,14 +26,47 @@ MonoBehaviour:
   anchoViaPixeles: 32
   trayectoria:
   - {x: 0, y: 0.5}
-  - {x: 0.18, y: 0.5}
-  - {x: 0.38, y: 0.6}
-  - {x: 0.62, y: 0.7}
-  - {x: 0.82, y: 0.5}
+  - {x: 0.025052192, y: 0.5}
+  - {x: 0.10438413, y: 0.5}
+  - {x: 0.12734865, y: 0.5022305}
+  - {x: 0.15240084, y: 0.51078063}
+  - {x: 0.16701461, y: 0.5204461}
+  - {x: 0.18580376, y: 0.53866166}
+  - {x: 0.23799582, y: 0.60334575}
+  - {x: 0.28392485, y: 0.6472119}
+  - {x: 0.3382046, y: 0.66171}
+  - {x: 0.36743215, y: 0.65873605}
+  - {x: 0.36951983, y: 0.6620818}
+  - {x: 0.37787056, y: 0.65873605}
+  - {x: 0.37995824, y: 0.6526894}
+  - {x: 0.39248434, y: 0.6490707}
+  - {x: 0.41336116, y: 0.6360595}
+  - {x: 0.4446764, y: 0.60334575}
+  - {x: 0.4926931, y: 0.532342}
+  - {x: 0.5490605, y: 0.44148666}
+  - {x: 0.5762004, y: 0.40892193}
+  - {x: 0.5929019, y: 0.39219332}
+  - {x: 0.6137787, y: 0.37732342}
+  - {x: 0.6450939, y: 0.36319703}
+  - {x: 0.6784969, y: 0.3605948}
+  - {x: 0.72025055, y: 0.37137547}
+  - {x: 0.7494781, y: 0.3936803}
+  - {x: 0.75782883, y: 0.40446097}
+  - {x: 0.7599165, y: 0.41191736}
+  - {x: 0.7682672, y: 0.42083928}
+  - {x: 0.7703549, y: 0.4182156}
+  - {x: 0.80167013, y: 0.45464686}
+  - {x: 0.80375785, y: 0.46131867}
+  - {x: 0.8204593, y: 0.4766519}
+  - {x: 0.82254696, y: 0.48110938}
+  - {x: 0.8329854, y: 0.4832714}
+  - {x: 0.8538622, y: 0.49551398}
+  - {x: 0.8830898, y: 0.5}
+  - {x: 0.9749478, y: 0.5}
   - {x: 1, y: 0.5}
-  paisaje: "Bodegas peque\xF1as retiradas de la carretera."
-  vegetacionRelieve: Pastos y terreno nivelado.
-  caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
-  continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
+  paisaje: "Corredor de mayor exposici\xF3n"
+  vegetacionRelieve: "Vegetaci\xF3n tropical y andina, taludes y bodegas dispersas."
+  caracteristicasVia: "Asfalto envejecido, curvas pronunciadas y bermas estrechas; v\xEDa despejada."
+  continuidad: "Entrada (0,.5), salida (1,.5), tangentes hacia este; ancho nominal 32 px sobre 640x360. \xDAnico siguiente DELIVERY por futura transici\xF3n de escena. Ver R3EFGHContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: 8ae89c9e4546a39408233b2b00b83439, type: 2}

@@ -42,9 +42,11 @@ namespace LifeDrive.Editor
                 if (m.trayectoria == null || m.trayectoria.Length < 2) { errores.Add(m.Id + ": trayectoria ausente."); continue; }
                 if (Vector2.Distance(m.trayectoria[0], m.entrada) > .001f || Vector2.Distance(m.trayectoria.Last(), m.salida) > .001f) errores.Add(m.Id + ": extremos de trayectoria incorrectos.");
                 if (m.trayectoria.Any(p => p.x < 0 || p.x > 1 || p.y < 0 || p.y > 1)) errores.Add(m.Id + ": trayectoria fuera del fondo.");
-                if (Vector2.Distance((m.trayectoria[1] - m.entrada).normalized, Vector2.right) > .001f || Vector2.Distance((m.salida - m.trayectoria[m.trayectoria.Length - 2]).normalized, Vector2.right) > .001f) errores.Add(m.Id + ": tangente de enlace no orientada al este.");
+                bool entrega = m.Id == "DELIVERY" && m.categoria == CategoriaMapa.Entrega;
+                if (Vector2.Distance((m.trayectoria[1] - m.entrada).normalized, Vector2.right) > .001f || (!entrega && Vector2.Distance((m.salida - m.trayectoria[m.trayectoria.Length - 2]).normalized, Vector2.right) > .001f)) errores.Add(m.Id + ": tangente de enlace no orientada al este.");
+                if (m.Id == "DELIVERY" && (!entrega || m.zonaEntrega.width <= 0 || m.zonaEntrega.height <= 0 || m.zonaEntrega.xMin < 0 || m.zonaEntrega.yMin < 0 || m.zonaEntrega.xMax > 1 || m.zonaEntrega.yMax > 1 || !m.zonaEntrega.Contains(m.salida))) errores.Add("DELIVERY: el punto final debe estar dentro de una zona de entrega válida.");
                 foreach (var d in destinos.Where(d => d != null))
-                    if (!mapas.Contains(d) || Mathf.Abs(m.salida.y - d.entrada.y) > .001f || Mathf.Abs(m.anchoViaPixeles - d.anchoViaPixeles) > .001f) errores.Add(m.Id + " → " + d.Id + ": enlace incompatible.");
+                    if (!mapas.Contains(d) || (!(d.Id == "DELIVERY" && d.categoria == CategoriaMapa.Entrega) && Mathf.Abs(m.salida.y - d.entrada.y) > .001f) || Mathf.Abs(m.anchoViaPixeles - d.anchoViaPixeles) > .001f) errores.Add(m.Id + " → " + d.Id + ": enlace incompatible.");
             }
             return errores;
         }

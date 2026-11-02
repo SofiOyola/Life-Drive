@@ -27,5 +27,8 @@ namespace LifeDrive.Mapas
         [TextArea] public string continuidad;
         [Tooltip("DELIVERY admite varios predecesores; origen solo representa el padre único de las ramas.")]
         public MapaVisual[] origenes = new MapaVisual[0];
+        [Header("Solo mapas de entrega · área normalizada, Y hacia arriba")]
+        [Tooltip("Zona libre para detener el sprite. En Entrega, salida indica el punto final interior, no una conexión posterior.")]
+        public Rect zonaEntrega;
     }
 }
