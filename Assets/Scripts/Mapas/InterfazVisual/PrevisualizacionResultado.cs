@@ -54,7 +54,7 @@ namespace LifeDrive.Mapas.InterfazVisual
             Seleccionado = indice;
             var e = EjemploActual;
             titulo.text = e.titulo;
-            Color color = e.tono == TonoResultadoDemo.Seguro ? new Color32(100,218,190,255) : e.tono == TonoResultadoDemo.Complicaciones ? new Color32(255,207,106,255) : new Color32(255,145,127,255);
+            Color color = e.tono == TonoResultadoDemo.Seguro ? new Color32(223,193,105,255) : e.tono == TonoResultadoDemo.Complicaciones ? new Color32(255,207,106,255) : new Color32(255,145,127,255);
             titulo.color = color; acento.color = color;
             jugador.text = e.jugador;
             personaje.text = "Personaje: " + personajes.Single(p => p.id == e.personajeId).nombre;
@@ -70,7 +70,7 @@ namespace LifeDrive.Mapas.InterfazVisual
                 var d = definiciones.reconocimientos[i]; bool obtenida = e.insignias.Contains(d.id);
                 nombresInsignias[i].text = d.nombre;
                 estadosInsignias[i].text = obtenida ? "OBTENIDA EN ESTE EJEMPLO" : "NO OBTENIDA EN ESTE EJEMPLO";
-                estadosInsignias[i].color = obtenida ? new Color32(100,218,190,255) : new Color32(180,193,193,255);
+                estadosInsignias[i].color = obtenida ? new Color32(223,193,105,255) : new Color32(194,201,168,255);
                 iconosInsignias[i].texture = iconos.Obtener(d.icono);
                 iconosInsignias[i].color = obtenida ? new Color32(255,207,106,255) : new Color(.45f,.55f,.57f);
             }
@@ -97,3 +97,4 @@ namespace LifeDrive.Mapas.InterfazVisual
         void OnDestroy() => iconos.Liberar();
     }
 }
+

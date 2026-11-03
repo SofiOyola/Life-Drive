@@ -123,3 +123,27 @@ Cierre: Unity compiló las tres clases nuevas y Console final devolvió cero err
 - Solo se validó 16:9 en las dos resoluciones indicadas. No se certifica un build distribuido ni nuevas plataformas.
 
 Se preservaron los cambios locales previos. No se hace commit ni push. La escena Resultado queda abierta en modo edición al terminar.
+
+## Actualización de continuidad visual · 3 de noviembre de 2026
+
+Se adaptó la escena existente Resultado.unity sin reconstruir su contenido ni sus datos. Usa FuentePixel y FuenteLectura de BaseNaturaleza, FormaRedondeadaUI y RespuestaBotonUI. Se conservan las insignias S3-04, sus iconos, los tres ScriptableObjects DEMO y el historial ficticio. El presentador reemplaza el acento menta por dorado y texto secundario natural.
+
+Archivos modificados en esta etapa: Assets/Scenes/Resultado.unity, Assets/Scripts/Mapas/InterfazVisual/PrevisualizacionResultado.cs y este documento. Las superficies redondeadas son hijos de los objetos existentes para conservar referencias serializadas, incluido el acento y el controlador original desactivado.
+
+Pruebas nuevas: Play Mode a 1280×720; los tres selectores mostraron +25, -5 y -20 puntos DEMO, respectivamente; comprobación de altura preferida con cero desbordamientos en el contenido principal; apertura del historial y llamada al botón Inicio. Console sin errores ni advertencias al finalizar estas comprobaciones. No se realizó una nueva inspección visual humana ni se completó la revisión a 1920×1080 en esta etapa; tampoco se repitió la regresión de las demos. Las pruebas históricas anteriores no certifican por sí solas el diseño actualizado. El hover se incorporó mediante el componente aprobado, pero su animación no quedó validada en esta pasada.
+
+La integración real sigue pendiente: los tres estados son instantáneas escritas, sin umbrales ni clasificación por mapa. No se guardan datos y no se activó PantallaResultado. La representación de personaje conserva el retrato DEMO previo; no recibe aún la personalización volátil de Registro. El constructor histórico no aplica este rediseño: no debe ejecutarse para sustituir esta escena ya adaptada.
+
+## Validación final solicitada · 3 de noviembre de 2026
+
+No se rediseñó ni se modificó ninguna escena o script en esta pasada. Se actualiza únicamente este informe.
+
+Inspección visual real del render del Editor: Resultado en 1920×1080, tres estados seleccionados con clic nativo y apertura del historial crítico. Títulos, mensajes, tarjetas, puntos, nombres de insignias y botones se observaron completos, sin solapamientos visibles. Se distinguió el zoom del Editor de la resolución: inicialmente el zoom 1 recortaba la vista dentro de la ventana; se ajustó a 0.71 sin cambiar la escena. Esto era un recorte del visor, no de la UI.
+
+A 1280×720 se revisó visualmente el historial crítico. Los tres estados, con historial abierto y cerrado, se comprobaron automáticamente mediante ForceMeshUpdate y preferredHeight: cero desbordamientos de altura. No se inspeccionaron visualmente por separado los seis estados de 720p; esta diferencia se mantiene explícita.
+
+Hover: se envió pointerEnter mediante ExecuteEvents al botón Inicio sobre el componente vivo. Tras transcurrir fotogramas, la escala fue 1.025 y el color #77864C. Esto valida la animación con eventos de puntero y actualización real, no una propiedad estática. La evolución temporal de la animación no se capturó visualmente como secuencia: esa valoración visual de suavidad continúa pendiente. Los clics nativos en los tres selectores y el historial sí se observaron.
+
+Navegación y regresión automatizada en Play Mode: botón Volver cargó Inicio; Jugar cargó Registro; selección Mujer, cabello 3 y traje 2 confirmadas en el avatar y sus índices. DemoInterfazPartida completó tres respuestas positivas y llegó a Finalizado, +25 puntos simulados, tres insignias y DELIVERY. DemoRecorrido avanzó, pausó sin cambiar progreso, reanudó y reinició correctamente. Estas pruebas de regresión fueron sobre métodos y eventos de los componentes vivos, no inspecciones visuales exhaustivas de las demostraciones.
+
+Console devolvió cero errores y cero advertencias al cierre de las pruebas; las clases existentes cargaron y ejecutaron sin errores de compilación. No fue necesario corregir código. Se salió de Play Mode. La validación sigue limitada a datos DEMO, no a integración real ni a textos arbitrarios o historiales extensos. No se hace commit ni push.
