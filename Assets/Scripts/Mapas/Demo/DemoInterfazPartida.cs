@@ -94,7 +94,7 @@ namespace LifeDrive.Mapas.Demo
         }
         public void Avanzar(float segundos)
         {
-            if (Estado != Fase.EnMarcha || pausa || mostrarInsignias || segundos <= 0 || !float.IsFinite(segundos)) return;
+            if (estadoGamificacion == null || Estado != Fase.EnMarcha || pausa || mostrarInsignias || segundos <= 0 || !float.IsFinite(segundos)) return;
             // Small presentation steps avoid skipping a question while a fade ends.
             while (segundos > 0 && Estado == Fase.EnMarcha)
             {
@@ -117,7 +117,11 @@ namespace LifeDrive.Mapas.Demo
             if (Estado != Fase.Situacion || mostrarInsignias || indice < 0 || indice >= DatosActuales.respuestas.Length) return;
             var r = DatosActuales.respuestas[indice];
             if (!estadoGamificacion.Aplicar(new ResultadoPresentacionDemo { IdSituacion = DatosActuales.idDemo, CambioPuntos = r.puntosSimulados, Explicacion = r.explicacionPuntos, Senales = r.senalesSimuladas }, out var nuevas)) return;
-            foreach (var nombre in nuevas) avisos.Enqueue(nombre);
+            foreach (var nombre in nuevas)
+            {
+                if (aviso == null) { aviso = nombre; tiempoAviso = 4; }
+                else avisos.Enqueue(nombre);
+            }
             respuesta = indice;
             Estado = Fase.Retroalimentacion;
         }
@@ -228,8 +232,8 @@ namespace LifeDrive.Mapas.Demo
             if (Boton(new Rect(1380, 815, 168, 52), "Reiniciar")) Reiniciar();
             if (aviso != null)
             {
-                Bloque(new Rect(48, 646, 1000, 74), tinta);
-                Texto(68, 658, 960, 55, "INSIGNIA DE PRUEBA DESBLOQUEADA · " + aviso, etiqueta);
+                Bloque(new Rect(40, 814, 1040, 56), tinta);
+                Texto(60, 822, 1020, 45, "INSIGNIA DE PRUEBA DESBLOQUEADA · " + aviso, etiqueta);
             }
             GUI.matrix = matriz; GUI.depth = depth;
         }

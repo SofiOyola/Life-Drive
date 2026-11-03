@@ -1,5 +1,7 @@
 # DemoInterfazPartida · prototipo de presentación
 
+**Actualización S3-04:** esta guía conserva el diagnóstico y las pruebas de la versión inicial. La versión vigente incluye tres situaciones ficticias, cambios positivos/negativos acumulados, progreso educativo separado e insignias. Consultar `Assets/Mapas/GamificacionS3-04.md` para las reglas y controles actuales; la segunda respuesta inicial ahora resta 5 puntos simulados y hay paradas adicionales en R2 y R3.
+
 Unity 6000.6.7f1 · rama feat/unity-map. Escena independiente, sin integración con el motor ni las pantallas de Javier.
 
 ## Ejecutar y usar

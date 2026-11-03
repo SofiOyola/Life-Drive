@@ -1,0 +1,1315 @@
+fileFormatVersion: 2
+guid: dd783206ffc78ee43bc521b4e2c66c85
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1226216053260095343
+    second: PersonajesAtlas_0
+  - first:
+      213: 6056223489001876029
+    second: PersonajesAtlas_1
+  - first:
+      213: -820279593653401963
+    second: PersonajesAtlas_2
+  - first:
+      213: 1110663814517331484
+    second: PersonajesAtlas_3
+  - first:
+      213: 3230545607322808381
+    second: PersonajesAtlas_4
+  - first:
+      213: -5746697957766870117
+    second: PersonajesAtlas_5
+  - first:
+      213: 4772762492796079670
+    second: PersonajesAtlas_6
+  - first:
+      213: 7362337788098427072
+    second: PersonajesAtlas_7
+  - first:
+      213: 6588090293070105415
+    second: PersonajesAtlas_8
+  - first:
+      213: -9003836605620553633
+    second: PersonajesAtlas_9
+  - first:
+      213: -4752780203147502112
+    second: PersonajesAtlas_10
+  - first:
+      213: 5858926893015651075
+    second: PersonajesAtlas_11
+  - first:
+      213: -1665209605222056939
+    second: PersonajesAtlas_12
+  - first:
+      213: -8451878865352460738
+    second: PersonajesAtlas_13
+  - first:
+      213: 1164419843450338564
+    second: PersonajesAtlas_14
+  - first:
+      213: 2397200172725603318
+    second: PersonajesAtlas_15
+  - first:
+      213: -3145729932947202205
+    second: PersonajesAtlas_16
+  - first:
+      213: -5547653853712862608
+    second: PersonajesAtlas_17
+  - first:
+      213: -5470366929345897463
+    second: PersonajesAtlas_18
+  - first:
+      213: 8404597078031167684
+    second: PersonajesAtlas_19
+  - first:
+      213: 7561750554293007387
+    second: PersonajesAtlas_20
+  - first:
+      213: 3541655894541009456
+    second: PersonajesAtlas_21
+  - first:
+      213: 6349523114858715488
+    second: PersonajesAtlas_22
+  - first:
+      213: -2867981200770463387
+    second: PersonajesAtlas_23
+  - first:
+      213: 1229114768859787332
+    second: PersonajesAtlas_24
+  - first:
+      213: 8582392286774941230
+    second: PersonajesAtlas_25
+  - first:
+      213: -9124784565642298255
+    second: PersonajesAtlas_26
+  - first:
+      213: 4159572659889523719
+    second: PersonajesAtlas_27
+  - first:
+      213: -3911801532391882916
+    second: PersonajesAtlas_28
+  - first:
+      213: 7913457881563521712
+    second: PersonajesAtlas_29
+  - first:
+      213: -5906317685734081822
+    second: PersonajesAtlas_30
+  - first:
+      213: -2163801634722121445
+    second: PersonajesAtlas_31
+  - first:
+      213: 6689486896991569154
+    second: PersonajesAtlas_32
+  - first:
+      213: 7874955411647012809
+    second: PersonajesAtlas_33
+  - first:
+      213: 7048924453382175441
+    second: PersonajesAtlas_34
+  - first:
+      213: 6918604315130652372
+    second: PersonajesAtlas_35
+  - first:
+      213: -2759376677846014917
+    second: PersonajesAtlas_36
+  - first:
+      213: 3198872820213755847
+    second: PersonajesAtlas_37
+  - first:
+      213: 3746449519777811921
+    second: PersonajesAtlas_38
+  - first:
+      213: 2769271119284870510
+    second: PersonajesAtlas_39
+  - first:
+      213: -6441648467838115070
+    second: PersonajesAtlas_40
+  - first:
+      213: 6072763012921900071
+    second: PersonajesAtlas_41
+  - first:
+      213: -3373867644198253971
+    second: PersonajesAtlas_42
+  - first:
+      213: 2616659262303030154
+    second: PersonajesAtlas_43
+  - first:
+      213: -5389251867617172488
+    second: PersonajesAtlas_44
+  - first:
+      213: 5843174988774544655
+    second: PersonajesAtlas_45
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PersonajesAtlas_0
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 1247
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6f0370f005640110800000000000000
+      internalID: 1226216053260095343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 616
+        width: 622
+        height: 620
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3a655e0d270c0450800000000000000
+      internalID: 6056223489001876029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_2
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 1223
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59689cb3e08cd94f0800000000000000
+      internalID: -820279593653401963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_3
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 1219
+        width: 12
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c169f21daded96f00800000000000000
+      internalID: 1110663814517331484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_4
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 1215
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d30bc2b1d1435dc20800000000000000
+      internalID: 3230545607322808381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_5
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 636
+        width: 596
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9bc7db97a0af30b0800000000000000
+      internalID: -5746697957766870117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_6
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 1231
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63e0b6433324c3240800000000000000
+      internalID: 4772762492796079670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_7
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 1181
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c8ba0006374c2660800000000000000
+      internalID: 7362337788098427072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_8
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 1198
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74b84a267399d6b50800000000000000
+      internalID: 6588090293070105415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_9
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 1197
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f58f352cf42fb0380800000000000000
+      internalID: -9003836605620553633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_10
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 1140
+        width: 11
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ed52e7269bba0eb0800000000000000
+      internalID: -4752780203147502112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_11
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 1140
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3035e2f97f61f4150800000000000000
+      internalID: 5858926893015651075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_12
+      rect:
+        serializedVersion: 2
+        x: 1186
+        y: 1155
+        width: 23
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51cbb2ccfacf3e8e0800000000000000
+      internalID: -1665209605222056939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_13
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 1110
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e36f802b3f4e4ba80800000000000000
+      internalID: -8451878865352460738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_14
+      rect:
+        serializedVersion: 2
+        x: 1186
+        y: 1124
+        width: 35
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40df542ada9d82010800000000000000
+      internalID: 1164419843450338564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_15
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 1086
+        width: 45
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fb80de2bd0944120800000000000000
+      internalID: 2397200172725603318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_16
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1108
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36f5e53fa4f1854d0800000000000000
+      internalID: -3145729932947202205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_17
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 1106
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0723e987636c203b0800000000000000
+      internalID: -5547653853712862608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_18
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 1038
+        width: 35
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90c1b41d24a5514b0800000000000000
+      internalID: -5470366929345897463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_19
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 1085
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c07554538023a470800000000000000
+      internalID: 8404597078031167684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_20
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 1086
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b147fb4b01cb0f860800000000000000
+      internalID: 7561750554293007387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_21
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 1052
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03209c6854d762130800000000000000
+      internalID: 3541655894541009456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_22
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 1004
+        width: 27
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 069194ab1a90e1850800000000000000
+      internalID: 6349523114858715488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_23
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1030
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56904990b42e238d0800000000000000
+      internalID: -2867981200770463387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_24
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 1034
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 440f212ce51be0110800000000000000
+      internalID: 1229114768859787332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_25
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 986
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e26d5483058ca1770800000000000000
+      internalID: 8582392286774941230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 953
+        width: 5
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17c7ce068c04e5180800000000000000
+      internalID: -9124784565642298255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_27
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 931
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70c442abb45c9b930800000000000000
+      internalID: 4159572659889523719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 654
+        height: 597
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5ff3fd5b3d76b9c0800000000000000
+      internalID: -3911801532391882916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_29
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 580
+        width: 35
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b2eb97140042dd60800000000000000
+      internalID: 7913457881563521712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_30
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 511
+        width: 21
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea763b9b5b880ea0800000000000000
+      internalID: -5906317685734081822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_31
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 15
+        width: 578
+        height: 564
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b197af5a0e1a8f1e0800000000000000
+      internalID: -2163801634722121445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 467
+        width: 41
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20500d0f3e4d5dc50800000000000000
+      internalID: 6689486896991569154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_33
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 497
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cf924d3936794d60800000000000000
+      internalID: 7874955411647012809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_34
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 391
+        width: 41
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dab86c817fc2d160800000000000000
+      internalID: 7048924453382175441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_35
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 465
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d6e8d0e7f1d30060800000000000000
+      internalID: 6918604315130652372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_36
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 463
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b34ad730889b4b9d0800000000000000
+      internalID: -2759376677846014917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_37
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 459
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cf2e72b1eda46c20800000000000000
+      internalID: 3198872820213755847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_38
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 417
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dd0a4b1dff0ef330800000000000000
+      internalID: 3746449519777811921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_39
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 391
+        width: 23
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6d19b7296d6e6620800000000000000
+      internalID: 2769271119284870510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_40
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 381
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 203e19a09daaa96a0800000000000000
+      internalID: -6441648467838115070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_41
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 276
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72c375e09c9c64450800000000000000
+      internalID: 6072763012921900071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_42
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 258
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6a016cc04d9d21d0800000000000000
+      internalID: -3373867644198253971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_43
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 228
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8bcec34cbd305420800000000000000
+      internalID: 2616659262303030154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_44
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 214
+        width: 17
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f36199daf78535b0800000000000000
+      internalID: -5389251867617172488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PersonajesAtlas_45
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 215
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f059a5e91b0271150800000000000000
+      internalID: 5843174988774544655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PersonajesAtlas_0: 1226216053260095343
+      PersonajesAtlas_1: 6056223489001876029
+      PersonajesAtlas_10: -4752780203147502112
+      PersonajesAtlas_11: 5858926893015651075
+      PersonajesAtlas_12: -1665209605222056939
+      PersonajesAtlas_13: -8451878865352460738
+      PersonajesAtlas_14: 1164419843450338564
+      PersonajesAtlas_15: 2397200172725603318
+      PersonajesAtlas_16: -3145729932947202205
+      PersonajesAtlas_17: -5547653853712862608
+      PersonajesAtlas_18: -5470366929345897463
+      PersonajesAtlas_19: 8404597078031167684
+      PersonajesAtlas_2: -820279593653401963
+      PersonajesAtlas_20: 7561750554293007387
+      PersonajesAtlas_21: 3541655894541009456
+      PersonajesAtlas_22: 6349523114858715488
+      PersonajesAtlas_23: -2867981200770463387
+      PersonajesAtlas_24: 1229114768859787332
+      PersonajesAtlas_25: 8582392286774941230
+      PersonajesAtlas_26: -9124784565642298255
+      PersonajesAtlas_27: 4159572659889523719
+      PersonajesAtlas_28: -3911801532391882916
+      PersonajesAtlas_29: 7913457881563521712
+      PersonajesAtlas_3: 1110663814517331484
+      PersonajesAtlas_30: -5906317685734081822
+      PersonajesAtlas_31: -2163801634722121445
+      PersonajesAtlas_32: 6689486896991569154
+      PersonajesAtlas_33: 7874955411647012809
+      PersonajesAtlas_34: 7048924453382175441
+      PersonajesAtlas_35: 6918604315130652372
+      PersonajesAtlas_36: -2759376677846014917
+      PersonajesAtlas_37: 3198872820213755847
+      PersonajesAtlas_38: 3746449519777811921
+      PersonajesAtlas_39: 2769271119284870510
+      PersonajesAtlas_4: 3230545607322808381
+      PersonajesAtlas_40: -6441648467838115070
+      PersonajesAtlas_41: 6072763012921900071
+      PersonajesAtlas_42: -3373867644198253971
+      PersonajesAtlas_43: 2616659262303030154
+      PersonajesAtlas_44: -5389251867617172488
+      PersonajesAtlas_45: 5843174988774544655
+      PersonajesAtlas_5: -5746697957766870117
+      PersonajesAtlas_6: 4772762492796079670
+      PersonajesAtlas_7: 7362337788098427072
+      PersonajesAtlas_8: 6588090293070105415
+      PersonajesAtlas_9: -9003836605620553633
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb27902154ae74048be49adbd4c3725a, type: 3}
+  m_Name: OperacionCriticaDemo
+  m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.InterfazVisual.ResultadoEjemploDemo
+  titulo: "OPERACI\xD3N CR\xCDTICA"
+  tono: 2
+  jugador: Conductor DEMO
+  personajeId: 2
+  puntosSimulados: -20
+  resumen: "La entrega se completa, pero este ejemplo reporta consecuencias graves para la operaci\xF3n."
+  mensajeEducativo: Llegar al destino no elimina las consecuencias de las decisiones.
+  insignias: []
+  decisiones:
+  - decision: "Omitir la confirmaci\xF3n del aviso"
+    consecuencia: "El ejemplo presenta una salida con informaci\xF3n incompleta."
+    cambioIlustrativo: -5
+  - decision: Continuar sin confirmar el enlace
+    consecuencia: "El ejemplo incluye una reprogramaci\xF3n y dificultades de coordinaci\xF3n."
+    cambioIlustrativo: -5
+  - decision: Omitir el aviso del ejercicio
+    consecuencia: "La entrega llega a DELIVERY con una afectaci\xF3n grave reportada en esta instant\xE1nea ficticia."
+    cambioIlustrativo: -10

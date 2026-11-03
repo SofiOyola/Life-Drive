@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb27902154ae74048be49adbd4c3725a, type: 3}
+  m_Name: EntregaComplicacionesDemo
+  m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.InterfazVisual.ResultadoEjemploDemo
+  titulo: ENTREGA CON COMPLICACIONES
+  tono: 1
+  jugador: Conductor DEMO
+  personajeId: 2
+  puntosSimulados: -5
+  resumen: "La entrega se completa con coordinaci\xF3n pendiente y retrasos moderados en este ejemplo."
+  mensajeEducativo: "Revisar lo ocurrido ayuda a mejorar la siguiente operaci\xF3n."
+  insignias:
+  - demo.preventivo
+  decisiones:
+  - decision: Confirmar el aviso de acceso
+    consecuencia: "En el ejemplo se dispone de informaci\xF3n para preparar la salida."
+    cambioIlustrativo: 10
+  - decision: Continuar sin confirmar el enlace
+    consecuencia: "El ejemplo incluye una reprogramaci\xF3n y dificultades de coordinaci\xF3n."
+    cambioIlustrativo: -5
+  - decision: Omitir el aviso del ejercicio
+    consecuencia: "La entrega se completa con complicaciones moderadas en esta instant\xE1nea."
+    cambioIlustrativo: -10
