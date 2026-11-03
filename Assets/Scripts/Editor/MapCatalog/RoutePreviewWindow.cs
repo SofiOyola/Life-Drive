@@ -13,6 +13,10 @@ namespace LifeDrive.Editor
         [SerializeField] MapaVisual mapa;
         [SerializeField] float progreso, largo = 18, ancho = 7, lateral, zoom = 1;
         [SerializeField] bool verRuta = true, verPuntos = true, verCamion = true;
+        [SerializeField] Sprite camionSprite;
+        [SerializeField] float escalaSprite = 1, orientacionBase;
+        [SerializeField] bool verHuella = true;
+        Rect camionUV = new Rect(0, 0, 1, 1);
         Vector2 scroll, imagenScroll;
         Texture2D lectura;
         string diagnostico = "Pulsa Analizar para obtener advertencias con las dimensiones actuales.";
@@ -24,6 +28,8 @@ namespace LifeDrive.Editor
         {
             minSize = new Vector2(780, 650);
             catalogo = AssetDatabase.LoadAssetAtPath<CatalogoMapas>("Assets/Mapas/CatalogoMapas.asset");
+            if (camionSprite == null) camionSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Mapas/Vehiculos/CamionCarga.png");
+            ActualizarSpriteUV();
             if (mapa == null && catalogo != null) Seleccionar(catalogo.mapas.FirstOrDefault());
             else if (mapa != null) Seleccionar(mapa);
         }
@@ -38,6 +44,40 @@ namespace LifeDrive.Editor
         }
         public void EstablecerProgreso(float value) { progreso = Mathf.Clamp01(value); Repaint(); }
         public void MostrarCapas(bool ruta, bool puntos) { verRuta = ruta; verPuntos = puntos; Repaint(); }
+        public void ConfigurarCamion(Sprite sprite, float escala, float grados)
+        {
+            camionSprite = sprite; escalaSprite = Mathf.Clamp(escala, .1f, 4); orientacionBase = grados;
+            ActualizarSpriteUV(); Repaint();
+        }
+        public Vector2 DimensionesCamion => new Vector2(largo, ancho) * escalaSprite;
+        public void AjustarProporcionSprite()
+        {
+            if (camionSprite == null) return;
+            float ratio = camionUV.width * camionSprite.texture.width / (camionUV.height * camionSprite.texture.height);
+            ancho = Mathf.Clamp(largo / Mathf.Max(.1f, ratio), 1, 50);
+            Repaint();
+        }
+        void ActualizarSpriteUV()
+        {
+            camionUV = new Rect(0, 0, 1, 1);
+            if (camionSprite == null) return;
+            // Trim only for display: PNG, pivot and Sprite resource remain unchanged.
+            var path = AssetDatabase.GetAssetPath(camionSprite);
+            if (!File.Exists(path)) return;
+            var t = new Texture2D(2, 2);
+            try
+            {
+                ImageConversion.LoadImage(t, File.ReadAllBytes(path));
+                int x0 = t.width, y0 = t.height, x1 = -1, y1 = -1;
+                var pixels = t.GetPixels32();
+                var source = camionSprite.rect;
+                for (int y = (int)source.yMin; y < source.yMax; y++)
+                    for (int x = (int)source.xMin; x < source.xMax; x++)
+                        if (pixels[y * t.width + x].a > 8) { x0 = Mathf.Min(x0, x); y0 = Mathf.Min(y0, y); x1 = Mathf.Max(x1, x); y1 = Mathf.Max(y1, y); }
+                if (x1 >= x0) camionUV = new Rect(x0 / (float)t.width, y0 / (float)t.height, (x1 - x0 + 1f) / t.width, (y1 - y0 + 1f) / t.height);
+            }
+            finally { DestroyImmediate(t); }
+        }
         public Vector2 PosicionActual
         {
             get { Vector2 t; var p = RoutePreviewAnalysis.Evaluate(mapa, progreso, out t); return p + new Vector2(-t.y, t.x) * lateral; }
@@ -58,10 +98,17 @@ namespace LifeDrive.Editor
             if (GUILayout.Button("Recurso en Project")) { Selection.activeObject = mapa; EditorGUIUtility.PingObject(mapa); }
             EditorGUILayout.EndHorizontal();
             EditorGUI.BeginChangeCheck();
+            var nuevoSprite = (Sprite)EditorGUILayout.ObjectField("Sprite del camión", camionSprite, typeof(Sprite), false, GUILayout.Height(20));
+            if (nuevoSprite != camionSprite) { camionSprite = nuevoSprite; ActualizarSpriteUV(); }
+            escalaSprite = EditorGUILayout.Slider("Escala del sprite y huella", escalaSprite, .1f, 4);
+            orientacionBase = EditorGUILayout.FloatField("Corrección de orientación · grados", orientacionBase);
+            verHuella = EditorGUILayout.Toggle("Superponer huella diagnóstica", verHuella);
             largo = Mathf.Clamp(EditorGUILayout.FloatField("Largo · píxeles lógicos 480×270", largo), 1, 100);
             ancho = Mathf.Clamp(EditorGUILayout.FloatField("Ancho · píxeles lógicos", ancho), 1, 50);
+            if (camionSprite != null && GUILayout.Button("Ajustar ancho para conservar proporción del sprite")) AjustarProporcionSprite();
             lateral = EditorGUILayout.Slider("Desplazamiento lateral · px (+izquierda)", lateral, -20, 20);
             if (EditorGUI.EndChangeCheck()) diagnostico = "Dimensiones o desplazamiento cambiados: vuelve a analizar.";
+            EditorGUILayout.LabelField($"Dimensión visible aprox.: {largo * escalaSprite:F1} × {ancho * escalaSprite:F1} px lógicos · vía nominal {mapa.anchoViaPixeles * .75f:F1}px / carril {mapa.anchoViaPixeles * .375f:F1}px.", EditorStyles.wordWrappedMiniLabel);
             progreso = EditorGUILayout.Slider("Progreso · %", progreso * 100, 0, 100) / 100;
             zoom = EditorGUILayout.Slider("Zoom", zoom, .5f, 3);
             EditorGUILayout.LabelField("Entrada verde · intermedios cian · final naranja · zona DELIVERY magenta. Tangente por segmento, sin interpolación de gameplay.", EditorStyles.wordWrappedMiniLabel);
@@ -70,7 +117,7 @@ namespace LifeDrive.Editor
             if (mapa.fondo != null) GUI.DrawTexture(area, mapa.fondo, ScaleMode.StretchToFill);
             if (Event.current.type == EventType.Repaint) Dibujar(area);
             EditorGUILayout.EndScrollView();
-            if (GUILayout.Button("Analizar mapa con estas dimensiones")) diagnostico = RoutePreviewAnalysis.Analyze(mapa, largo, ancho, lateral).Summary;
+            if (GUILayout.Button("Analizar mapa con estas dimensiones")) diagnostico = RoutePreviewAnalysis.Analyze(mapa, largo * escalaSprite, ancho * escalaSprite, lateral, orientacionBase).Summary;
             EditorGUILayout.HelpBox(diagnostico, MessageType.Info);
             if (GUILayout.Button("Revisar los 16 y registrar informe")) RevisarTodos();
             foreach (var c in conexiones) EditorGUILayout.LabelField(c, EditorStyles.wordWrappedMiniLabel);
@@ -103,15 +150,34 @@ namespace LifeDrive.Editor
             if (verCamion && points.Length > 1)
             {
                 Vector2 t; var p = RoutePreviewAnalysis.Evaluate(mapa, progreso, out t); p += new Vector2(-t.y, t.x) * lateral;
-                var hull = RoutePreviewAnalysis.Hull(p, t, largo, ancho);
+                float angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg;
+                var axis = Quaternion.Euler(0, 0, orientacionBase) * (Vector3)t;
+                var hull = RoutePreviewAnalysis.Hull(p, axis, largo * escalaSprite, ancho * escalaSprite);
                 bool suspect = hull.Append(p).Any(v => !RoutePreviewAnalysis.Plausible(lectura, v, mapa.categoria == CategoriaMapa.Entrega));
+                if (camionSprite != null)
+                {
+                    var center = Pantalla(rect, p);
+                    var saved = GUI.matrix;
+                    GUIUtility.RotateAroundPivot(-(angle + orientacionBase), center);
+                    float width = largo * escalaSprite * rect.width / 480;
+                    float height = ancho * escalaSprite * rect.height / 270;
+                    GUI.DrawTextureWithTexCoords(new Rect(center.x - width / 2, center.y - height / 2, width, height), camionSprite.texture, camionUV, true);
+                    GUI.matrix = saved;
+                }
+                if (verHuella || camionSprite == null)
+                {
                 Handles.color = suspect ? new Color(1, .2f, .1f, .7f) : new Color(1, .85f, .1f, .7f);
+                if (camionSprite != null) Handles.color = new Color(Handles.color.r, Handles.color.g, Handles.color.b, .15f);
                 Handles.DrawAAConvexPolygon(hull.Select(v => Pantalla(rect, v)).ToArray());
                 Handles.color = Color.white;
                 Handles.DrawAAPolyLine(2, hull.Concat(new[] { hull[0] }).Select(v => Pantalla(rect, v)).ToArray());
-                var cab = RoutePreviewAnalysis.Hull(p + t * largo * .32f, t, largo * .25f, ancho * .9f);
-                Handles.color = new Color(.15f, .5f, 1, 1); Handles.DrawAAConvexPolygon(cab.Select(v => Pantalla(rect, v)).ToArray());
+                if (camionSprite == null)
+                {
+                    var cab = RoutePreviewAnalysis.Hull(p + t * largo * escalaSprite * .32f, t, largo * escalaSprite * .25f, ancho * escalaSprite * .9f);
+                    Handles.color = new Color(.15f, .5f, 1, 1); Handles.DrawAAConvexPolygon(cab.Select(v => Pantalla(rect, v)).ToArray());
+                }
                 Handles.color = Color.white; Handles.DrawAAPolyLine(2, Pantalla(rect, p), Pantalla(rect, p + t * largo));
+                }
                 GUI.Label(new Rect(rect.x + 8, rect.y + 8, 650, 35), suspect ? "HUELLA ROJA: color o límite sospechoso; inspeccionar visualmente." : "Huella amarilla: sin alerta de color local; NO certifica cabida.");
             }
             Handles.EndGUI();
@@ -131,8 +197,8 @@ namespace LifeDrive.Editor
         public string RevisarTodos()
         {
             conexiones.Clear();
-            var lines = new List<string> { "# Life Drive · revisión Route Preview", "", $"Huella {largo}×{ancho} px lógicos; desplazamiento lateral {lateral} px. Progreso por longitud de polilínea.", "", "## Geometría y estimación visual por mapa", "" };
-            foreach (var m in catalogo.mapas.Where(m => m != null)) lines.Add("- " + RoutePreviewAnalysis.Analyze(m, largo, ancho, lateral).Summary);
+            var lines = new List<string> { "# Life Drive · revisión Route Preview", "", $"Huella {largo * escalaSprite}×{ancho * escalaSprite} px lógicos; desplazamiento lateral {lateral} px. Progreso por longitud de polilínea.", "", "## Geometría y estimación visual por mapa", "" };
+            foreach (var m in catalogo.mapas.Where(m => m != null)) lines.Add("- " + RoutePreviewAnalysis.Analyze(m, largo * escalaSprite, ancho * escalaSprite, lateral, orientacionBase).Summary);
             lines.Add("\n## Conexiones · estimación raster\n");
             foreach (var m in catalogo.mapas.Where(m => m != null))
                 foreach (var d in m.siguientes ?? new MapaVisual[0]) if (d != null) { var c = RoutePreviewAnalysis.Connection(m, d); conexiones.Add(c); lines.Add("- " + c); }

@@ -69,7 +69,7 @@ namespace LifeDrive.Editor
                 + $" · Color PNG (estimación): centro {centerSuspect}/201, huella {hullSuspect}/201 sospechosos; {outside} huellas fuera del lienzo.";
         }
 
-        public static Result Analyze(MapaVisual m, float length, float width, float lateral)
+        public static Result Analyze(MapaVisual m, float length, float width, float lateral, float baseAngle = 0)
         {
             var r = new Result { id = m.Id };
             var points = m.trayectoria ?? new Vector2[0];
@@ -98,7 +98,8 @@ namespace LifeDrive.Editor
                     var side = new Vector2(-tangent.y, tangent.x); p += side * lateral;
                     bool terminal = m.categoria == CategoriaMapa.Entrega;
                     if (!Plausible(t, p, terminal)) r.centerSuspect++;
-                    var hull = Hull(p, tangent, length, width);
+                    Vector2 spriteAxis = Quaternion.Euler(0, 0, baseAngle) * (Vector3)tangent;
+                    var hull = Hull(p, spriteAxis, length, width);
                     var samples = hull.Concat(Enumerable.Range(0, 4).Select(k => (hull[k] + hull[(k + 1) % 4]) / 2)).Append(p);
                     if (samples.Any(v => !Plausible(t, v, terminal))) r.hullSuspect++;
                     if (hull.Any(v => v.x < 0 || v.y < 0 || v.x >= 480 || v.y >= 270)) r.outside++;

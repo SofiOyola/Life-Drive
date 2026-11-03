@@ -1,0 +1,1055 @@
+fileFormatVersion: 2
+guid: 04e6f4bb5e5487945b5cafb714452108
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6015602347337901223
+    second: CamionCarga_0
+  - first:
+      213: -2832613872187513306
+    second: CamionCarga_1
+  - first:
+      213: -7381647991740798662
+    second: CamionCarga_2
+  - first:
+      213: -5171571985765736185
+    second: CamionCarga_3
+  - first:
+      213: -7936580039113664999
+    second: CamionCarga_4
+  - first:
+      213: 2548720550669251440
+    second: CamionCarga_5
+  - first:
+      213: -36560894571674255
+    second: CamionCarga_6
+  - first:
+      213: -9126268425222717538
+    second: CamionCarga_7
+  - first:
+      213: -9041741125398168379
+    second: CamionCarga_8
+  - first:
+      213: 5442420843389434120
+    second: CamionCarga_9
+  - first:
+      213: 5065558405006506351
+    second: CamionCarga_10
+  - first:
+      213: 8040377445445250721
+    second: CamionCarga_11
+  - first:
+      213: -8578889986313237193
+    second: CamionCarga_12
+  - first:
+      213: -7670236854208905819
+    second: CamionCarga_13
+  - first:
+      213: -4054511286854582792
+    second: CamionCarga_14
+  - first:
+      213: -6290873301594586627
+    second: CamionCarga_15
+  - first:
+      213: -6628993375854850298
+    second: CamionCarga_16
+  - first:
+      213: 7917262190226200759
+    second: CamionCarga_17
+  - first:
+      213: -2480537793667685311
+    second: CamionCarga_18
+  - first:
+      213: 7161173949895003715
+    second: CamionCarga_19
+  - first:
+      213: -6082052265308359055
+    second: CamionCarga_20
+  - first:
+      213: -4106167005675445181
+    second: CamionCarga_21
+  - first:
+      213: -8865176018506914724
+    second: CamionCarga_22
+  - first:
+      213: -1193575659004976824
+    second: CamionCarga_23
+  - first:
+      213: -1873676200438219051
+    second: CamionCarga_24
+  - first:
+      213: -1741421337021688451
+    second: CamionCarga_25
+  - first:
+      213: 8386212860598582220
+    second: CamionCarga_26
+  - first:
+      213: -2178833500511206417
+    second: CamionCarga_27
+  - first:
+      213: 8781291195569255990
+    second: CamionCarga_28
+  - first:
+      213: -5770357752923239932
+    second: CamionCarga_29
+  - first:
+      213: 6368745216804815269
+    second: CamionCarga_30
+  - first:
+      213: 620672680157737015
+    second: CamionCarga_31
+  - first:
+      213: 7880027098176791703
+    second: CamionCarga_32
+  - first:
+      213: 4220164200402551059
+    second: CamionCarga_33
+  - first:
+      213: 5809936820093711365
+    second: CamionCarga_34
+  - first:
+      213: 1843756044551380232
+    second: CamionCarga_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CamionCarga_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1985
+        height: 716
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95b1be08989448ca0800000000000000
+      internalID: -6015602347337901223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_1
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 704
+        width: 109
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6266b6ae0b880b8d0800000000000000
+      internalID: -2832613872187513306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_2
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 679
+        width: 29
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a39605bd24e1f8990800000000000000
+      internalID: -7381647991740798662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 711
+        width: 70
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 701621adda2ea38b0800000000000000
+      internalID: -5171571985765736185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_4
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 716
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9169c25118a9bd190800000000000000
+      internalID: -7936580039113664999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_5
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 678
+        width: 84
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 073f06e46dfde5320800000000000000
+      internalID: 2548720550669251440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_6
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 668
+        width: 46
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17582626f0c1e7ff0800000000000000
+      internalID: -36560894571674255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_7
+      rect:
+        serializedVersion: 2
+        x: 1062
+        y: 682
+        width: 58
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9f7cb5683bf85180800000000000000
+      internalID: -9126268425222717538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_8
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 704
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ccf9950a58458280800000000000000
+      internalID: -9041741125398168379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_9
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 704
+        width: 100
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 809b8600cec578b40800000000000000
+      internalID: 5442420843389434120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_10
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 704
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f693867e78a7c4640800000000000000
+      internalID: 5065558405006506351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_11
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 680
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aea3d7dfa8259f60800000000000000
+      internalID: 8040377445445250721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_12
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 690
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73dc4a6a209a1f880800000000000000
+      internalID: -8578889986313237193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_13
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 688
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5adb4c14838dd8590800000000000000
+      internalID: -7670236854208905819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_14
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 672
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fd7831677b7bb7c0800000000000000
+      internalID: -4054511286854582792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_15
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 688
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df1477b001452b8a0800000000000000
+      internalID: -6290873301594586627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_16
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 672
+        width: 23
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f01c585a51104a0800000000000000
+      internalID: -6628993375854850298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_17
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 74
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b8501ab304cfdd60800000000000000
+      internalID: 7917262190226200759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_18
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 67
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 144a184e40c539dd0800000000000000
+      internalID: -2480537793667685311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_19
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 76
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34ec54214c9916360800000000000000
+      internalID: 7161173949895003715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_20
+      rect:
+        serializedVersion: 2
+        x: 1549
+        y: 80
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1767fe450b5389ba0800000000000000
+      internalID: -6082052265308359055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_21
+      rect:
+        serializedVersion: 2
+        x: 1575
+        y: 60
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 344294e1dd6f307c0800000000000000
+      internalID: -4106167005675445181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_22
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 62
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c546591816198f480800000000000000
+      internalID: -8865176018506914724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_23
+      rect:
+        serializedVersion: 2
+        x: 1484
+        y: 72
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 841a47013419f6fe0800000000000000
+      internalID: -1193575659004976824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_24
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 37
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5deb6c04c6d5ff5e0800000000000000
+      internalID: -1873676200438219051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_25
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 42
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d75598a358a35d7e0800000000000000
+      internalID: -1741421337021688451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_26
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 40
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccb7ac62a20d16470800000000000000
+      internalID: 8386212860598582220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_27
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 29
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe30f49a97a33c1e0800000000000000
+      internalID: -2178833500511206417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_28
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 45
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 636bb2d21d96dd970800000000000000
+      internalID: 8781291195569255990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_29
+      rect:
+        serializedVersion: 2
+        x: 1492
+        y: 30
+        width: 44
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40ac61642329befa0800000000000000
+      internalID: -5770357752923239932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_30
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 0
+        width: 68
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a18e981804526850800000000000000
+      internalID: 6368745216804815269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_31
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 29
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 730779e93821d9800800000000000000
+      internalID: 620672680157737015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_32
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 21
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 794a74745ea7b5d60800000000000000
+      internalID: 7880027098176791703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_33
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 30
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31180da1bf8019a30800000000000000
+      internalID: 4220164200402551059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_34
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 23
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 504f52961ca01a050800000000000000
+      internalID: 5809936820093711365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CamionCarga_35
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 15
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80dd6f79a56569910800000000000000
+      internalID: 1843756044551380232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      CamionCarga_0: -6015602347337901223
+      CamionCarga_1: -2832613872187513306
+      CamionCarga_10: 5065558405006506351
+      CamionCarga_11: 8040377445445250721
+      CamionCarga_12: -8578889986313237193
+      CamionCarga_13: -7670236854208905819
+      CamionCarga_14: -4054511286854582792
+      CamionCarga_15: -6290873301594586627
+      CamionCarga_16: -6628993375854850298
+      CamionCarga_17: 7917262190226200759
+      CamionCarga_18: -2480537793667685311
+      CamionCarga_19: 7161173949895003715
+      CamionCarga_2: -7381647991740798662
+      CamionCarga_20: -6082052265308359055
+      CamionCarga_21: -4106167005675445181
+      CamionCarga_22: -8865176018506914724
+      CamionCarga_23: -1193575659004976824
+      CamionCarga_24: -1873676200438219051
+      CamionCarga_25: -1741421337021688451
+      CamionCarga_26: 8386212860598582220
+      CamionCarga_27: -2178833500511206417
+      CamionCarga_28: 8781291195569255990
+      CamionCarga_29: -5770357752923239932
+      CamionCarga_3: -5171571985765736185
+      CamionCarga_30: 6368745216804815269
+      CamionCarga_31: 620672680157737015
+      CamionCarga_32: 7880027098176791703
+      CamionCarga_33: 4220164200402551059
+      CamionCarga_34: 5809936820093711365
+      CamionCarga_35: 1843756044551380232
+      CamionCarga_4: -7936580039113664999
+      CamionCarga_5: 2548720550669251440
+      CamionCarga_6: -36560894571674255
+      CamionCarga_7: -9126268425222717538
+      CamionCarga_8: -9041741125398168379
+      CamionCarga_9: 5442420843389434120
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
