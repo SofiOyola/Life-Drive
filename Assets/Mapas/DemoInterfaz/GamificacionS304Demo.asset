@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6f5d626ccf4cf449f1e00fea2720b5, type: 3}
+  m_Name: GamificacionS304Demo
+  m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.Demo.GamificacionDemo
+  reconocimientos:
+  - id: demo.preventivo
+    nombre: Conductor preventivo
+    descripcion: "Reconoce la confirmaci\xF3n del aviso de prueba."
+    condicionSimulada: Elegir la primera respuesta en S0.
+    senalRequerida: demo.confirmacion
+    icono: 0
+  - id: demo.responsable
+    nombre: Ruta responsable
+    descripcion: "Reconoce la coordinaci\xF3n del corredor ficticio."
+    condicionSimulada: Elegir la primera respuesta en R2.
+    senalRequerida: demo.ruta.coordinada
+    icono: 1
+  - id: demo.emergencia
+    nombre: Respuesta ante emergencias
+    descripcion: "Reconoce la recepci\xF3n del aviso simulado."
+    condicionSimulada: Elegir la primera respuesta en R3.
+    senalRequerida: demo.aviso.emergencia
+    icono: 2

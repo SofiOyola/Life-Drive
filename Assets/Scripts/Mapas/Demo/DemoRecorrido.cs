@@ -29,6 +29,9 @@ namespace LifeDrive.Mapas.Demo
         float distancia, angulo, giroVelocidad;
         string error;
         string[] nombres;
+        // Optional host presentation; defaults retain the original standalone demo.
+        public bool ControlExterno { get; set; }
+        public Rect AreaVisualExterna { get; set; }
         public bool Reproduciendo { get; private set; }
         bool FinMapa => recorrido != null && distancia >= recorrido.Longitud;
         public bool Terminado => FinMapa && (!recorridoCompleto || etapa == RutaActual.Length - 1) && fase == FaseFundido.Ninguna;
@@ -72,7 +75,12 @@ namespace LifeDrive.Mapas.Demo
             SeleccionarMapa(0);
             if (iniciarAutomaticamente) Reproducir();
         }
-        void Update() => Avanzar(Time.deltaTime);
+        void Update() { if (!ControlExterno) Avanzar(Time.deltaTime); }
+        public void PosicionarProgreso(float progreso)
+        {
+            if (EnTransicion || recorrido == null) return;
+            Pausar(); distancia = Mathf.Clamp01(progreso) * Longitud; Alinear();
+        }
         void Construir()
         {
             error = null;
@@ -166,6 +174,13 @@ namespace LifeDrive.Mapas.Demo
             float ancho = Mathf.Min(Screen.width, disponible * 16f / 9);
             float alto = ancho * 9f / 16;
             var image = new Rect((Screen.width - ancho) / 2, (disponible - alto) / 2, ancho, alto);
+            if (ControlExterno)
+            {
+                var area = AreaVisualExterna;
+                ancho = Mathf.Min(area.width, area.height * 16f / 9);
+                alto = ancho * 9f / 16;
+                image = new Rect(area.center.x - ancho / 2, area.center.y - alto / 2, ancho, alto);
+            }
             if (MapaActual != null && MapaActual.fondo != null)
             {
                 GUI.DrawTexture(image, MapaActual.fondo, ScaleMode.ScaleToFit);
@@ -191,6 +206,7 @@ namespace LifeDrive.Mapas.Demo
                 GUI.DrawTexture(image, Texture2D.whiteTexture);
                 GUI.color = color;
             }
+            if (ControlExterno) return;
             GUILayout.BeginArea(new Rect(8, Screen.height - controles + 4, Screen.width - 16, controles - 8), GUI.skin.box);
             GUILayout.Label("DEMO INDEPENDIENTE · Recorrido automático · " + (MapaActual == null ? "sin mapa" : MapaActual.Id));
             int modo = GUILayout.Toolbar(recorridoCompleto ? 1 : 0, new[] { "MAPA ÚNICO", "RECORRIDO COMPLETO" });

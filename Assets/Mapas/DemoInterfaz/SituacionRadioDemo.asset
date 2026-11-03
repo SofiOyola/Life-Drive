@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a33eab5aa59446744b17d848819ec919, type: 3}
+  m_Name: SituacionRadioDemo
+  m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.Demo.SituacionInterfazDemo
+  titulo: Un mensaje incompleto
+  idDemo: demo.radio
+  prefijoMapa: S0
+  enunciado: "La radio transmite solo parte del aviso de acceso al corredor. \xBFC\xF3mo prefieres continuar en esta demostraci\xF3n?"
+  puntoDemostracion: 0.35
+  respuestas:
+  - texto: Confirmar el mensaje antes de continuar
+    retroalimentacion: "Confirmar la informaci\xF3n facilita coordinar el acceso. En esta maqueta mostramos una continuaci\xF3n organizada."
+    consecuencia: "+10 puntos simulados \xB7 Continuaci\xF3n visual A"
+    puntosSimulados: 10
+    explicacionPuntos: +10 por confirmar el aviso ficticio.
+    senalesSimuladas:
+    - demo.confirmacion
+    hojaVisual: {fileID: 11400000, guid: 617313aac7171764393f4935e97f70ef, type: 2}
+  - texto: "Seguir el corredor se\xF1alizado disponible"
+    retroalimentacion: "Esta opci\xF3n permite comparar otra secuencia de fondos. El ejemplo no eval\xFAa una decisi\xF3n real ni registra consecuencias."
+    consecuencia: "\u22125 puntos simulados \xB7 Continuaci\xF3n visual B"
+    puntosSimulados: -5
+    explicacionPuntos: "\u22125 por omitir la confirmaci\xF3n de prueba."
+    senalesSimuladas: []
+    hojaVisual: {fileID: 11400000, guid: 4fc88176f16f30d4abea67d80f3766cf, type: 2}

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a33eab5aa59446744b17d848819ec919, type: 3}
+  m_Name: SituacionCoordinacionDemo
+  m_EditorClassIdentifier: LifeDrive::LifeDrive.Mapas.Demo.SituacionInterfazDemo
+  titulo: Coordinar el corredor
+  idDemo: demo.coordinacion
+  prefijoMapa: R2
+  enunciado: "El equipo solicita confirmar el corredor asignado antes del siguiente enlace. \xBFQu\xE9 har\xEDas en este ensayo?"
+  puntoDemostracion: 0.4
+  respuestas:
+  - texto: Confirmar el corredor con el equipo
+    retroalimentacion: "La confirmaci\xF3n completa este ejercicio de coordinaci\xF3n. La ruta visual se mantiene."
+    consecuencia: 
+    puntosSimulados: 5
+    explicacionPuntos: +5 por coordinar el corredor ficticio.
+    senalesSimuladas:
+    - demo.ruta.coordinada
+    hojaVisual: {fileID: 0}
+  - texto: Continuar sin confirmar el enlace
+    retroalimentacion: "En esta prueba se omite la coordinaci\xF3n. Puedes observar un cambio negativo ilustrativo."
+    consecuencia: 
+    puntosSimulados: -5
+    explicacionPuntos: "\u22125 por omitir la coordinaci\xF3n de prueba."
+    senalesSimuladas: []
+    hojaVisual: {fileID: 0}
