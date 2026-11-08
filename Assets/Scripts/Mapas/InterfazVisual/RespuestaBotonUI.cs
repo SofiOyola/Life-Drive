@@ -16,15 +16,17 @@ namespace LifeDrive.Mapas.InterfazVisual
         void Update()
         {
             bool activo=boton.interactable&&(encima||foco||marcado);
+            if(!boton.interactable)presionado=false;
             float k=1-Mathf.Exp(-18*Time.unscaledDeltaTime);
             transform.localScale=Vector3.Lerp(transform.localScale,Vector3.one*(presionado?.98f:activo?1.025f:1),k);
-            boton.targetGraphic.color=Color.Lerp(boton.targetGraphic.color,activo?hover:normal,k);
+            Color destino=!boton.interactable?Color.Lerp(normal,new Color32(24,41,28,255),.45f):activo?hover:normal;
+            boton.targetGraphic.color=Color.Lerp(boton.targetGraphic.color,destino,k);
             if(sombra!=null)sombra.effectDistance=Vector2.Lerp(sombra.effectDistance,new Vector2(0,activo?-7:-3),k);
         }
         void OnDisable(){encima=presionado=foco=false;transform.localScale=Vector3.one;}
         public void OnPointerEnter(PointerEventData e){encima=true;}
         public void OnPointerExit(PointerEventData e){encima=false;presionado=false;}
-        public void OnPointerDown(PointerEventData e){presionado=true;}
+        public void OnPointerDown(PointerEventData e){if(boton.interactable)presionado=true;}
         public void OnPointerUp(PointerEventData e){presionado=false;}
         public void OnSelect(BaseEventData e){foco=true;}
         public void OnDeselect(BaseEventData e){foco=false;presionado=false;}

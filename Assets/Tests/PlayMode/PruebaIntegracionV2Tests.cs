@@ -38,11 +38,14 @@ namespace LifeDrive.Tests
         string carpeta;
         PruebaIntegracionV2 prueba;
         float escalaPrevia;
+        bool vigilarProgreso;
+        float ultimoProgreso;
 
         [SetUp]
         public void Preparar()
         {
             escalaPrevia = Time.timeScale;
+            vigilarProgreso = false; ultimoProgreso = 0;
             Time.timeScale = 28;
             sesion = Guid.NewGuid();
             carpeta = Path.Combine(Application.temporaryCachePath, "LifeDrive-PruebaIntegracionV2", sesion.ToString("N"));
@@ -69,6 +72,7 @@ namespace LifeDrive.Tests
         public IEnumerator OchoRutasConBotonesReales([ValueSource(nameof(Rutas))] int ruta)
         {
             yield return AbrirEscena();
+            vigilarProgreso = true;
             int tramo = 0;
             int respuestas = 0;
             while (respuestas < 8 && prueba.Estado != Fase.Entregada)
@@ -92,6 +96,12 @@ namespace LifeDrive.Tests
                 Assert.That(decision.situacion_id, Is.EqualTo(id));
                 Assert.That(Texto("Detalle"), Does.Contain(decision.consecuencia));
                 Assert.That(antes.Decisiones.Count, Is.EqualTo(respuestas));
+                Assert.That(prueba.Gamificacion.Puntos, Is.EqualTo(antes.Partidas.Single().puntos));
+                Assert.That(prueba.Gamificacion.SituacionesResueltas, Is.EqualTo(respuestas));
+                Assert.That(Texto("Variación guardada"), Does.Contain(decision.puntos_aplicados.ToString("+0;-0;0")));
+                Assert.That(Texto("Situaciones resueltas"), Does.Contain("Situaciones resueltas: " + respuestas));
+                Assert.That(prueba.Gamificacion.BuenasPracticas.Length,
+                    Is.EqualTo(antes.Decisiones.Count(d => d.es_buena_practica)));
 
                 Click("Continuar");
                 if (bifurca || id == 6)
@@ -104,6 +114,8 @@ namespace LifeDrive.Tests
             }
             Assert.That(prueba.Estado, Is.EqualTo(Fase.Entregada));
             Assert.That(prueba.MapaVisible, Is.EqualTo("DELIVERY"));
+            Assert.That(prueba.ProgresoRecorrido, Is.EqualTo(1).Within(.0001f));
+            Assert.That(Texto("Situaciones resueltas"), Does.Contain("Entrega presentada"));
             Assert.That(Texto("Título"), Is.EqualTo("Entrega completada"));
             Assert.That(tramo, Is.EqualTo(4));
             var datos = LeerDatos();
@@ -185,10 +197,62 @@ namespace LifeDrive.Tests
             float limite = Time.realtimeSinceStartup + 12;
             while (prueba.Estado != fase)
             {
+                if (vigilarProgreso)
+                {
+                    Assert.That(prueba.ProgresoRecorrido + .0001f, Is.GreaterThanOrEqualTo(ultimoProgreso), "El cambio de mapa no debe hacer retroceder la barra.");
+                    ultimoProgreso = prueba.ProgresoRecorrido;
+                }
                 Assert.That(prueba.Estado, Is.Not.EqualTo(Fase.Error), Texto("Detalle"));
                 Assert.That(Time.realtimeSinceStartup, Is.LessThan(limite), $"Se esperaba {fase}, se obtuvo {prueba.Estado}.");
                 yield return null;
             }
+        }
+
+        [UnityTest]
+        public IEnumerator ReconocimientoRealSinInsigniaYPausaDePanel()
+        {
+            yield return AbrirEscena();
+            Click("Reconocimientos");
+            Assert.That(prueba.ReconocimientosAbiertos, Is.True);
+            float posicion = prueba.ProgresoMapa;
+            yield return null; yield return null;
+            Assert.That(prueba.ProgresoMapa, Is.EqualTo(posicion));
+            Click("Cerrar reconocimientos");
+            yield return Esperar(Fase.Situacion);
+            Click("Respuesta 1");
+            Assert.That(prueba.Gamificacion.Puntos, Is.EqualTo(20));
+            Assert.That(prueba.Gamificacion.BuenasPracticas.Length, Is.EqualTo(1));
+            Assert.That(Texto("Detalle"), Does.Contain("Buena práctica registrada"));
+            Assert.That(Texto("Variación guardada"), Does.Contain("Ganancia"));
+            Click("Reconocimientos");
+            Assert.That(Texto("Buenas prácticas registradas"), Does.Contain("registradas: 1"));
+            Assert.That(Texto("Buenas prácticas registradas"), Does.Contain("Insignias otorgadas: ninguna"));
+            Click("Cerrar reconocimientos");
+            var guardada = LeerDatos(); int cantidad = guardada.Eventos.Count;
+            yield return AbrirEscena();
+            Assert.That(prueba.Estado, Is.EqualTo(Fase.Consecuencia));
+            Assert.That(prueba.Gamificacion.Puntos, Is.EqualTo(20));
+            Assert.That(prueba.Gamificacion.BuenasPracticas.Length, Is.EqualTo(1));
+            Assert.That(LeerDatos().Eventos.Count(e => e.tipo == TipoEvento.BuenaPractica), Is.EqualTo(1));
+            Click("Reinicio visual");
+            Assert.That(prueba.Gamificacion.BuenasPracticas.Length, Is.EqualTo(1));
+            Assert.That(LeerDatos().Decisiones.Count, Is.EqualTo(1));
+        }
+
+        [UnityTest]
+        public IEnumerator CambiosNeutroYNegativoSinInsigniaAplicable()
+        {
+            yield return AbrirEscena(); yield return Esperar(Fase.Situacion);
+            Click("Respuesta 2");
+            Assert.That(Texto("Variación guardada"), Is.EqualTo("0 pts · Sin cambio"));
+            Assert.That(prueba.Gamificacion.BuenasPracticas, Is.Empty);
+            Click("Continuar"); yield return Esperar(Fase.Situacion);
+            Click("Respuesta 2");
+            Assert.That(Texto("Variación guardada"), Is.EqualTo("-20 pts · Pérdida"));
+            Assert.That(prueba.Gamificacion.Puntos, Is.EqualTo(-20));
+            Assert.That(prueba.Gamificacion.BuenasPracticas, Is.Empty);
+            Click("Reconocimientos");
+            Assert.That(Texto("Buenas prácticas registradas"), Does.Contain("no hay evidencias"));
         }
 
         Button BuscarBoton(string nombre) => prueba.GetComponentsInChildren<Button>(true)

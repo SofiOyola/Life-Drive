@@ -35,6 +35,10 @@ namespace LifeDrive.Editor.InterfazVisual
                 "sesion-local", Cargar);
         }
 
+        [MenuItem("Life Drive/Piloto V2/Configurar administradores de prueba")]
+        public static void ConfigurarAdministradores() => LifeDrive.Editor.VentanaAdministradores.AbrirPiloto(
+            FlujoJugadorPilotoV2.PrepararContenidoPiloto("sesion-local"));
+
         public static void Cargar(string nombre) => EditorSceneManager.LoadSceneInPlayMode(
             "Assets/Scenes/" + nombre + ".unity", new LoadSceneParameters(LoadSceneMode.Single));
     }

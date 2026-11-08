@@ -250,6 +250,7 @@ MonoBehaviour:
   catalogo: {fileID: 11400000, guid: 8222008d4da558643a483240f2bf7d9f, type: 2}
   fuentePixel: {fileID: 11400000, guid: 3708b62f03b697d4285072a525c2a5bb, type: 2}
   fuenteLectura: {fileID: 11400000, guid: 3bbba667b6ef138499aacdea972c9619, type: 2}
+  catalogoReconocimientos: {fileID: 11400000, guid: 44694b71374af0448b1c091fa8f75340, type: 2}
 --- !u!114 &1627950273
 MonoBehaviour:
   m_ObjectHideFlags: 0

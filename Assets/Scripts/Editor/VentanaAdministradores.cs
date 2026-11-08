@@ -11,7 +11,16 @@ namespace LifeDrive.Editor
 {
     public class VentanaAdministradores : EditorWindow
     {
-        static string Archivo => Path.Combine(Application.streamingAssetsPath, "Contenido", "administradores.json");
+        [SerializeField] string archivoPiloto;
+        string Archivo => archivoPiloto ?? Path.Combine(Application.streamingAssetsPath, "Contenido", "administradores.json");
+
+        public static void AbrirPiloto(string carpetaContenido)
+        {
+            var ventana = CreateInstance<VentanaAdministradores>();
+            ventana.archivoPiloto = Path.Combine(carpetaContenido, "administradores.json");
+            ventana.titleContent = new GUIContent("Cuentas PILOTO V2");
+            ventana.ShowUtility();
+        }
 
         string usuario = "", contrasena = "", mensaje = "";
 
@@ -20,6 +29,8 @@ namespace LifeDrive.Editor
 
         void OnGUI()
         {
+            if (archivoPiloto != null)
+                EditorGUILayout.HelpBox("Cuentas aisladas del piloto. Reinicia el piloto después de guardar para recargarlas. Usa credenciales exclusivas de prueba.", MessageType.Info);
             var lista = Cargar();
             EditorGUILayout.LabelField("Cuentas actuales", EditorStyles.boldLabel);
             foreach (var a in lista.administradores)
@@ -54,7 +65,7 @@ namespace LifeDrive.Editor
             usuario = contrasena = "";
         }
 
-        static ListaAdministradores Cargar() =>
+        ListaAdministradores Cargar() =>
             File.Exists(Archivo) ? JsonUtility.FromJson<ListaAdministradores>(File.ReadAllText(Archivo)) : new ListaAdministradores();
 
         void Guardar(ListaAdministradores lista, string aviso)

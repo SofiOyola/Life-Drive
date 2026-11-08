@@ -8,7 +8,7 @@ En Unity elegir **Life Drive > Piloto V2 > Abrir flujo del jugador**. El comando
 
 Se reutilizan sin duplicar ni guardar modificaciones en sus escenas:
 
-1. `Inicio.unity`: Jugar abre Registro. Un aviso identifica el piloto, los datos temporales y el uso exclusivo de identidades ficticias. El acceso administrativo conserva su aviso de integración pendiente.
+1. `Inicio.unity`: Jugar abre Registro. Un aviso identifica el piloto, los datos temporales y el uso exclusivo de identidades ficticias. El acceso administrativo se conecta en el piloto según [IntegracionAdministrativaV2.md](IntegracionAdministrativaV2.md).
 2. `Registro.unity`: solicita nombre, cédula y elección explícita de una de las cuatro fichas existentes. Conserva Hombre/Mujer y los cinco tonos de cada grupo: piel, ojos, cabello y traje. Iniciar / retomar V2 llama a `ServicioUsuarios.RegistrarJugador` y abre la partida. Los errores del servicio aparecen en el formulario.
 3. `PruebaIntegracionV2.unity`: recibe el mismo ServicioJuego y la identidad registrada. Inicia o retoma automáticamente, usa las respuestas del paquete y las decisiones guardadas para navegar. Mantiene camión, mapas, pausas, consecuencias y reconocimiento de hitos. Al completar la última presentación en DELIVERY aparece **Ver resultado de la operación**. Ese botón abre Resultado, sin adelantar el cierre visual.
 4. `Resultado.unity`: usa las referencias de la presentación existente con su controlador DEMO desactivado solo en el piloto. Muestra nombre, ficha, apariencia de la sesión, puntos, decisiones, retraso, recorrido visual e historial paginado de alternativas y consecuencias. Volver a Inicio cierra la sesión de usuario del piloto. No asigna una de las tres categorías finales. Esas categorías y sus recursos siguen preparados en la escena original.
@@ -23,7 +23,7 @@ Los botones **Ficha 1**, **Ficha 2**, **Ficha 3** y **Ficha 4** se generan a par
 
 Una cédula ya registrada con nombre compatible recupera el jugador existente. El servicio conserva su personaje_id original aunque se elija otra ficha en el formulario. El piloto respeta esa conducta y usa el ID devuelto. No modifica Usuarios, Datos, esquema ni validaciones de Javier.
 
-La apariencia se copia a un diccionario por jugador en el adaptador del piloto. Se puede mostrar en Resultado durante esa sesión. **No se guarda en la base ni en un archivo auxiliar.** Al detener Play Mode o cerrar la aplicación se pierde y hay que personalizarla de nuevo al registrarse. La reapertura recupera la partida y sus puntos, pero no recupera automáticamente la apariencia previa. Falta un contrato aprobado de persistencia y correspondencia visual para integrar esos atributos al producto.
+La apariencia del piloto ahora se conserva mediante eventos versionados en la misma base temporal, con variantes visuales válidas y una configuración fijada a cada partida. Registro permite recuperarla y Resultado reconstruye la apariencia guardada, sin reemplazar el personaje_id original. El contrato, las pruebas y los límites están en [PersistenciaPersonajesS3-07.md](PersistenciaPersonajesS3-07.md). La incorporación al modelo definitivo de producción sigue pendiente de coordinación con Javier.
 
 ## Datos reales y provisionales
 
@@ -39,7 +39,7 @@ No se implementan ni reemplazan TDS, IEE, PPS o PCRS. Se preservan sus entradas 
 
 | Archivo | Trabajo |
 | --- | --- |
-| `Assets/Scripts/IntegracionV2/FlujoJugadorPilotoV2.cs` | Adaptador aislado de pantallas, sesión temporal, selección técnica explícita, apariencia en memoria, resumen real e historial paginado. Crea fuentes TMP temporales para los textos del piloto. |
+| `Assets/Scripts/IntegracionV2/FlujoJugadorPilotoV2.cs` | Adaptador aislado de pantallas, sesión temporal, selección técnica explícita, persistencia visual aislada, resumen real e historial paginado. Crea fuentes TMP temporales para los textos del piloto. |
 | `Assets/Editor/InterfazVisual/FlujoJugadorPilotoV2Editor.cs` | Activación explícita y navegación de Editor sin cambiar Build Profiles. |
 | `Assets/Scripts/IntegracionV2/PruebaIntegracionV2.cs` | Inyección opcional del servicio del jugador y salida a Resultado limitada al cierre visual confirmado. |
 | `Assets/Scripts/IntegracionV2/PruebaIntegracionV2.Vista.cs` | El botón final ofrece Resultado cuando hay sesión inyectada. El piloto independiente conserva Iniciar otra prueba. |
@@ -80,4 +80,4 @@ Durante las recargas apareció una advertencia transitoria de transporte Unity M
 - S4-05: aporta pruebas de comportamiento por las pantallas y verificaciones internas de estado, decisiones y eventos. No sustituye la totalidad de pruebas de caja negra y blanca documentadas.
 - S4-06: ejecuta la suite EditMode existente y añade pruebas de integración Play Mode. No se afirma que toda especificación de pruebas unitarias del documento esté implementada.
 
-Para la vista administrativa falta conectar la autenticación y autorización ya existentes, elegir explícitamente la fuente de datos piloto, listar jugadores y partidas de esa fuente y consumir Resumen/ReportePdf con permisos administrativos. No se debe mezclar automáticamente esta caché con producción. También faltan la persistencia aprobada de apariencia, las reglas definitivas de categorías e insignias, los cálculos de Jorge y la aprobación del contenido candidato. No se añadió autenticación administrativa.
+La integración administrativa posterior queda documentada en [IntegracionAdministrativaV2.md](IntegracionAdministrativaV2.md), que actualiza la autenticación, las consultas y el PDF del piloto. No se debe mezclar automáticamente esta caché con producción. La persistencia de apariencia del piloto se documenta en [PersistenciaPersonajesS3-07.md](PersistenciaPersonajesS3-07.md). Siguen pendientes su incorporación a producción, las reglas definitivas de categorías e insignias, los cálculos de Jorge y la aprobación del contenido candidato. No se añadió autenticación administrativa.

@@ -24,13 +24,15 @@ namespace LifeDrive.IntegracionV2
         string error;
         Guid? sesionPruebas;
         Action<int> alResultado;
+        Action<int> alAbrirPartida;
 
         // Explicit injection from the isolated player pilot, before Start. The standalone test stays unchanged.
-        public void ConectarJugador(ServicioJuego servicio, Action<int> resultado)
+        public void ConectarJugador(ServicioJuego servicio, Action<int> resultado, Action<int> abierta = null)
         {
             if (juego != null) throw new InvalidOperationException("La sesión ya se abrió.");
             juego = servicio ?? throw new ArgumentNullException(nameof(servicio));
             alResultado = resultado ?? throw new ArgumentNullException(nameof(resultado));
+            alAbrirPartida = abierta;
         }
 
         public void VerResultado()
@@ -65,7 +67,7 @@ namespace LifeDrive.IntegracionV2
         void Update()
         {
             AjustarVista();
-            if (pausa || (Estado != Fase.EnMarcha && Estado != Fase.Transicion)) return;
+            if (reconocimientosAbiertos || pausa || (Estado != Fase.EnMarcha && Estado != Fase.Transicion)) return;
             Ejecutar(Avanzar);
         }
 
@@ -95,6 +97,7 @@ namespace LifeDrive.IntegracionV2
 
         void Restaurar()
         {
+            alAbrirPartida?.Invoke(partidaId); // Retry a failed appearance snapshot before allowing the match to continue.
             pausa = false;
             estado = juego.RecorridosV2.Consultar(partidaId);
             reproductor.MostrarMapa(estado.MapaActual);
@@ -122,12 +125,7 @@ namespace LifeDrive.IntegracionV2
         }
 
         // Hitos de esta escena en la trayectoria existente. s1 y s3 preceden a otra pregunta en el mismo mapa.
-        static float Hito(int situacionId) => situacionId switch
-        {
-            1 or 3 => .24f,
-            7 => .82f,
-            _ => .56f
-        };
+        static float Hito(int situacionId) => GamificacionPartidaV2.HitoVisual(situacionId);
 
         void Avanzar()
         {

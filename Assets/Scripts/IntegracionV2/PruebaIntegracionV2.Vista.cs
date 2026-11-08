@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using LifeDrive.Mapas;
 using LifeDrive.Mapas.InterfazVisual;
 using TMPro;
 using UnityEngine;
@@ -45,12 +46,13 @@ namespace LifeDrive.IntegracionV2
             Texto(superior.transform, "Life Drive", 24, 10, 630, 48, "LIFE DRIVE  /  EN RUTA", 38, true);
             Texto(superior.transform, "Versión", 25, 61, 645, 35,
                 "PRUEBA V2 · CONTENIDO EDUCATIVO PENDIENTE DE VALIDACIÓN", 18, false, Suave);
-            Texto(superior.transform, "Progreso", 720, 11, 270, 38, "Progreso del recorrido", 21, false, Suave);
+            progresoTexto = Texto(superior.transform, "Progreso", 720, 11, 310, 38, "Recorrido visual: 0%", 21, false, Suave);
             Caja("Fondo progreso", superior.transform, 720, 58, 300, 15, Musgo);
             relleno = Caja("Progreso presentado", superior.transform, 720, 58, 300, 15, Dorado).rectTransform;
             relleno.pivot = new Vector2(0, .5f);
             relleno.anchoredPosition = new Vector2(720, -65.5f);
-            puntos = Texto(superior.transform, "Puntos", 1060, 18, 245, 65, "0 pts", 29, true);
+            puntos = Texto(superior.transform, "Puntos", 1060, 10, 245, 62, "0 pts", 27, true);
+            variacionTexto = Texto(superior.transform, "Variación guardada", 1060, 76, 245, 26, "Sin respuestas", 18);
             pausaBoton = Boton(superior.transform, "Pausa", "Pausar", 1330, 24, 190, 58, AlternarPausa, out pausaTexto);
 
             var bitacora = Caja("Bitácora", marco, 1094, 144, 482, 637, Panel);
@@ -73,10 +75,13 @@ namespace LifeDrive.IntegracionV2
                     434, 78, () => Responder(indice), out textos[i]);
             }
             var pie = Caja("Estado", marco, 24, 800, 1552, 76, Bosque);
-            mapa = Texto(pie.transform, "Mapa", 24, 10, 650, 54, "", 23, true);
-            Texto(pie.transform, "Insignias", 706, 10, 380, 54, "Insignias pendientes de integración", 19, false, Suave);
+            mapa = Texto(pie.transform, "Mapa", 24, 5, 690, 32, "", 22, true);
+            situacionesTexto = Texto(pie.transform, "Situaciones resueltas", 24, 38, 690, 30, "", 19, false, Suave);
+            reconocimientosBoton = Boton(pie.transform, "Reconocimientos", "Reconocimientos", 724, 10, 510, 54,
+                AlternarReconocimientos, out reconocimientosTexto);
             reinicio = Boton(pie.transform, "Reinicio visual", "Reiniciar vista", 1266, 10, 262, 54,
                 ReiniciarVista, out _);
+            ConstruirReconocimientos(bitacora.gameObject);
             AjustarVista();
         }
 
@@ -87,6 +92,7 @@ namespace LifeDrive.IntegracionV2
 
         void OnDestroy()
         {
+            iconosReconocimientos.Liberar();
             LiberarFuente(pixelTemporal);
             LiberarFuente(lecturaTemporal);
         }
@@ -108,9 +114,11 @@ namespace LifeDrive.IntegracionV2
                 (Screen.width - 1600 * escala) / 2 + 24 * escala,
                 (Screen.height - 900 * escala) / 2 + 150 * escala,
                 1052 * escala, 592 * escala);
-            float progreso = estado == null ? 0 : estado.CierrePresentado ? 1 :
-                (estado.Historial.Length - 1 + (MapaVisible == estado.MapaActual ? ProgresoMapa : 1)) / 5;
-            relleno.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300 * Mathf.Clamp01(progreso));
+            ProgresoRecorrido = GamificacionPartidaV2.Progreso(estado, ProgresoMapa, Estado == Fase.Transicion);
+            relleno.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300 * ProgresoRecorrido);
+            relleno.gameObject.SetActive(Estado != Fase.Error);
+            progresoTexto.text = Estado == Fase.Error ? "Recorrido no disponible" :
+                "Recorrido visual: " + Mathf.FloorToInt(ProgresoRecorrido * 100) + "%";
         }
 
         void DeshabilitarRespuestas()
@@ -122,8 +130,9 @@ namespace LifeDrive.IntegracionV2
         {
             if (marco == null) return;
             var partida = juego?.BaseDatos.Partidas.FirstOrDefault(p => p.id == partidaId);
-            puntos.text = (partida?.puntos ?? 0) + " pts de seguridad";
+            puntos.text = Estado == Fase.Error ? "Puntos no disponibles" : (partida?.puntos ?? 0) + " pts de seguridad";
             mapa.text = "MAPA " + (MapaVisible ?? "S0");
+            ActualizarGamificacion();
             inicio.gameObject.SetActive(Estado == Fase.Preparada || Estado == Fase.Error && partidaId == 0);
             reinicio.gameObject.SetActive(partidaId != 0);
             continuar.gameObject.SetActive(Estado == Fase.Consecuencia);
@@ -168,7 +177,9 @@ namespace LifeDrive.IntegracionV2
             string veredicto = decision.tipo == "PREGUNTA"
                 ? (decision.es_acertada ? "Correcta" : "Incorrecta")
                 : (decision.es_acertada ? "Acción segura" : "Acción insegura");
-            return $"{veredicto} · {decision.puntos_aplicados:+0;-0;0} pts · {decision.retraso_aplicado} min\n\n{decision.consecuencia}";
+            string reconocimiento = Gamificacion?.BuenasPracticas.Any(b => b.DecisionId == decision.id) == true
+                ? "\n\nBuena práctica registrada por el motor." : "";
+            return $"{veredicto} · {decision.puntos_aplicados:+0;-0;0} pts · {decision.retraso_aplicado} min\n\n{decision.consecuencia}{reconocimiento}";
         }
 
         static RectTransform Rectangulo(string nombre, Transform padre, float x, float y, float ancho, float alto)
@@ -196,6 +207,7 @@ namespace LifeDrive.IntegracionV2
             var t = Rectangulo(nombre, padre, x, y, ancho, alto).gameObject.AddComponent<TextMeshProUGUI>();
             t.font = pixel ? pixelTemporal : lecturaTemporal;
             t.text = texto;
+            t.richText = false;
             t.fontSize = tamano;
             t.fontSizeMin = 16;
             t.fontSizeMax = tamano;
