@@ -10,7 +10,7 @@ namespace LifeDrive.Datos
     [Serializable]
     public class TablasLocales
     {
-        public int version = BaseDatos.VersionEsquema;
+        public int version = 1;
         public Secuencias secuencias = new Secuencias();
         public List<Jugador> jugador = new List<Jugador>();
         public List<Partida> partida = new List<Partida>();
@@ -42,6 +42,9 @@ namespace LifeDrive.Datos
     {
         public int id;
         public int jugador_id;
+        public int contenido_version; // 0 en registros antiguos equivale a V1
+        public string contenido_huella; // identidad del paquete V2 al iniciar
+        public int ultima_decision_presentada_id; // 0 representa el hito inicial de V2
         public string estado = EstadoPartida.EnCurso;
         public int tramo_actual_id;
         public int puntos;

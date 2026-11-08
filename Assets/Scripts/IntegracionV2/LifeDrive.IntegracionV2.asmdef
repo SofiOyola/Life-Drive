@@ -1,0 +1,9 @@
+{
+    "name": "LifeDrive.IntegracionV2",
+    "references": [
+        "LifeDrive",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI",
+        "Unity.InputSystem"
+    ]
+}

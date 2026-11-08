@@ -39,16 +39,24 @@ namespace LifeDrive.Motor
         readonly Contenido contenido;
         readonly ServicioUsuarios usuarios;
         readonly RegistroEventos eventos;
+        readonly Func<Partida, int, Tramo> resolverTramo;
 
         public ServicioDesempeno(BaseDatos db, Contenido contenido, ServicioUsuarios usuarios, RegistroEventos eventos)
+            : this(db, contenido, usuarios, eventos, null) { }
+
+        internal ServicioDesempeno(BaseDatos db, Contenido contenido, ServicioUsuarios usuarios,
+            RegistroEventos eventos, Func<Partida, int, Tramo> resolverTramo)
         {
             this.db = db;
             this.contenido = contenido;
             this.usuarios = usuarios;
             this.eventos = eventos;
+            this.resolverTramo = resolverTramo;
         }
 
-        string NombreTramo(int id) => contenido.tramos.FirstOrDefault(t => t.id == id)?.nombre ?? $"Tramo {id}";
+        string NombreTramo(Partida partida, int id) => partida.contenido_version == 2 && resolverTramo != null
+            ? resolverTramo(partida, id).nombre
+            : contenido.tramos.FirstOrDefault(t => t.id == id)?.nombre ?? $"Tramo {id}";
 
         // El jugador ve solo sus partidas; el administrador, cualquiera.
         public Resumen Resumen(int partidaId)
@@ -72,8 +80,8 @@ namespace LifeDrive.Motor
                 if (d.tipo == TipoSituacion.DecisionRuta && d.tramo_destino_id != d.tramo_origen_id) r.CambiosDeRuta++;
 
                 acumulado += d.puntos_aplicados;
-                var origen = NombreTramo(d.tramo_origen_id);
-                var destino = NombreTramo(d.tramo_destino_id);
+                var origen = NombreTramo(p, d.tramo_origen_id);
+                var destino = NombreTramo(p, d.tramo_destino_id);
                 r.Historial.Add(new PasoHistorial { Decision = d, TramoOrigen = origen, TramoDestino = destino, PuntosAcumulados = acumulado });
                 foreach (var t in new[] { origen, destino })
                     if (r.RutaRecorrida.Count == 0 || r.RutaRecorrida[r.RutaRecorrida.Count - 1] != t) r.RutaRecorrida.Add(t);

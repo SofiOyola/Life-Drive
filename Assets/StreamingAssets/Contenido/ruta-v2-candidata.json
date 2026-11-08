@@ -1,0 +1,718 @@
+{
+  "contenido_version": 2,
+  "estado": "CANDIDATO",
+  "contenido": {
+    "personajes": [
+      {
+        "id": 1,
+        "nombre": "Andrés",
+        "descripcion": "Conductor con 10 años en carretera"
+      },
+      {
+        "id": 2,
+        "nombre": "Camila",
+        "descripcion": "Conductora de tractocamión"
+      },
+      {
+        "id": 3,
+        "nombre": "Miguel",
+        "descripcion": "Conductor de carga refrigerada"
+      },
+      {
+        "id": 4,
+        "nombre": "Valentina",
+        "descripcion": "Conductora de carga seca"
+      }
+    ],
+    "tramos": [
+      {
+        "id": 101,
+        "nombre": "Patio de salida",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": true,
+        "es_destino": false,
+        "siguiente_tramo_id": 102
+      },
+      {
+        "id": 102,
+        "nombre": "Salida preparada",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 104
+      },
+      {
+        "id": 103,
+        "nombre": "Salida apresurada",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 106
+      },
+      {
+        "id": 104,
+        "nombre": "Corredor principal",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 108
+      },
+      {
+        "id": 105,
+        "nombre": "Atajo rural",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 110
+      },
+      {
+        "id": 106,
+        "nombre": "Zona de servicio",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 112
+      },
+      {
+        "id": 107,
+        "nombre": "Corredor rural industrial",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 114
+      },
+      {
+        "id": 108,
+        "nombre": "Corredor prudente",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 116
+      },
+      {
+        "id": 109,
+        "nombre": "Montaña de alta exposición",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 116
+      },
+      {
+        "id": 110,
+        "nombre": "Vía rural abierta",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 116
+      },
+      {
+        "id": 111,
+        "nombre": "Vía rural exigente",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 116
+      },
+      {
+        "id": 112,
+        "nombre": "Descenso después del descanso",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 116
+      },
+      {
+        "id": 113,
+        "nombre": "Descenso con fatiga",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 116
+      },
+      {
+        "id": 114,
+        "nombre": "Corredor después de la inspección",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 116
+      },
+      {
+        "id": 115,
+        "nombre": "Corredor de mayor exposición",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": false,
+        "siguiente_tramo_id": 116
+      },
+      {
+        "id": 116,
+        "nombre": "Centro logístico de entrega",
+        "descripcion": "Tramo del paquete candidato.",
+        "es_salida": false,
+        "es_destino": true,
+        "siguiente_tramo_id": 0
+      }
+    ],
+    "situaciones": [
+      {
+        "id": 1,
+        "tramo_id": 101,
+        "orden": 1,
+        "tipo": "PREGUNTA",
+        "tema": "MANTENIMIENTO",
+        "enunciado": "¿Qué debe hacerse antes de iniciar una operación de transporte?",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 1,
+            "descripcion": "Realizar la inspección preoperacional del vehículo",
+            "es_acertada": true,
+            "es_buena_practica": true,
+            "puntos": 20,
+            "retraso_min": 0,
+            "explicacion": "La inspección preoperacional detecta fallas antes de salir y es una buena práctica obligatoria.",
+            "tramo_destino_id": 0
+          },
+          {
+            "id": 2,
+            "descripcion": "Salir de inmediato para evitar retrasos",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": 0,
+            "retraso_min": 0,
+            "explicacion": "Salir sin inspección expone a fallas de frenos, llantas o luces durante el recorrido.",
+            "tramo_destino_id": 0
+          },
+          {
+            "id": 3,
+            "descripcion": "Revisar solo el combustible",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": 0,
+            "retraso_min": 0,
+            "explicacion": "El combustible no basta: también se revisan frenos, llantas, luces y amarres de la carga.",
+            "tramo_destino_id": 0
+          }
+        ]
+      },
+      {
+        "id": 101,
+        "tramo_id": 101,
+        "orden": 2,
+        "tipo": "RIESGO",
+        "tema": "MANTENIMIENTO",
+        "enunciado": "Despacho solicita salir y la inspección preoperacional aún no se ha hecho. ¿Qué haces?",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 101,
+            "descripcion": "Completar la inspección antes de salir",
+            "es_acertada": true,
+            "es_buena_practica": true,
+            "puntos": 20,
+            "retraso_min": 10,
+            "explicacion": "Verificar el vehículo antes de operar permite reportar hallazgos y corregirlos antes de salir.",
+            "tramo_destino_id": 102
+          },
+          {
+            "id": 102,
+            "descripcion": "Salir sin completar la inspección",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -20,
+            "retraso_min": 0,
+            "explicacion": "Salir por afán deja condiciones críticas sin verificar. Completa la inspección antes de operar.",
+            "tramo_destino_id": 103
+          }
+        ]
+      },
+      {
+        "id": 102,
+        "tramo_id": 102,
+        "orden": 1,
+        "tipo": "DECISION_RUTA",
+        "tema": "SEGURIDAD_VIAL",
+        "enunciado": "El reporte vial confirma que el corredor principal y un atajo rural están habilitados para este camión. El atajo reduce distancia, pero tiene curvas cerradas y menor visibilidad. ¿Qué camino eliges?",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 103,
+            "descripcion": "Seguir por el corredor principal, de mejor visibilidad",
+            "es_acertada": true,
+            "es_buena_practica": true,
+            "puntos": 15,
+            "retraso_min": 10,
+            "explicacion": "El corredor con mejor visibilidad ofrece más margen para anticipar riesgos en estas condiciones.",
+            "tramo_destino_id": 104
+          },
+          {
+            "id": 104,
+            "descripcion": "Tomar el atajo rural priorizando la distancia",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -15,
+            "retraso_min": 0,
+            "explicacion": "Una ruta más corta puede tener mayor exposición. Considera visibilidad, trazado y condiciones de paso antes de elegir.",
+            "tramo_destino_id": 105
+          }
+        ]
+      },
+      {
+        "id": 103,
+        "tramo_id": 103,
+        "orden": 1,
+        "tipo": "DECISION_RUTA",
+        "tema": "MANTENIMIENTO",
+        "enunciado": "Ya saliste con la revisión pendiente. No hay una falla conocida y el reporte de despacho identifica una zona habilitada para detenerte. ¿Qué haces?",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 105,
+            "descripcion": "Dirigirme a la zona de servicio y coordinar la verificación",
+            "es_acertada": true,
+            "es_buena_practica": true,
+            "puntos": 15,
+            "retraso_min": 15,
+            "explicacion": "Realiza la verificación en un lugar habilitado. Reporta cualquier hallazgo antes de continuar.",
+            "tramo_destino_id": 106
+          },
+          {
+            "id": 106,
+            "descripcion": "Seguir por el corredor rural industrial sin hacer la verificación",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -15,
+            "retraso_min": 0,
+            "explicacion": "Aplazar la verificación mantiene el riesgo sin controlar. Coordina una parada habilitada.",
+            "tramo_destino_id": 107
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "tramo_id": 104,
+        "orden": 1,
+        "tipo": "RIESGO",
+        "tema": "NORMAS_EMPRESA",
+        "enunciado": "Tienes una entrega programada y llevas retraso.",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 6,
+            "descripcion": "Aumentar la velocidad para recuperar tiempo",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -20,
+            "retraso_min": 0,
+            "explicacion": "Exceder la velocidad con carga aumenta la distancia de frenado y el riesgo de volcamiento.",
+            "tramo_destino_id": 0
+          },
+          {
+            "id": 7,
+            "descripcion": "Mantener una conducción segura y reportar el retraso",
+            "es_acertada": true,
+            "es_buena_practica": true,
+            "puntos": 20,
+            "retraso_min": 10,
+            "explicacion": "Reportar el retraso es el procedimiento correcto: la entrega se reprograma sin poner en riesgo a nadie.",
+            "tramo_destino_id": 0
+          },
+          {
+            "id": 8,
+            "descripcion": "Ignorar las condiciones de la vía",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -20,
+            "retraso_min": 0,
+            "explicacion": "Las condiciones de la vía determinan la velocidad segura; ignorarlas provoca incidentes.",
+            "tramo_destino_id": 0
+          }
+        ]
+      },
+      {
+        "id": 104,
+        "tramo_id": 104,
+        "orden": 2,
+        "tipo": "DECISION_RUTA",
+        "tema": "SEGURIDAD_VIAL",
+        "enunciado": "Ambos corredores de montaña están abiertos. Con visibilidad variable, uno tiene curvas amplias y el otro curvas más cerradas junto al talud. ¿Cuál eliges?",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 107,
+            "descripcion": "Elegir el corredor de curvas amplias",
+            "es_acertada": true,
+            "es_buena_practica": true,
+            "puntos": 15,
+            "retraso_min": 10,
+            "explicacion": "En este escenario, las curvas amplias ofrecen mayor margen de anticipación. Ajusta la velocidad a la visibilidad.",
+            "tramo_destino_id": 108
+          },
+          {
+            "id": 108,
+            "descripcion": "Elegir el corredor de curvas cerradas para recuperar tiempo",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -15,
+            "retraso_min": 0,
+            "explicacion": "La presión de tiempo no compensa la mayor exposición. Respeta la demarcación y ajusta la velocidad a la visibilidad.",
+            "tramo_destino_id": 109
+          }
+        ]
+      },
+      {
+        "id": 105,
+        "tramo_id": 105,
+        "orden": 1,
+        "tipo": "DECISION_RUTA",
+        "tema": "SEGURIDAD_VIAL",
+        "enunciado": "Dos corredores rurales están habilitados. La vía abierta ofrece mayor visibilidad. La otra es más corta, con doble curva y demarcación continua. ¿Cuál eliges?",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 109,
+            "descripcion": "Elegir la vía abierta y anticipar posibles usuarios vulnerables",
+            "es_acertada": true,
+            "es_buena_practica": true,
+            "puntos": 15,
+            "retraso_min": 10,
+            "explicacion": "La mejor visibilidad facilita anticipar riesgos. Mantén atención a quienes usan la vía.",
+            "tramo_destino_id": 110
+          },
+          {
+            "id": 110,
+            "descripcion": "Elegir el tramo exigente solo porque es más corto",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -15,
+            "retraso_min": 0,
+            "explicacion": "La distancia por sí sola no justifica mayor exposición. Ajusta velocidad y respeta la demarcación.",
+            "tramo_destino_id": 111
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "tramo_id": 106,
+        "orden": 1,
+        "tipo": "RIESGO",
+        "tema": "FATIGA_PAUSAS",
+        "enunciado": "Llevas cuatro horas conduciendo y sientes los ojos pesados.",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 12,
+            "descripcion": "Detenerse en un lugar seguro y hacer una pausa activa",
+            "es_acertada": true,
+            "es_buena_practica": true,
+            "puntos": 20,
+            "retraso_min": 15,
+            "explicacion": "La pausa activa recupera la atención; la fatiga causa una gran parte de los accidentes en carretera.",
+            "tramo_destino_id": 112
+          },
+          {
+            "id": 13,
+            "descripcion": "Bajar la ventana y seguir conduciendo",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -20,
+            "retraso_min": 0,
+            "explicacion": "El aire frío no elimina la fatiga; solo el descanso la reduce.",
+            "tramo_destino_id": 113
+          }
+        ]
+      },
+      {
+        "id": 106,
+        "tramo_id": 107,
+        "orden": 1,
+        "tipo": "RIESGO",
+        "tema": "MANEJO_CARGA",
+        "enunciado": "Tras circular por firme irregular, hay un punto habilitado antes del siguiente tramo. ¿Cómo gestionas la verificación de los amarres?",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 111,
+            "descripcion": "Detenerme en el punto habilitado y comprobar los amarres",
+            "es_acertada": true,
+            "es_buena_practica": true,
+            "puntos": 15,
+            "retraso_min": 10,
+            "explicacion": "Comprueba la sujeción en un lugar seguro. Reporta y corrige cualquier hallazgo antes de continuar.",
+            "tramo_destino_id": 114
+          },
+          {
+            "id": 112,
+            "descripcion": "Aplazar la comprobación y continuar por el corredor de mayor exposición",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -15,
+            "retraso_min": 0,
+            "explicacion": "El firme irregular puede afectar la sujeción de la carga. Verifica los amarres antes de continuar.",
+            "tramo_destino_id": 115
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "tramo_id": 116,
+        "orden": 1,
+        "tipo": "EMERGENCIA",
+        "tema": "EMERGENCIAS",
+        "enunciado": "A pocos kilómetros del destino se presenta una falla mecánica. ¿Cuál es el procedimiento adecuado?",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 15,
+            "descripcion": "Detenerse en un lugar seguro, señalizar y reportar",
+            "es_acertada": true,
+            "es_buena_practica": false,
+            "puntos": 15,
+            "retraso_min": 20,
+            "explicacion": "Ese es el protocolo: detenerse fuera de la vía, poner señales y reportar a la empresa.",
+            "tramo_destino_id": 0
+          },
+          {
+            "id": 16,
+            "descripcion": "Seguir conduciendo hasta el siguiente pueblo",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -20,
+            "retraso_min": 0,
+            "explicacion": "Conducir con una falla puede convertirla en un accidente.",
+            "tramo_destino_id": 0
+          },
+          {
+            "id": 17,
+            "descripcion": "Detenerse en plena vía sin señalizar",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": -20,
+            "retraso_min": 0,
+            "explicacion": "Un vehículo detenido sin señales en la vía es un riesgo para los demás conductores.",
+            "tramo_destino_id": 0
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "tramo_id": 116,
+        "orden": 2,
+        "tipo": "PREGUNTA",
+        "tema": "MANEJO_CARGA",
+        "enunciado": "Al llegar al destino, ¿qué se debe verificar antes de iniciar el descargue?",
+        "validada": false,
+        "fecha_validacion": "",
+        "alternativas": [
+          {
+            "id": 18,
+            "descripcion": "El estado de los amarres y la estabilidad de la carga",
+            "es_acertada": true,
+            "es_buena_practica": false,
+            "puntos": 10,
+            "retraso_min": 0,
+            "explicacion": "La carga puede haberse desplazado en el viaje; revisarla evita caídas al abrir.",
+            "tramo_destino_id": 0
+          },
+          {
+            "id": 19,
+            "descripcion": "Solo que el cliente firme la remisión",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": 0,
+            "retraso_min": 0,
+            "explicacion": "La remisión es necesaria, pero primero se verifica que el descargue sea seguro.",
+            "tramo_destino_id": 0
+          },
+          {
+            "id": 20,
+            "descripcion": "Nada, el descargue lo hace el cliente",
+            "es_acertada": false,
+            "es_buena_practica": false,
+            "puntos": 0,
+            "retraso_min": 0,
+            "explicacion": "El conductor sigue siendo responsable de entregar la carga en condiciones seguras.",
+            "tramo_destino_id": 0
+          }
+        ]
+      }
+    ]
+  },
+  "nodos": [
+    {
+      "mapa_id": "S0",
+      "tramo_id": 101
+    },
+    {
+      "mapa_id": "R1A",
+      "tramo_id": 102
+    },
+    {
+      "mapa_id": "R1B",
+      "tramo_id": 103
+    },
+    {
+      "mapa_id": "R2A",
+      "tramo_id": 104
+    },
+    {
+      "mapa_id": "R2B",
+      "tramo_id": 105
+    },
+    {
+      "mapa_id": "R2C",
+      "tramo_id": 106
+    },
+    {
+      "mapa_id": "R2D",
+      "tramo_id": 107
+    },
+    {
+      "mapa_id": "R3A",
+      "tramo_id": 108
+    },
+    {
+      "mapa_id": "R3B",
+      "tramo_id": 109
+    },
+    {
+      "mapa_id": "R3C",
+      "tramo_id": 110
+    },
+    {
+      "mapa_id": "R3D",
+      "tramo_id": 111
+    },
+    {
+      "mapa_id": "R3E",
+      "tramo_id": 112
+    },
+    {
+      "mapa_id": "R3F",
+      "tramo_id": 113
+    },
+    {
+      "mapa_id": "R3G",
+      "tramo_id": 114
+    },
+    {
+      "mapa_id": "R3H",
+      "tramo_id": 115
+    },
+    {
+      "mapa_id": "DELIVERY",
+      "tramo_id": 116
+    }
+  ],
+  "asociaciones": [
+    {
+      "contenido_version": 2,
+      "situacion_id": 101,
+      "alternativa_id": 101,
+      "mapa_origen": "S0",
+      "mapa_destino": "R1A"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 101,
+      "alternativa_id": 102,
+      "mapa_origen": "S0",
+      "mapa_destino": "R1B"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 102,
+      "alternativa_id": 103,
+      "mapa_origen": "R1A",
+      "mapa_destino": "R2A"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 102,
+      "alternativa_id": 104,
+      "mapa_origen": "R1A",
+      "mapa_destino": "R2B"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 103,
+      "alternativa_id": 105,
+      "mapa_origen": "R1B",
+      "mapa_destino": "R2C"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 103,
+      "alternativa_id": 106,
+      "mapa_origen": "R1B",
+      "mapa_destino": "R2D"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 104,
+      "alternativa_id": 107,
+      "mapa_origen": "R2A",
+      "mapa_destino": "R3A"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 104,
+      "alternativa_id": 108,
+      "mapa_origen": "R2A",
+      "mapa_destino": "R3B"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 105,
+      "alternativa_id": 109,
+      "mapa_origen": "R2B",
+      "mapa_destino": "R3C"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 105,
+      "alternativa_id": 110,
+      "mapa_origen": "R2B",
+      "mapa_destino": "R3D"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 5,
+      "alternativa_id": 12,
+      "mapa_origen": "R2C",
+      "mapa_destino": "R3E"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 5,
+      "alternativa_id": 13,
+      "mapa_origen": "R2C",
+      "mapa_destino": "R3F"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 106,
+      "alternativa_id": 111,
+      "mapa_origen": "R2D",
+      "mapa_destino": "R3G"
+    },
+    {
+      "contenido_version": 2,
+      "situacion_id": 106,
+      "alternativa_id": 112,
+      "mapa_origen": "R2D",
+      "mapa_destino": "R3H"
+    }
+  ]
+}

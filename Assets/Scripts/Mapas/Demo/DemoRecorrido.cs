@@ -19,6 +19,7 @@ namespace LifeDrive.Mapas.Demo
         FaseFundido fase;
         float relojFundido;
         bool recorridoCompleto;
+        int? siguienteExterno;
         int rutaSeleccionada, etapa;
         MapaVisual[][] rutas = new MapaVisual[0][];
         string[] nombresRutas = new string[0];
@@ -34,7 +35,8 @@ namespace LifeDrive.Mapas.Demo
         public Rect AreaVisualExterna { get; set; }
         public bool Reproduciendo { get; private set; }
         bool FinMapa => recorrido != null && distancia >= recorrido.Longitud;
-        public bool Terminado => FinMapa && (!recorridoCompleto || etapa == RutaActual.Length - 1) && fase == FaseFundido.Ninguna;
+        public bool Terminado => FinMapa && !siguienteExterno.HasValue &&
+            (!recorridoCompleto || etapa == RutaActual.Length - 1) && fase == FaseFundido.Ninguna;
         MapaVisual[] RutaActual => rutas.Length == 0 ? new MapaVisual[0] : rutas[rutaSeleccionada];
         public bool ModoCompleto => recorridoCompleto;
         public bool EntregaCompletada => recorridoCompleto && Terminado && MapaActual != null && MapaActual.Id == "DELIVERY";
@@ -93,6 +95,23 @@ namespace LifeDrive.Mapas.Demo
             indice = catalogo == null || catalogo.mapas == null ? 0 : Mathf.Clamp(value, 0, catalogo.mapas.Length - 1);
             Construir(); Reiniciar();
         }
+        public void MostrarMapa(string mapaId)
+        {
+            var nuevo = Array.FindIndex(catalogo.mapas, m => m.Id == mapaId);
+            if (nuevo < 0) throw new ArgumentException("Mapa desconocido: " + mapaId);
+            SeleccionarMapa(nuevo);
+            if (recorrido == null) throw new ArgumentException(error);
+        }
+
+        // The host supplies one confirmed edge. Standalone demo routes keep their original autoplay.
+        public void TransicionarA(string mapaId)
+        {
+            if (!ControlExterno || recorridoCompleto || EnTransicion || siguienteExterno.HasValue ||
+                MapaActual == null || !MapaActual.siguientes.Any(m => m.Id == mapaId))
+                throw new ArgumentException("Transición visual no permitida: " + mapaId);
+            siguienteExterno = Array.FindIndex(catalogo.mapas, m => m.Id == mapaId);
+            Reproducir();
+        }
         public void SeleccionarRecorrido(int value)
         {
             if (rutas.Length == 0) { error = errorRutas ?? "No hay recorridos válidos."; return; }
@@ -120,6 +139,7 @@ namespace LifeDrive.Mapas.Demo
         }
         public void Reiniciar()
         {
+            siguienteExterno = null;
             fase = FaseFundido.Ninguna; relojFundido = 0;
             if (recorridoCompleto) AbrirEtapa(0);
             distancia = 0; Reproduciendo = false; Alinear();
@@ -141,11 +161,22 @@ namespace LifeDrive.Mapas.Demo
                         relojFundido = 0;
                         if (fase == FaseFundido.Saliendo)
                         {
-                            AbrirEtapa(etapa + 1); fase = FaseFundido.Entrando;
+                            if (siguienteExterno.HasValue)
+                            {
+                                indice = siguienteExterno.Value;
+                                siguienteExterno = null;
+                                Construir(); distancia = 0; Alinear();
+                            }
+                            else AbrirEtapa(etapa + 1);
+                            fase = FaseFundido.Entrando;
                             // Present at least one fully black frame before revealing the new art.
                             return;
                         }
-                        else fase = FaseFundido.Ninguna;
+                        else
+                        {
+                            fase = FaseFundido.Ninguna;
+                            if (!recorridoCompleto) Pausar();
+                        }
                     }
                     continue;
                 }
@@ -153,7 +184,8 @@ namespace LifeDrive.Mapas.Demo
                 Mover(delta); segundos -= delta;
                 if (FinMapa)
                 {
-                    if (recorridoCompleto && etapa < RutaActual.Length - 1) { fase = FaseFundido.Saliendo; relojFundido = 0; }
+                    if (siguienteExterno.HasValue || recorridoCompleto && etapa < RutaActual.Length - 1)
+                    { fase = FaseFundido.Saliendo; relojFundido = 0; }
                     else Reproduciendo = false;
                 }
             }

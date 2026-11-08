@@ -17,7 +17,7 @@ namespace LifeDrive.Datos
 
     public class BaseDatos
     {
-        public const int VersionEsquema = 1;
+        public const int VersionEsquema = 2;
         static readonly Regex Cedula = new Regex("^[0-9]{5,15}$");
 
         readonly string archivo;
@@ -95,6 +95,7 @@ namespace LifeDrive.Datos
 
             var partidas = new HashSet<int>();
             var enCurso = new HashSet<int>();
+            var decisionesPorId = t.decision.ToLookup(d => d.id);
             foreach (var p in t.partida)
             {
                 if (!jugadores.Contains(p.jugador_id)) Falla($"Partida {p.id}: el jugador {p.jugador_id} no existe");
@@ -102,6 +103,13 @@ namespace LifeDrive.Datos
                 if ((p.estado == EstadoPartida.EnCurso) != string.IsNullOrEmpty(p.fecha_fin)) Falla($"Partida {p.id}: solo una partida terminada tiene fecha de fin");
                 if (p.estado == EstadoPartida.EnCurso && !enCurso.Add(p.jugador_id)) Falla($"El jugador {p.jugador_id} ya tiene una partida en curso");
                 if (p.tramo_actual_id <= 0 || p.retraso_min < 0) Falla($"Partida {p.id}: tramo o retraso no válido");
+                if (p.contenido_version < 0 || p.contenido_version > 2)
+                    Falla($"Partida {p.id}: versión de contenido desconocida");
+                if (p.contenido_version == 2 && string.IsNullOrEmpty(p.contenido_huella))
+                    Falla($"Partida {p.id}: falta la huella del contenido V2");
+                if (p.ultima_decision_presentada_id != 0 && (p.contenido_version != 2 ||
+                    decisionesPorId[p.ultima_decision_presentada_id].Count(d => d.partida_id == p.id) != 1))
+                    Falla($"Partida {p.id}: el hito de presentación no corresponde a una decisión propia");
                 partidas.Add(p.id);
             }
 
@@ -129,6 +137,8 @@ namespace LifeDrive.Datos
         // La versión anterior queda en lifedrive-db.json.bak.
         void Guardar()
         {
+            if (t.partida.Any(p => p.contenido_version == 2))
+                t.version = VersionEsquema;
             var temporal = archivo + ".tmp";
             File.WriteAllText(temporal, JsonUtility.ToJson(t, true));
             if (File.Exists(archivo)) File.Replace(temporal, archivo, archivo + ".bak");
