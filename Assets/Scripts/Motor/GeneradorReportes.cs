@@ -16,7 +16,9 @@ namespace LifeDrive.Motor
             float y = 50;
 
             pdf.Texto(Margen, y, "Life Drive · Reporte de desempeño", 18, true); y += 30;
-            pdf.Texto(Margen, y, $"Jugador: {r.Jugador.nombre}   ·   Cédula: {r.Jugador.cedula}", 10, false, Suave); y += 15;
+            // Cédula primero y nombre con ajuste de línea: un nombre largo no debe empujar la cédula fuera de la hoja.
+            pdf.Texto(Margen, y, $"Cédula: {r.Jugador.cedula}", 10, false, Suave); y += 15;
+            y = pdf.Parrafo(Margen, y, AnchoUtil, $"Jugador: {r.Jugador.nombre}", 10, false, Suave) + 2;
             pdf.Texto(Margen, y, $"Partida #{p.id}   ·   Inicio: {p.fecha_inicio}   ·   Fin: {p.fecha_fin}", 10, false, Suave); y += 26;
             pdf.Texto(Margen, y, $"Puntos de seguridad: {p.puntos}      Retraso acumulado: {p.retraso_min} min", 13, true); y += 18;
             pdf.Texto(Margen, y, "Llegar más rápido no significa un mejor resultado: el desempeño se mide por las decisiones seguras.", 9, false, Suave); y += 26;

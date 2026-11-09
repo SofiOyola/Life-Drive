@@ -219,5 +219,19 @@ namespace LifeDrive.Tests
             Assert.AreEqual(TipoEvento.ReporteGenerado, eventos.First().tipo);   // el más reciente primero
             Assert.IsTrue(juego.Desempeno.Eventos(jugadorId: filas[0].Jugador.id).Count > 0);
         }
+
+        [Test]
+        public void ElPdfConNombreLargoConservaLaCedulaYAjustaElNombre()
+        {
+            var juego = NuevoJuego();
+            var nombre = string.Join(" ", System.Linq.Enumerable.Repeat("Maria Fernanda Rodriguez", 5));
+            juego.Usuarios.RegistrarJugador(nombre, "77777777", 3);
+            var terminada = Jugar(juego, a => a[0]);
+            juego.Usuarios.IniciarSesionAdministrador("admin", "ClaveDePrueba123");
+
+            var texto = System.Text.Encoding.GetEncoding("iso-8859-1").GetString(juego.Desempeno.ReportePdf(terminada.id));
+            StringAssert.Contains("(Cédula: 77777777) Tj", texto);          // cédula en su propia línea
+            StringAssert.DoesNotContain("Jugador: " + nombre + ")", texto);      // el nombre se partió en varias líneas
+        }
     }
 }

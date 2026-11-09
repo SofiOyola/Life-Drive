@@ -192,7 +192,8 @@ namespace LifeDrive.Tests
                     if (turno == 0)
                     {
                         Assert.That(reproductor.MapaActual.fondo, Is.Not.Null);
-                        Assert.That(fondos.Add(reproductor.MapaActual.fondo), Is.True, "El nuevo mapa debe cargar otro fondo.");
+                        Assert.That(fondos.Add(reproductor.MapaActual.fondo), Is.True,
+                            $"El nuevo mapa debe cargar otro fondo. Esperado {mapas[tramo]}, MapaActual {reproductor.MapaActual.Id} (fondo {reproductor.MapaActual.fondo.name}), ya vistos {fondos.Count}.");
                     }
                     int id = prueba.SituacionVisibleId;
                     Assert.That(id, Is.EqualTo(situaciones[tramo][turno]));
@@ -233,6 +234,7 @@ namespace LifeDrive.Tests
                     {
                         yield return ReabrirDesdeInicioDuranteFundido(estado, disco);
                         prueba = Object.FindAnyObjectByType<PruebaIntegracionV2>();
+                        reproductor = prueba.GetComponent<DemoRecorrido>(); // la escena se reabrió: el anterior quedó obsoleto
                         Click(Boton("Continuar"));
                         yield return EsperarEntradaConFundido(prueba, destino);
                     }
