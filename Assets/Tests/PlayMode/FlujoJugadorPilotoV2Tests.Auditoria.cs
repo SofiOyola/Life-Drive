@@ -84,7 +84,7 @@ namespace LifeDrive.Tests
             var partida = piloto.Juego.BaseDatos.Partidas.Single(); string original = partida.contenido_huella;
             int puntos = partida.puntos, decisiones = piloto.Juego.BaseDatos.Decisiones.Count;
             piloto.Juego.BaseDatos.Ejecutar(() => piloto.Juego.BaseDatos.Partidas.Single().contenido_huella = "huella-alterada-solo-prueba");
-            Click(Boton("Reinicio visual")); yield return null;
+            Click(Boton("Continuar")); yield return null;
             Assert.That(prueba.Estado, Is.EqualTo(Fase.Error));
             var detalle = prueba.GetComponentsInChildren<TMP_Text>(true).Single(t => t.name == "Detalle");
             Assert.That(detalle.text, Does.Contain("no coincide"));
@@ -102,6 +102,7 @@ namespace LifeDrive.Tests
         {
             Resolucion(false); Activar(); yield return Pantalla("Inicio");
             var v = Object.FindAnyObjectByType<PersonalizacionRegistroUI>(); var b = v.jugar;
+            EventSystem.current.SetSelectedGameObject(v.administrador.gameObject); // Compare pointer hover independently of the new initial keyboard focus.
             var feedback = b.GetComponent<RespuestaBotonUI>();
             yield return new WaitForSecondsRealtime(.3f);
             var normal = b.targetGraphic.color;

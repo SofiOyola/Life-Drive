@@ -22,6 +22,8 @@ namespace LifeDrive.IntegracionV2
         static readonly Color Suave = new Color32(194, 201, 168, 255);
         RectTransform marco, relleno;
         TMP_Text titulo, detalle, mapa, puntos, pausaTexto;
+        TMP_Text tipoFicha, ayudaLectura;
+        ScrollRect lecturaFicha;
         Button inicio, reinicio, continuar, pausaBoton, nuevaPrueba;
         readonly Button[] respuestas = new Button[3];
         readonly TMP_Text[] textos = new TMP_Text[3];
@@ -43,11 +45,11 @@ namespace LifeDrive.IntegracionV2
             marco.anchorMin = marco.anchorMax = new Vector2(.5f, .5f);
             marco.sizeDelta = new Vector2(1600, 900);
             var superior = Caja("Cabecera", marco, 24, 20, 1552, 108, Bosque);
-            Texto(superior.transform, "Life Drive", 24, 10, 630, 48, "LIFE DRIVE  /  EN RUTA", 38, true);
-            Texto(superior.transform, "Versión", 25, 61, 645, 35,
-                "PRUEBA V2 · CONTENIDO EDUCATIVO PENDIENTE DE VALIDACIÓN", 18, false, Suave);
+            Texto(superior.transform, "Life Drive", 24, alResultado == null ? 10 : 29, 630, 48, "LIFE DRIVE  /  EN RUTA", 38, true);
+            if (alResultado == null)
+                Texto(superior.transform, "Versión", 25, 61, 645, 35, "PRUEBA INTERNA DE INTEGRACIÓN", 18, false, Suave);
             progresoTexto = Texto(superior.transform, "Progreso", 720, 11, 310, 38, "Recorrido visual: 0%", 21, false, Suave);
-            Caja("Fondo progreso", superior.transform, 720, 58, 300, 15, Musgo);
+            Caja("Fondo progreso", superior.transform, 720, 58, 300, 15, Musgo).gameObject.SetActive(!esV1);
             relleno = Caja("Progreso presentado", superior.transform, 720, 58, 300, 15, Dorado).rectTransform;
             relleno.pivot = new Vector2(0, .5f);
             relleno.anchoredPosition = new Vector2(720, -65.5f);
@@ -56,12 +58,28 @@ namespace LifeDrive.IntegracionV2
             pausaBoton = Boton(superior.transform, "Pausa", "Pausar", 1330, 24, 190, 58, AlternarPausa, out pausaTexto);
 
             var bitacora = Caja("Bitácora", marco, 1094, 144, 482, 637, Panel);
-            Texto(bitacora.transform, "Sección", 24, 16, 425, 34, "BITÁCORA DEL RECORRIDO", 22, true, Dorado);
+            tipoFicha = Texto(bitacora.transform, "Sección", 24, 16, 425, 34, "BITÁCORA DEL RECORRIDO", 22, true, Dorado);
             titulo = Texto(bitacora.transform, "Título", 24, 53, 434, 55, "", 29, true);
             detalle = Texto(bitacora.transform, "Detalle", 24, 118, 434, 210, "", 25);
             detalle.alignment = TextAlignmentOptions.TopLeft;
+            var ventanaLectura = Rectangulo("Lectura de ficha", bitacora.transform, 24, 118, 434, 190);
+            ventanaLectura.gameObject.AddComponent<Image>().color = Color.clear;
+            ventanaLectura.gameObject.AddComponent<RectMask2D>();
+            lecturaFicha = ventanaLectura.gameObject.AddComponent<ScrollRect>();
+            lecturaFicha.viewport = ventanaLectura; lecturaFicha.content = detalle.rectTransform;
+            lecturaFicha.horizontal = false; lecturaFicha.movementType = ScrollRect.MovementType.Clamped; lecturaFicha.scrollSensitivity = 42;
+            detalle.transform.SetParent(ventanaLectura, false);
+            detalle.rectTransform.anchorMin = new Vector2(0,1); detalle.rectTransform.anchorMax = Vector2.one;
+            detalle.rectTransform.pivot = new Vector2(.5f,1); detalle.rectTransform.anchoredPosition = Vector2.zero;
+            detalle.rectTransform.sizeDelta = Vector2.zero;
+            detalle.enableAutoSizing = false; detalle.fontSize = 25; detalle.overflowMode = TextOverflowModes.Overflow;
+            detalle.raycastTarget = true;
+            detalle.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            ayudaLectura = Texto(bitacora.transform, "Ayuda de lectura", 24, 312, 434, 24, "Texto desplazable · RePág / AvPág o rueda", 17, false, Suave);
+            ayudaLectura.gameObject.SetActive(alResultado == null);
+            if (alResultado != null) ConstruirEstadosJugador(bitacora.transform);
 
-            inicio = Boton(bitacora.transform, "Iniciar V2", "Iniciar / retomar V2", 24, 539, 434, 65,
+            inicio = Boton(bitacora.transform, "Iniciar V2", alResultado == null ? "Iniciar / retomar V2" : "Reintentar", 24, 539, 434, 65,
                 () => Abrir(false), out _, true);
             continuar = Boton(bitacora.transform, "Continuar", "Continuar recorrido", 24, 539, 434, 65,
                 Continuar, out _, true);
@@ -79,9 +97,12 @@ namespace LifeDrive.IntegracionV2
             situacionesTexto = Texto(pie.transform, "Situaciones resueltas", 24, 38, 690, 30, "", 19, false, Suave);
             reconocimientosBoton = Boton(pie.transform, "Reconocimientos", "Reconocimientos", 724, 10, 510, 54,
                 AlternarReconocimientos, out reconocimientosTexto);
-            reinicio = Boton(pie.transform, "Reinicio visual", "Reiniciar vista", 1266, 10, 262, 54,
+            reinicio = Boton(pie.transform, "Reinicio visual", alResultado == null ? "Reiniciar vista" : "Reintentar", 1266, 10, 262, 54,
                 ReiniciarVista, out _);
+            mapa.gameObject.SetActive(alResultado == null);
+            situacionesTexto.gameObject.SetActive(alResultado == null);
             ConstruirReconocimientos(bitacora.gameObject);
+            ConstruirNavegacionJugador(superior.transform);
             AjustarVista();
         }
 
@@ -114,11 +135,19 @@ namespace LifeDrive.IntegracionV2
                 (Screen.width - 1600 * escala) / 2 + 24 * escala,
                 (Screen.height - 900 * escala) / 2 + 150 * escala,
                 1052 * escala, 592 * escala);
+            if (esV1)
+            {
+                ProgresoRecorrido = Estado == Fase.Entregada ? 1 : 0;
+                relleno.gameObject.SetActive(Estado == Fase.Entregada);
+                progresoTexto.text = Estado == Fase.Entregada ? "Recorrido completo" :
+                    Estado == Fase.Error ? "Recorrido no disponible" : "Recorrido en curso";
+                return;
+            }
             ProgresoRecorrido = GamificacionPartidaV2.Progreso(estado, ProgresoMapa, Estado == Fase.Transicion);
             relleno.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300 * ProgresoRecorrido);
             relleno.gameObject.SetActive(Estado != Fase.Error);
             progresoTexto.text = Estado == Fase.Error ? "Recorrido no disponible" :
-                "Recorrido visual: " + Mathf.FloorToInt(ProgresoRecorrido * 100) + "%";
+                "Recorrido: " + Mathf.FloorToInt(ProgresoRecorrido * 100) + "%";
         }
 
         void DeshabilitarRespuestas()
@@ -131,21 +160,29 @@ namespace LifeDrive.IntegracionV2
             if (marco == null) return;
             var partida = juego?.BaseDatos.Partidas.FirstOrDefault(p => p.id == partidaId);
             puntos.text = Estado == Fase.Error ? "Puntos no disponibles" : (partida?.puntos ?? 0) + " pts de seguridad";
-            mapa.text = "MAPA " + (MapaVisible ?? "S0");
+            mapa.text = esV1 && partida != null ? "TRAMO: " + juego.Partidas.Tramo(partida,partida.tramo_actual_id).nombre : "MAPA " + (MapaVisible ?? "S0");
             ActualizarGamificacion();
-            inicio.gameObject.SetActive(Estado == Fase.Preparada || Estado == Fase.Error && partidaId == 0);
-            reinicio.gameObject.SetActive(partidaId != 0);
+            if (alResultado != null) reconocimientosTexto.text = "Reconocimientos";
+            inicio.gameObject.SetActive(alResultado == null && Estado == Fase.Preparada || Estado == Fase.Error && partidaId == 0);
+            reinicio.gameObject.SetActive(partidaId != 0 && (alResultado == null || Estado == Fase.Error));
             continuar.gameObject.SetActive(Estado == Fase.Consecuencia);
             nuevaPrueba.gameObject.SetActive(Estado == Fase.Entregada);
             pausaBoton.gameObject.SetActive(Estado == Fase.EnMarcha || Estado == Fase.Transicion);
             pausaTexto.text = pausa ? "Reanudar" : "Pausar";
+            bool consecuencia = Estado == Fase.Consecuencia;
+            lecturaFicha.viewport.sizeDelta = new Vector2(434, consecuencia ? 380 : 190);
+            lecturaFicha.viewport.anchoredPosition = new Vector2(241, -118 - (consecuencia ? 380 : 190) / 2f);
+            ayudaLectura.rectTransform.anchoredPosition = new Vector2(241, consecuencia ? -514 : -324);
+            lecturaFicha.verticalNormalizedPosition = 1;
+            tipoFicha.text = Estado == Fase.Situacion ? "TIPO: " + situacion.tipo.Replace('_', ' ') :
+                consecuencia ? "CONSECUENCIA · RESPUESTA GUARDADA" : "BITÁCORA DEL RECORRIDO";
 
             for (int i = 0; i < respuestas.Length; i++)
             {
                 bool visible = Estado == Fase.Situacion && i < situacion.alternativas.Length;
                 respuestas[i].gameObject.SetActive(visible);
                 respuestas[i].interactable = visible;
-                if (visible) textos[i].text = situacion.alternativas[i].descripcion;
+                if (visible) textos[i].text = (i + 1) + ". " + situacion.alternativas[i].descripcion;
             }
 
             titulo.text = Estado switch
@@ -169,17 +206,19 @@ namespace LifeDrive.IntegracionV2
                 Fase.EnMarcha => "El camión se detendrá en el próximo punto de decisión.",
                 _ => "Inicia una partida candidata o retoma la prueba guardada en este equipo."
             };
+            if (alResultado != null) PresentarEstadoJugador();
+            if (Estado == Fase.Entregada) AjustarVista();
         }
 
         string Retroalimentacion()
         {
-            var decision = estado.DecisionConfirmada;
+            var decision = esV1 ? ultimaV1 : estado.DecisionConfirmada;
             string veredicto = decision.tipo == "PREGUNTA"
                 ? (decision.es_acertada ? "Correcta" : "Incorrecta")
                 : (decision.es_acertada ? "Acción segura" : "Acción insegura");
             string reconocimiento = Gamificacion?.BuenasPracticas.Any(b => b.DecisionId == decision.id) == true
                 ? "\n\nBuena práctica registrada por el motor." : "";
-            return $"{veredicto} · {decision.puntos_aplicados:+0;-0;0} pts · {decision.retraso_aplicado} min\n\n{decision.consecuencia}{reconocimiento}";
+            return $"Tu elección: {decision.alternativa}\n\n{veredicto} · {decision.puntos_aplicados:+0;-0;0} pts · {decision.retraso_aplicado} min\n\n{decision.consecuencia}{reconocimiento}";
         }
 
         static RectTransform Rectangulo(string nombre, Transform padre, float x, float y, float ancho, float alto)

@@ -13,6 +13,7 @@ namespace LifeDrive.Mapas
     [Serializable]
     public sealed class PaqueteRecorridos
     {
+        internal const int SituacionAproximacion = 6;
         public int contenido_version;
         public string estado;
         public Contenido contenido;
@@ -73,12 +74,21 @@ namespace LifeDrive.Mapas
                 "Asociación con mapa o versión inexistente.");
             var porOrigen = asociaciones.ToLookup(a => a.mapa_origen, StringComparer.Ordinal);
             var porTramo = contenido.situaciones.ToLookup(s => s.tramo_id);
+            var primeraEntrega = porTramo[porMapa["DELIVERY"].tramo_id].OrderBy(s => s.orden).FirstOrDefault();
+            Exigir(primeraEntrega?.id == SituacionAproximacion,
+                "La situación de aproximación debe abrir el tramo lógico de entrega.");
             foreach (var nodo in nodos)
             {
                 var tramo = tramos[nodo.tramo_id];
                 var hijos = mapas[nodo.mapa_id].siguientes.Select(m => m.Id).ToArray();
                 var filas = porOrigen[nodo.mapa_id].ToArray();
                 var situaciones = porTramo[tramo.id].OrderBy(s => s.orden).ToArray();
+                // La aproximación pertenece al tramo lógico de entrega y se presenta
+                // sobre su carretera de acceso, antes del fundido a DELIVERY.
+                int totalVisible = situaciones.Length;
+                if (hijos.Contains("DELIVERY")) totalVisible++;
+                if (nodo.mapa_id == "DELIVERY") totalVisible--;
+                Exigir(totalVisible <= 2, $"El mapa {nodo.mapa_id} presenta {totalVisible} situaciones. El máximo es dos.");
                 Exigir(tramo.es_salida == (nodo.mapa_id == "S0") &&
                     tramo.es_destino == (nodo.mapa_id == "DELIVERY"), $"Extremo lógico inválido en {nodo.mapa_id}.");
                 Exigir(hijos.Length == 0 ? tramo.siguiente_tramo_id == 0 :

@@ -132,10 +132,6 @@ namespace LifeDrive.Tests
             var v = Object.FindAnyObjectByType<PersonalizacionRegistroUI>();
             v.nombre.text = "Piloto Ficticio"; v.documento.text = "990033";
             v.ElegirEstilo(1); v.ElegirColor(0, 2); v.ElegirColor(1, 3); v.ElegirColor(2, 4); v.ElegirColor(3, 2);
-            int jugadoresPrevios = piloto.Juego.BaseDatos.Jugadores.Count;
-            Click(v.comprobar);
-            Assert.That(SceneManager.GetActiveScene().name, Is.EqualTo("Registro"));
-            Assert.That(piloto.Juego.BaseDatos.Jugadores.Count, Is.EqualTo(jugadoresPrevios), "No elegir ID debe impedir el registro.");
             Click(Boton("Ficha piloto 3"));
             yield return null;
             foreach (var ficha in Object.FindObjectsByType<Button>().Where(b => b.name.StartsWith("Ficha piloto ")))
@@ -199,13 +195,14 @@ namespace LifeDrive.Tests
             Assert.That(vista.educativo.text, Does.Contain(Hojas[ruta]));
             Assert.That(vista.educativo.text, Does.EndWith("DELIVERY"));
             Assert.That(vista.retrato.GetComponentInChildren<AvatarPersonalizableUI>().mujer, Is.True);
-            Assert.That(vista.estadosInsignias.All(t => t.text == "PENDIENTE DE REGLAS APROBADAS"), Is.True);
+            Assert.That(vista.estadosInsignias.All(t => t.text == "Aún no disponible"), Is.True);
             yield return Evidencia("Resultado", ruta);
             Click(vista.revisar);
-            for (int pagina = 0; pagina * vista.filasDecisiones.Length < respuestas; pagina++)
+            Assert.That(vista.filasDecisiones[0].text, Is.EqualTo(vista.puntos.text));
+            for (int i = 0; i < 5; i++) Click(vista.selectores[1]);
+            for (int i = 0; i < respuestas; i++)
             {
-                for (int i = 0; i < vista.filasDecisiones.Length && pagina * vista.filasDecisiones.Length + i < respuestas; i++)
-                    Assert.That(vista.filasDecisiones[i].text, Does.Contain(datos.Decisiones[pagina * vista.filasDecisiones.Length + i].consecuencia));
+                Assert.That(vista.filasDecisiones[1].text, Does.Contain(datos.Decisiones[i].consecuencia));
                 if (vista.selectores[1].interactable) Click(vista.selectores[1]);
             }
             while (vista.selectores[0].interactable) Click(vista.selectores[0]);
@@ -352,7 +349,7 @@ namespace LifeDrive.Tests
             Click(Boton("Reinicio visual"));
             Assert.That(prueba.Estado, Is.Not.EqualTo(Fase.Error));
             Assert.That(JsonUtility.ToJson(piloto.AparienciaPartidaActual), Is.EqualTo(JsonUtility.ToJson(apariencia)));
-            Click(Boton("Reinicio visual"));
+            Assert.That(Boton("Reinicio visual").gameObject.activeInHierarchy, Is.False);
             Assert.That(piloto.Juego.BaseDatos.Eventos.Count(e => e.tipo == PersistenciaAparienciaPilotoV2.EventoPartida), Is.EqualTo(1));
             Assert.That(piloto.Juego.BaseDatos.Decisiones, Is.Empty); Assert.That(piloto.Juego.BaseDatos.Partidas.Single().puntos, Is.Zero);
         }

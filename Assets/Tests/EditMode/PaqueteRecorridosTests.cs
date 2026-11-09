@@ -150,6 +150,27 @@ namespace LifeDrive.Tests
             }
         }
 
+        [TestCase("S0", 1)]
+        [TestCase("R3A", 2)]
+        public void RechazaTresSituacionesVisiblesEnUnMapa(string mapa, int adicionales)
+        {
+            int tramo = paquete.nodos.Single(n => n.mapa_id == mapa).tramo_id;
+            var modelo = paquete.contenido.situaciones.Single(s => s.id == 1);
+            int alternativaId = 500;
+            for (int i = 0; i < adicionales; i++)
+            {
+                var extra = JsonUtility.FromJson<Situacion>(JsonUtility.ToJson(modelo));
+                extra.id = 500 + i;
+                extra.tramo_id = tramo;
+                extra.orden = 10 + i;
+                foreach (var alternativa in extra.alternativas) alternativa.id = alternativaId++;
+                paquete.contenido.situaciones = paquete.contenido.situaciones.Append(extra).ToArray();
+            }
+            Assert.That(ValidadorRuta.Revisar(paquete.contenido), Is.Empty);
+            var error = Assert.Throws<InvalidDataException>(() => paquete.Validar(catalogo));
+            Assert.That(error.Message, Does.Contain($"El mapa {mapa} presenta 3 situaciones"));
+        }
+
         [Test]
         public void CargarCandidatoNoCambiaLaInterpretacionDeV1()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using LifeDrive.Datos;
 using LifeDrive.Mapas;
 using LifeDrive.Mapas.Demo;
+using LifeDrive.Mapas.InterfazVisual;
 using LifeDrive.Motor;
 using UnityEngine;
 
@@ -27,17 +28,22 @@ namespace LifeDrive.IntegracionV2
         Action<int> alAbrirPartida;
 
         // Explicit injection from the isolated player pilot, before Start. The standalone test stays unchanged.
-        public void ConectarJugador(ServicioJuego servicio, Action<int> resultado, Action<int> abierta = null)
+        public void ConectarJugador(ServicioJuego servicio, Action<int> resultado, Action<int> abierta = null,
+            Action inicioJugador = null, bool usarV1 = false, Func<AparienciaJugadorPilotoV1> apariencia = null)
         {
             if (juego != null) throw new InvalidOperationException("La sesión ya se abrió.");
             juego = servicio ?? throw new ArgumentNullException(nameof(servicio));
             alResultado = resultado ?? throw new ArgumentNullException(nameof(resultado));
             alAbrirPartida = abierta;
+            alInicioJugador = inicioJugador;
+            esV1 = usarV1;
+            consultarApariencia = apariencia;
         }
 
         public void VerResultado()
         {
-            if (Estado == Fase.Entregada && estado.CierrePresentado) alResultado?.Invoke(partidaId);
+            if (salidaAbierta) return;
+            if (Estado == Fase.Entregada && (esV1 || estado.CierrePresentado)) alResultado?.Invoke(partidaId);
         }
 
         public Fase Estado { get; private set; }
@@ -67,23 +73,31 @@ namespace LifeDrive.IntegracionV2
         void Update()
         {
             AjustarVista();
-            if (reconocimientosAbiertos || pausa || (Estado != Fase.EnMarcha && Estado != Fase.Transicion)) return;
+            AnimarVolante();
+            if (salidaAbierta || reconocimientosAbiertos || pausa || (Estado != Fase.EnMarcha && Estado != Fase.Transicion)) return;
             Ejecutar(Avanzar);
         }
 
         void Abrir(bool nueva)
         {
+            if (salidaAbierta) return;
+            if (esV1) { Ejecutar(AbrirV1); return; }
             Ejecutar(() =>
             {
                 if (juego == null)
                 {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
                     var contenido = Path.Combine(Application.streamingAssetsPath, "Contenido");
                     var abierto = new ServicioJuego(contenido, CarpetaDatos, catalogo);
                     abierto.Usuarios.RegistrarJugador("Conductor de prueba V2", "990002", 1);
                     juego = abierto;
+#else
+                    throw new ErrorJuego("Abre el recorrido desde Inicio.");
+#endif
                 }
-                var guardada = juego.BaseDatos.Partidas.LastOrDefault(p =>
-                    p.jugador_id == juego.Usuarios.Actual.JugadorId);
+                var propias = juego.BaseDatos.Partidas.Where(p => p.jugador_id == juego.Usuarios.Actual.JugadorId);
+                var guardada = propias.FirstOrDefault(p => p.estado == EstadoPartida.EnCurso) ??
+                    propias.LastOrDefault(p => p.contenido_version == 2);
                 var partida = nueva || guardada == null ? juego.RecorridosV2.IniciarPartida() : guardada;
                 partidaId = partida.id;
                 Restaurar();
@@ -92,11 +106,12 @@ namespace LifeDrive.IntegracionV2
 
         void ReiniciarVista()
         {
-            if (partidaId != 0) Ejecutar(Restaurar);
+            if (!salidaAbierta && partidaId != 0) Ejecutar(Restaurar);
         }
 
         void Restaurar()
         {
+            if (esV1) { RestaurarV1(); return; }
             alAbrirPartida?.Invoke(partidaId); // Retry a failed appearance snapshot before allowing the match to continue.
             pausa = false;
             estado = juego.RecorridosV2.Consultar(partidaId);
@@ -129,6 +144,7 @@ namespace LifeDrive.IntegracionV2
 
         void Avanzar()
         {
+            if (esV1) { AvanzarV1(); return; }
             if (Estado == Fase.Transicion)
             {
                 reproductor.Avanzar(Time.deltaTime);
@@ -147,11 +163,16 @@ namespace LifeDrive.IntegracionV2
 
         void Responder(int indice)
         {
-            if (Estado != Fase.Situacion || indice >= situacion.alternativas.Length) return;
+            if (salidaAbierta || Estado != Fase.Situacion || indice >= situacion.alternativas.Length) return;
             Estado = Fase.Consecuencia;
             DeshabilitarRespuestas();
             Ejecutar(() =>
             {
+                if (esV1)
+                {
+                    ultimaV1 = juego.Partidas.Decidir(partidaId, situacion.id, situacion.alternativas[indice].id).Decision;
+                    ActualizarVista(); return;
+                }
                 juego.Partidas.Decidir(partidaId, situacion.id, situacion.alternativas[indice].id);
                 estado = juego.RecorridosV2.Consultar(partidaId);
                 PrepararSiguiente();
@@ -160,9 +181,10 @@ namespace LifeDrive.IntegracionV2
 
         void Continuar()
         {
-            if (Estado != Fase.Consecuencia) return;
+            if (salidaAbierta || Estado != Fase.Consecuencia) return;
             Ejecutar(() =>
             {
+                if (esV1) { PrepararSiguienteV1(); return; }
                 if (estado.DestinoVisualConfirmado == null) ConfirmarPresentacion();
                 else
                 {
@@ -181,7 +203,7 @@ namespace LifeDrive.IntegracionV2
 
         void AlternarPausa()
         {
-            if (Estado != Fase.EnMarcha && Estado != Fase.Transicion) return;
+            if (salidaAbierta || Estado != Fase.EnMarcha && Estado != Fase.Transicion) return;
             pausa = !pausa;
             if (pausa) reproductor.Pausar();
             else reproductor.Reproducir();

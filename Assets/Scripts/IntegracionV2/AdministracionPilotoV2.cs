@@ -57,10 +57,10 @@ namespace LifeDrive.IntegracionV2
         {
             foreach (var texto in SceneManager.GetActiveScene().GetRootGameObjects().SelectMany(r => r.GetComponentsInChildren<TMP_Text>(true)))
             {
-                if (texto.name == "Aviso demo") texto.text = "PILOTO V2 · Entorno temporal compartido · Solo datos de prueba";
-                if (texto.name == "Usuario etiqueta") texto.text = "Usuario administrativo del piloto";
+                if (texto.name == "Aviso demo") texto.text = piloto.EsPilotoV2 ? "PILOTO V2 · Entorno temporal compartido · Solo datos de prueba" : "LIFE DRIVE · Administración del contenido vigente V1";
+                if (texto.name == "Usuario etiqueta") texto.text = piloto.EsPilotoV2 ? "Usuario administrativo del piloto" : "Usuario administrativo";
                 if (texto.name == "Contraseña etiqueta") texto.text = "Contraseña";
-                if (texto.name == "Nota acceso") texto.text = "Cuenta creada en el Editor para este piloto.\nNo se permite el autorregistro administrativo.";
+                if (texto.name == "Nota acceso") texto.text = "Utiliza una cuenta administrativa existente.\nNo se permite el autorregistro administrativo.";
             }
             vista.volver.onClick.RemoveAllListeners();
             vista.volver.onClick.AddListener(() => { Juego.Usuarios.CerrarSesion(); piloto.Navegar("Inicio"); });
@@ -96,12 +96,12 @@ namespace LifeDrive.IntegracionV2
         void Login()
         {
             vista.usuario.text = vista.contrasena.text = "";
-            vista.usuario.placeholder.GetComponent<TMP_Text>().text = "Usuario del piloto";
-            vista.contrasena.placeholder.GetComponent<TMP_Text>().text = "Contraseña del piloto";
+            vista.usuario.placeholder.GetComponent<TMP_Text>().text = piloto.EsPilotoV2 ? "Usuario del piloto" : "Usuario";
+            vista.contrasena.placeholder.GetComponent<TMP_Text>().text = "Contraseña";
             vista.contrasena.contentType = TMP_InputField.ContentType.Password;
             vista.ingresar.onClick.RemoveAllListeners();
             vista.ingresar.GetComponentInChildren<TMP_Text>().text = "Ingresar";
-            vista.mensaje.text = "Acceso mediante el servicio original. Cuentas aisladas configuradas desde el Editor.";
+            vista.mensaje.text = piloto.EsPilotoV2 ? "Acceso mediante el servicio original. Cuentas aisladas configuradas desde el Editor." : "Acceso mediante la autenticación administrativa existente.";
             vista.ingresar.onClick.AddListener(() =>
             {
                 try

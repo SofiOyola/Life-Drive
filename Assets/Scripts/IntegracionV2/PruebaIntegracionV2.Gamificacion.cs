@@ -37,13 +37,14 @@ namespace LifeDrive.IntegracionV2
                 }
             }
             Texto(p, "Aviso de reconocimientos", 24, 472, 434, 56,
-                "Una buena práctica guardada no concede estas insignias. Contenido candidato.", 18, false, Suave);
+                "Las insignias de esta colección aún no están disponibles.", 18, false, Suave);
             Boton(p, "Cerrar reconocimientos", "Volver al recorrido", 24, 539, 434, 65, AlternarReconocimientos, out _, true);
             panelReconocimientos.SetActive(false);
         }
 
         void AlternarReconocimientos()
         {
+            if (salidaAbierta) return;
             reconocimientosAbiertos = !reconocimientosAbiertos;
             panelReconocimientos.SetActive(reconocimientosAbiertos);
             bitacoraGamificacion.SetActive(!reconocimientosAbiertos);
@@ -64,6 +65,7 @@ namespace LifeDrive.IntegracionV2
                 return; // Do not repeat the failing service query while trying to present its error.
             }
             reconocimientosBoton.interactable = true;
+            if (esV1) { ActualizarGamificacionV1(); return; }
             Gamificacion = partidaId == 0 ? null : GamificacionPartidaV2.Consultar(juego, partidaId);
             var ultima = Gamificacion?.UltimaDecision;
             variacionTexto.text = ultima == null ? "Sin respuestas guardadas" :

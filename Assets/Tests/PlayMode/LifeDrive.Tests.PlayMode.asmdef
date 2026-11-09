@@ -3,6 +3,7 @@
     "references": [
         "LifeDrive",
         "LifeDrive.IntegracionV2",
+        "Unity.InputSystem",
         "UnityEngine.UI",
         "Unity.TextMeshPro",
         "UnityEngine.TestRunner",

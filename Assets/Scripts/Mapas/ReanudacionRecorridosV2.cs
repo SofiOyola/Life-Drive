@@ -23,7 +23,6 @@ namespace LifeDrive.Mapas
     // El motor confirma las respuestas. Este adaptador reconstruye y confirma hitos de presentación.
     public sealed class ReanudacionRecorridosV2
     {
-        const int SituacionAproximacion = 6;
         readonly BaseDatos db;
         readonly ServicioUsuarios usuarios;
         readonly ServicioPartidas partidas;
@@ -105,7 +104,7 @@ namespace LifeDrive.Mapas
             var situacion = paquete.contenido.situaciones.SingleOrDefault(s => s.id == decision.situacion_id);
             var alternativa = situacion?.alternativas.SingleOrDefault(a => a.id == decision.alternativa_id);
             var mapaLogico = paquete.nodos.SingleOrDefault(n => n.tramo_id == decision.tramo_origen_id)?.mapa_id;
-            var esAproximacion = decision.situacion_id == SituacionAproximacion;
+            var esAproximacion = decision.situacion_id == PaqueteRecorridos.SituacionAproximacion;
             if (alternativa == null || situacion.tramo_id != decision.tramo_origen_id ||
                 (esAproximacion ? mapaLogico != "DELIVERY" || !cursor.Permitidos.Contains("DELIVERY")
                     : mapaLogico != cursor.Actual))
