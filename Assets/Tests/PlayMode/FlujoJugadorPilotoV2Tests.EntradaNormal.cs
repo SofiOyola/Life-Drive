@@ -85,6 +85,9 @@ namespace LifeDrive.Tests
             Assert.That(piloto.Juego.Usuarios.Actual.Nombre,Is.EqualTo("Jugador de ensayo"));
             Assert.That(piloto.Juego.BaseDatos.Jugadores.Single().personaje_id,Is.EqualTo(1));
             Assert.That(piloto.Juego.BaseDatos.Partidas.Single().contenido_version,Is.EqualTo(1));
+            // V1 también guarda la apariencia en el modelo: perfil del jugador y copia fijada en la partida.
+            Assert.That(piloto.Juego.BaseDatos.Jugadores.Single().apariencia,Is.Not.Empty);
+            Assert.That(piloto.Juego.BaseDatos.Partidas.Single().apariencia,Is.EqualTo(piloto.Juego.BaseDatos.Jugadores.Single().apariencia));
             var prueba=Object.FindAnyObjectByType<PruebaIntegracionV2>();int respuestas=0;int rama=caso%3;
             var volante = prueba.GetComponentInChildren<VolantePixelUI>();
             Assert.That(volante, Is.Not.Null);

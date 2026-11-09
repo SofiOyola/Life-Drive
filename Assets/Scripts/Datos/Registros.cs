@@ -29,6 +29,7 @@ namespace LifeDrive.Datos
         public string cedula;
         public int personaje_id;
         public string fecha_registro;
+        public string apariencia; // JSON de la personalización visual vigente; null o vacío en registros antiguos
     }
 
     public static class EstadoPartida
@@ -45,6 +46,7 @@ namespace LifeDrive.Datos
         public int contenido_version; // 0 en registros antiguos equivale a V1
         public string contenido_huella; // identidad del paquete V2 al iniciar
         public int ultima_decision_presentada_id; // 0 representa el hito inicial de V2
+        public string apariencia; // copia de Jugador.apariencia al empezar la partida: cambiarla después no altera partidas pasadas
         public string estado = EstadoPartida.EnCurso;
         public int tramo_actual_id;
         public int puntos;

@@ -98,7 +98,7 @@ namespace LifeDrive.IntegracionV2
             }
             var partida = FindAnyObjectByType<PruebaIntegracionV2>();
             if (partida != null) partida.ConectarJugador(Juego, id => { PartidaId = id; Navegar("Resultado"); },
-                id => { PartidaId = id; Sesion.PartidaId = id; if (EsPilotoV2) AparienciaPartidaActual = Apariencias.FijarPartida(id); },
+                id => { PartidaId = id; Sesion.PartidaId = id; AparienciaPartidaActual = Apariencias.FijarPartida(id); },
                 VolverAlInicioDesdePartida, !EsPilotoV2, () => AparienciaPartidaActual);
             AdministracionPilotoV2.Preparar(this, escena);
             StartCoroutine(Enlazar(escena));
@@ -154,8 +154,7 @@ namespace LifeDrive.IntegracionV2
             v.comprobar.GetComponentInChildren<TMP_Text>().text = "COMENZAR RECORRIDO";
             v.mensaje.text = "Completa tus datos y personaliza tu personaje.";
             var privacidad = v.nombre.transform.parent.GetComponentsInChildren<TMP_Text>().First(t => t.name == "Privacidad");
-            privacidad.text = EsPilotoV2 ? "Apariencia guardada con tu partida.\nLa ficha original se conserva." :
-                "Nombre, documento y ficha se guardan al comenzar.\nLa apariencia se conserva durante esta sesión.";
+            privacidad.text = "Apariencia guardada con tu partida.\nLa ficha original se conserva.";
             privacidad.fontSize = 20;
             privacidad.rectTransform.sizeDelta = new Vector2(474, 100);
             for (int i = 0; i < ids.Length; i++)
@@ -186,7 +185,7 @@ namespace LifeDrive.IntegracionV2
                     ActualizarMensajeRegistro(v, "Ficha " + id + " seleccionada. Puedes comenzar el recorrido.");
                 });
             }
-            var conservarApariencia = EsPilotoV2 ? PrepararPersistenciaRegistro(v) : PrepararAparienciaSesion(v);
+            var conservarApariencia = PrepararPersistenciaRegistro(v);
             v.documento.onValueChanged.AddListener(_ => ActualizarMensajeRegistro(v, "Completa tus datos y personaliza tu personaje."));
             v.comprobar.onClick.AddListener(() =>
             {
@@ -226,8 +225,8 @@ namespace LifeDrive.IntegracionV2
                 // Keep the approved portrait/header layout while allowing the full 60-character registration name.
                 v.jugador.rectTransform.sizeDelta = new Vector2(v.jugador.rectTransform.sizeDelta.x, 96);
                 v.personaje.rectTransform.anchoredPosition += new Vector2(0, -20);
-                var aparienciaGuardada = EsPilotoV2 ? Apariencias.LeerPartida(PartidaId) : AparienciaPartidaActual;
-                v.personaje.text = "Ficha " + r.Jugador.personaje_id + (!EsPilotoV2 ? " · apariencia de esta sesión" : aparienciaGuardada == null ? " · apariencia base sin guardar" : " · apariencia guardada");
+                var aparienciaGuardada = Apariencias.LeerPartida(PartidaId);
+                v.personaje.text = "Ficha " + r.Jugador.personaje_id + (aparienciaGuardada == null ? " · apariencia base sin guardar" : " · apariencia guardada");
                 v.puntos.text = r.Partida.puntos + " pts de seguridad";
                 v.resumen.text = r.Historial.Count + " decisiones guardadas · " + r.Partida.retraso_min + " min de retraso";
                 v.resumen.text += "\nBuenas prácticas registradas: " + (gamificacion?.BuenasPracticas.Length ?? r.BuenasPracticas);

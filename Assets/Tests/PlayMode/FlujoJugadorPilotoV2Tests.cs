@@ -281,8 +281,8 @@ namespace LifeDrive.Tests
             yield return Evidencia("AparienciaRegistroRecuperado", 0);
             Click(v.comprobar); yield return Pantalla("PruebaIntegracionV2");
             var datos = new BaseDatos(carpeta);
-            Assert.That(datos.Eventos.Count(e => e.tipo == PersistenciaAparienciaPilotoV2.EventoPerfil), Is.EqualTo(1));
-            Assert.That(datos.Eventos.Count(e => e.tipo == PersistenciaAparienciaPilotoV2.EventoPartida), Is.EqualTo(1));
+            Assert.That(datos.Jugadores.Single().apariencia, Is.Not.Empty);
+            Assert.That(datos.Partidas.Single().apariencia, Is.EqualTo(datos.Jugadores.Single().apariencia));
             Assert.That(datos.Decisiones.Count, Is.EqualTo(1)); Assert.That(datos.Partidas.Single().puntos, Is.EqualTo(puntos));
 
             // A later profile edit must not change the appearance already fixed to this match.
@@ -350,7 +350,7 @@ namespace LifeDrive.Tests
             Assert.That(prueba.Estado, Is.Not.EqualTo(Fase.Error));
             Assert.That(JsonUtility.ToJson(piloto.AparienciaPartidaActual), Is.EqualTo(JsonUtility.ToJson(apariencia)));
             Assert.That(Boton("Reinicio visual").gameObject.activeInHierarchy, Is.False);
-            Assert.That(piloto.Juego.BaseDatos.Eventos.Count(e => e.tipo == PersistenciaAparienciaPilotoV2.EventoPartida), Is.EqualTo(1));
+            Assert.That(piloto.Juego.BaseDatos.Partidas.Single().apariencia, Is.EqualTo(JsonUtility.ToJson(apariencia)));
             Assert.That(piloto.Juego.BaseDatos.Decisiones, Is.Empty); Assert.That(piloto.Juego.BaseDatos.Partidas.Single().puntos, Is.Zero);
         }
         static Button Boton(string nombre) => Object.FindObjectsByType<Button>(FindObjectsInactive.Include).Single(b => b.name == nombre);

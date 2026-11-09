@@ -40,8 +40,10 @@ namespace LifeDrive.Tests
             servicio.GuardarPerfilActual(apariencia); servicio.GuardarPerfilActual(apariencia);
             var p = juego.RecorridosV2.IniciarPartida();
             servicio.FijarPartida(p.id); servicio.FijarPartida(p.id);
-            Assert.That(juego.BaseDatos.Eventos.Count(e => e.tipo == PersistenciaAparienciaPilotoV2.EventoPerfil), Is.EqualTo(1));
-            Assert.That(juego.BaseDatos.Eventos.Count(e => e.tipo == PersistenciaAparienciaPilotoV2.EventoPartida), Is.EqualTo(1));
+            Assert.That(juego.BaseDatos.Jugadores.Single().apariencia, Is.EqualTo(JsonUtility.ToJson(apariencia)));
+            Assert.That(juego.BaseDatos.Partidas.Single().apariencia, Is.EqualTo(JsonUtility.ToJson(apariencia)));
+            string guardado = JsonActual(); servicio.GuardarPerfilActual(apariencia); servicio.FijarPartida(p.id);
+            Assert.That(JsonActual(), Is.EqualTo(guardado), "Repetir el guardado no reescribe nada.");
             var reabierto = Abrir(ficha); servicio = new PersistenciaAparienciaPilotoV2(reabierto);
             Assert.That(JsonUtility.ToJson(servicio.LeerPerfilActual()), Is.EqualTo(JsonUtility.ToJson(apariencia)));
             Assert.That(JsonUtility.ToJson(servicio.LeerPartida(p.id)), Is.EqualTo(JsonUtility.ToJson(apariencia)));
@@ -64,6 +66,28 @@ namespace LifeDrive.Tests
             Assert.That(servicio.LeerPartida(v2.id), Is.Null); Assert.That(JsonActual(), Is.EqualTo(antes));
         }
 
+        [Test] public void V1GuardaYRecuperaPerfilYPartidaTrasReabrir()
+        {
+            var juego = Abrir(); var servicio = new PersistenciaAparienciaPilotoV2(juego);
+            var apariencia = VariantesAparienciaPilotoV1.Crear(3, 1, 2, 3, 4, 2);
+            servicio.GuardarPerfilActual(apariencia);
+            var v1 = juego.Partidas.IniciarPartida(); Assert.That(v1.contenido_version, Is.EqualTo(1));
+            servicio.FijarPartida(v1.id);
+            var reabierto = Abrir(); servicio = new PersistenciaAparienciaPilotoV2(reabierto);
+            Assert.That(JsonUtility.ToJson(servicio.LeerPerfilActual()), Is.EqualTo(JsonUtility.ToJson(apariencia)));
+            Assert.That(JsonUtility.ToJson(servicio.LeerPartida(v1.id)), Is.EqualTo(JsonUtility.ToJson(apariencia)));
+        }
+
+        [Test] public void GuardadoAnteriorSinCamposDeAparienciaSigueAbriendo()
+        {
+            var juego = Abrir(); juego.Partidas.IniciarPartida();
+            var sinCampos = System.Text.RegularExpressions.Regex.Replace(JsonActual(), @",\s*""apariencia"": ""[^""]*""", "");
+            Assert.That(sinCampos, Does.Not.Contain("apariencia"));
+            File.WriteAllText(Path.Combine(datos, "lifedrive-db.json"), sinCampos);
+            var servicio = new PersistenciaAparienciaPilotoV2(Abrir());
+            Assert.That(servicio.LeerPerfilActual(), Is.Null);
+        }
+
         [Test] public void RechazaCambioDeIdVersionYVarianteSinSobrescribir()
         {
             var juego = Abrir(); var servicio = new PersistenciaAparienciaPilotoV2(juego);
@@ -81,8 +105,7 @@ namespace LifeDrive.Tests
         {
             var juego = Abrir(); var servicio = new PersistenciaAparienciaPilotoV2(juego);
             var futura = VariantesAparienciaPilotoV1.Crear(3, 1, 2, 3, 4, 2); futura.version_formato = 9;
-            juego.BaseDatos.Ejecutar(() => juego.Eventos.Registrar(PersistenciaAparienciaPilotoV2.EventoPerfil,
-                juego.Usuarios.Actual, detalle: JsonUtility.ToJson(futura)));
+            juego.BaseDatos.Ejecutar(() => juego.BaseDatos.Jugadores.Single().apariencia = JsonUtility.ToJson(futura));
             string antes = JsonActual();
             Assert.Throws<ErrorJuego>(() => servicio.LeerPerfilActual());
             Assert.Throws<ErrorJuego>(() => servicio.GuardarPerfilActual(VariantesAparienciaPilotoV1.Crear(3, 0, 0, 0, 0, 0)));
