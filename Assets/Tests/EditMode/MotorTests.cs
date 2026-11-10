@@ -221,17 +221,31 @@ namespace LifeDrive.Tests
         }
 
         [Test]
-        public void ElPdfConNombreLargoConservaLaCedulaYAjustaElNombre()
+        public void ElRegistroRechazaNombresDeMasDeSesentaCaracteres()
         {
             var juego = NuevoJuego();
-            var nombre = string.Join(" ", System.Linq.Enumerable.Repeat("Maria Fernanda Rodriguez", 5));
+            var limite = new string('A', Validacion.NombreMaximo);
+            Assert.AreEqual(limite, juego.Usuarios.RegistrarJugador(limite, "66666666", 3).nombre);
+            var ex = Assert.Throws<ErrorJuego>(() => juego.Usuarios.RegistrarJugador(limite + "A", "66666667", 3));
+            StringAssert.Contains("60", ex.Message);
+            Assert.AreEqual(1, juego.BaseDatos.Jugadores.Count);                         // el rechazado no se guardó
+            // los espacios sobrantes no cuentan: se normaliza antes de medir
+            Assert.DoesNotThrow(() => juego.Usuarios.RegistrarJugador("  " + limite + "  ", "66666668", 3));
+        }
+
+        [Test]
+        public void ElPdfConNombreMaximoMuestraLaCedulaEnSuPropiaLinea()
+        {
+            var juego = NuevoJuego();
+            var nombre = string.Join(" ", new[] { new string('M', 11), new string('W', 11), new string('M', 11), new string('W', 11), new string('M', 12) }); // 60 caracteres, los más anchos
+            Assert.AreEqual(Validacion.NombreMaximo, nombre.Length);
             juego.Usuarios.RegistrarJugador(nombre, "77777777", 3);
             var terminada = Jugar(juego, a => a[0]);
             juego.Usuarios.IniciarSesionAdministrador("admin", "ClaveDePrueba123");
 
             var texto = System.Text.Encoding.GetEncoding("iso-8859-1").GetString(juego.Desempeno.ReportePdf(terminada.id));
-            StringAssert.Contains("(Cédula: 77777777) Tj", texto);          // cédula en su propia línea
-            StringAssert.DoesNotContain("Jugador: " + nombre + ")", texto);      // el nombre se partió en varias líneas
+            StringAssert.Contains("(Cédula: 77777777) Tj", texto);   // la cédula no depende del largo del nombre
+            StringAssert.Contains("Jugador: ", texto);
         }
     }
 }
