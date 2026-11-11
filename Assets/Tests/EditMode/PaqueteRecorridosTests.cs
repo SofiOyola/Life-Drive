@@ -64,6 +64,21 @@ namespace LifeDrive.Tests
             Assert.Throws<InvalidDataException>(() => paquete.Validar(catalogo));
         }
 
+        [Test]
+        public void LasDecisionesInsegurasRetrasanMasYLasBifurcacionesCambianDeCarretera()
+        {
+            foreach (var situacion in paquete.contenido.situaciones.Where(s => s.tipo != "PREGUNTA"))
+            {
+                int tiempoSeguro = situacion.alternativas.Where(a => a.es_acertada).Max(a => a.retraso_min);
+                foreach (var insegura in situacion.alternativas.Where(a => !a.es_acertada))
+                    Assert.That(insegura.retraso_min, Is.GreaterThan(tiempoSeguro),
+                        $"La decisión insegura {insegura.id} debe tener una consecuencia temporal visible.");
+            }
+            foreach (var bifurcacion in paquete.asociaciones.GroupBy(a => a.mapa_origen))
+                Assert.That(bifurcacion.Select(a => a.mapa_destino).Distinct().Count(), Is.EqualTo(2),
+                    $"Las dos elecciones de {bifurcacion.Key} no deben llevar a la misma carretera.");
+        }
+
         [TestCase("R1A", "R2A", "R3A", 101, 103, 107)]
         [TestCase("R1A", "R2A", "R3B", 101, 103, 108)]
         [TestCase("R1A", "R2B", "R3C", 101, 104, 109)]
@@ -197,6 +212,12 @@ namespace LifeDrive.Tests
             {
                 var anterior = fatigaOriginal.alternativas.Single(a => a.id == alternativa.id);
                 anterior.tramo_destino_id = alternativa.tramo_destino_id;
+                // V2 aplica su propia penalización temporal a las decisiones inseguras.
+                if (!alternativa.es_acertada)
+                {
+                    Assert.That(alternativa.retraso_min, Is.GreaterThan(anterior.retraso_min));
+                    anterior.retraso_min = alternativa.retraso_min;
+                }
                 Assert.That(JsonUtility.ToJson(alternativa), Is.EqualTo(JsonUtility.ToJson(anterior)));
             }
         }

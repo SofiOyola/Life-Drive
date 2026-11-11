@@ -56,7 +56,14 @@ namespace LifeDrive.IntegracionV2
         {
             if (string.IsNullOrEmpty(sesion) || sesion.Any(c => !char.IsLetterOrDigit(c) && c != '-'))
                 throw new ArgumentException("Identificador de sesión inválido.");
-            return PrepararContenidoAislado(Path.Combine(Application.temporaryCachePath, "LifeDrive-FlujoJugadorV2", sesion));
+            // Each content revision gets its own snapshot. Never reuse stale rules or overwrite
+            // the package of an existing match (its persisted fingerprint must stay valid).
+            string revision;
+            using (var hash = System.Security.Cryptography.SHA256.Create())
+                revision = BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(
+                    Path.Combine(Application.streamingAssetsPath, "Contenido", "ruta-v2-candidata.json"))))
+                    .Replace("-", "").Substring(0, 16);
+            return PrepararContenidoAislado(Path.Combine(Application.temporaryCachePath, "LifeDrive-FlujoJugadorV2", sesion + "-" + revision));
         }
 
         static string PrepararContenidoAislado(string carpeta)

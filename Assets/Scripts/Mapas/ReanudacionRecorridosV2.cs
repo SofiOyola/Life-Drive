@@ -5,6 +5,12 @@ using UnityEngine;
 
 namespace LifeDrive.Mapas
 {
+    public sealed class OpcionCaminoVisual
+    {
+        public int SituacionId, Numero;
+        public string Destino;
+        public bool EsPrincipal;
+    }
     public sealed class EstadoRecorridoV2
     {
         public int PartidaId { get; internal set; }
@@ -43,6 +49,21 @@ namespace LifeDrive.Mapas
         public Partida IniciarPartida() => partidas.IniciarPartida(2);
 
         public EstadoRecorridoV2 Consultar(int partidaId) => Reconstruir(ObtenerPartida(partidaId));
+
+        // Read the same validated associations used by the engine; never infer safety from map names.
+        public OpcionCaminoVisual[] CaminosDisponibles(int partidaId)
+        {
+            var estado = Consultar(partidaId);
+            int id = estado.PresentacionPendiente ? estado.DecisionConfirmada.situacion_id : estado.SituacionPendienteId;
+            var situacion = paquete.contenido.situaciones.FirstOrDefault(s => s.id == id);
+            if (situacion == null) return new OpcionCaminoVisual[0];
+            return situacion.alternativas.Select((a, i) => new { alternativa = a, numero = i + 1,
+                enlace = paquete.asociaciones.FirstOrDefault(e => e.mapa_origen == estado.MapaActual && e.situacion_id == id && e.alternativa_id == a.id) })
+                .Where(x => x.enlace != null).Select(x => new OpcionCaminoVisual {
+                    SituacionId = id, Numero = x.numero, Destino = x.enlace.mapa_destino,
+                    EsPrincipal = x.alternativa.es_acertada
+                }).ToArray();
+        }
 
         public EstadoRecorridoV2 ConfirmarPresentacion(int partidaId, int decisionId)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LifeDrive.Mapas.Demo
 {
-    public sealed class DemoRecorrido : MonoBehaviour
+    public sealed partial class DemoRecorrido : MonoBehaviour
     {
         [SerializeField] CatalogoMapas catalogo;
         [SerializeField] Sprite camion;
@@ -34,7 +34,7 @@ namespace LifeDrive.Mapas.Demo
         public bool ControlExterno { get; set; }
         public Rect AreaVisualExterna { get; set; }
         public bool Reproduciendo { get; private set; }
-        bool FinMapa => recorrido != null && distancia >= recorrido.Longitud;
+        bool FinMapa => recorrido != null && distancia >= Longitud;
         public bool Terminado => FinMapa && !siguienteExterno.HasValue &&
             (!recorridoCompleto || etapa == RutaActual.Length - 1) && fase == FaseFundido.Ninguna;
         MapaVisual[] RutaActual => rutas.Length == 0 ? new MapaVisual[0] : rutas[rutaSeleccionada];
@@ -46,11 +46,11 @@ namespace LifeDrive.Mapas.Demo
         public float OpacidadFundido => fase == FaseFundido.Ninguna ? 0 : Mathf.SmoothStep(0, 1, fase == FaseFundido.Saliendo ? relojFundido / DuracionFundido : 1 - relojFundido / DuracionFundido);
         float DuracionFundido => Mathf.Max(.1f, duracionFundido);
         public float ProgresoTotal => !recorridoCompleto ? Progreso : Terminado ? 1 : longitudesRuta.Length == 0 ? 0 : Mathf.Clamp01((longitudesRuta.Take(etapa).Sum() + distancia) / Mathf.Max(.001f, longitudesRuta.Sum()));
-        public float Progreso => recorrido == null || recorrido.Longitud == 0 ? 0 : distancia / recorrido.Longitud;
-        public Vector2 Posicion => recorrido == null ? Vector2.zero : recorrido.Posicion(distancia);
+        public float Progreso => recorrido == null || Longitud == 0 ? 0 : distancia / Longitud;
+        public Vector2 Posicion => PosicionEnCamino(distancia);
         public float Angulo => angulo;
         public float Distancia => distancia;
-        public float Longitud => recorrido?.Longitud ?? 0;
+        public float Longitud => usandoDesvio && bifurcacion != null ? bifurcacion.Inicio + bifurcacion.Longitud : recorrido?.Longitud ?? 0;
         public bool AjusteLimites => recorrido != null && recorrido.AjusteLimites;
         public MapaVisual MapaActual => catalogo != null && catalogo.mapas != null && indice >= 0 && indice < catalogo.mapas.Length ? catalogo.mapas[indice] : null;
         public float Velocidad { get => velocidad; set => velocidad = Mathf.Clamp(value, 1, 160); }
@@ -85,6 +85,7 @@ namespace LifeDrive.Mapas.Demo
         }
         void Construir()
         {
+            LimpiarBifurcacion();
             error = null;
             try { recorrido = new RecorridoDemo(MapaActual, carrilDerecho); }
             catch (ArgumentException e) { recorrido = null; Reproduciendo = false; error = e.Message; }
@@ -110,6 +111,7 @@ namespace LifeDrive.Mapas.Demo
                 MapaActual == null || !MapaActual.siguientes.Any(m => m.Id == mapaId))
                 throw new ArgumentException("Transición visual no permitida: " + mapaId);
             siguienteExterno = Array.FindIndex(catalogo.mapas, m => m.Id == mapaId);
+            usandoDesvio = bifurcacion != null && mapaId == destinoDesvio;
             Reproducir();
         }
         public void SeleccionarRecorrido(int value)
@@ -134,7 +136,7 @@ namespace LifeDrive.Mapas.Demo
         }
         void Alinear()
         {
-            var t = recorrido?.Tangente(distancia) ?? Vector2.right;
+            var t = TangenteEnCamino(distancia);
             angulo = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg; giroVelocidad = 0;
         }
         public void Reiniciar()
@@ -194,7 +196,7 @@ namespace LifeDrive.Mapas.Demo
         {
             distancia = Mathf.Min(Longitud, distancia + Velocidad * segundos);
             if (Longitud - distancia < .0001f) distancia = Longitud;
-            var tangent = recorrido.Tangente(distancia);
+            var tangent = TangenteEnCamino(distancia);
             float objetivo = Mathf.Atan2(tangent.y, tangent.x) * Mathf.Rad2Deg;
             angulo = Mathf.SmoothDampAngle(angulo, objetivo, ref giroVelocidad, Mathf.Max(.02f, tiempoGiro), Mathf.Infinity, segundos);
             if (FinMapa) { angulo = objetivo; giroVelocidad = 0; }
@@ -216,6 +218,7 @@ namespace LifeDrive.Mapas.Demo
             if (MapaActual != null && MapaActual.fondo != null)
             {
                 GUI.DrawTexture(image, MapaActual.fondo, ScaleMode.ScaleToFit);
+                DibujarBifurcacion(image);
                 if (camion != null && recorrido != null)
                 {
                     // Clip at map edges, never clamp/warp the body to hide a road mismatch.

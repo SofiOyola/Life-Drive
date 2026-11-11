@@ -99,8 +99,8 @@ namespace LifeDrive.IntegracionV2
                 AlternarReconocimientos, out reconocimientosTexto);
             reinicio = Boton(pie.transform, "Reinicio visual", alResultado == null ? "Reiniciar vista" : "Reintentar", 1266, 10, 262, 54,
                 ReiniciarVista, out _);
-            mapa.gameObject.SetActive(alResultado == null);
-            situacionesTexto.gameObject.SetActive(alResultado == null);
+            mapa.gameObject.SetActive(true);
+            situacionesTexto.gameObject.SetActive(true);
             ConstruirReconocimientos(bitacora.gameObject);
             ConstruirNavegacionJugador(superior.transform);
             AjustarVista();
@@ -207,6 +207,8 @@ namespace LifeDrive.IntegracionV2
                 _ => "Inicia una partida candidata o retoma la prueba guardada en este equipo."
             };
             if (alResultado != null) PresentarEstadoJugador();
+            ActualizarRutaVisible();
+            ActualizarBifurcacionVisible();
             if (Estado == Fase.Entregada) AjustarVista();
         }
 
@@ -218,7 +220,43 @@ namespace LifeDrive.IntegracionV2
                 : (decision.es_acertada ? "Acción segura" : "Acción insegura");
             string reconocimiento = Gamificacion?.BuenasPracticas.Any(b => b.DecisionId == decision.id) == true
                 ? "\n\nBuena práctica registrada por el motor." : "";
-            return $"Tu elección: {decision.alternativa}\n\n{veredicto} · {decision.puntos_aplicados:+0;-0;0} pts · {decision.retraso_aplicado} min\n\n{decision.consecuencia}{reconocimiento}";
+            string ruta = esV1 ? "" : estado.DestinoVisualConfirmado != null
+                ? "\n\nTomarás: " + NombreMapa(estado.DestinoVisualConfirmado) + ". El recorrido cambia al continuar."
+                : "\n\nEsta respuesta no cambia de carretera.";
+            return $"Tu elección: {decision.alternativa}\n\n{veredicto} · {decision.puntos_aplicados:+0;-0;0} pts · +{decision.retraso_aplicado} min de tiempo simulado\n\n{decision.consecuencia}{ruta}{reconocimiento}";
+        }
+
+        string NombreMapa(string id) => catalogo.mapas.FirstOrDefault(m => m != null && m.Id == id)?.nombre ?? id;
+
+        void ActualizarBifurcacionVisible()
+        {
+            if (esV1 || partidaId == 0 || Estado == Fase.Error || Estado == Fase.Entregada)
+            { reproductor.LimpiarBifurcacion(); return; }
+            var opciones = juego.RecorridosV2.CaminosDisponibles(partidaId);
+            var principal = opciones.FirstOrDefault(o => o.EsPrincipal);
+            var desvio = opciones.FirstOrDefault(o => !o.EsPrincipal);
+            if (opciones.Length != 2 || principal == null || desvio == null)
+            { reproductor.LimpiarBifurcacion(); return; }
+            reproductor.ConfigurarBifurcacion(Hito(principal.SituacionId), principal.Destino, desvio.Destino, principal.Numero, desvio.Numero);
+            if (Estado == Fase.Situacion)
+            {
+                titulo.text = "Elige por dónde seguir";
+                situacionesTexto.text = "Dos caminos visibles · El número de la señal corresponde a tu respuesta";
+            }
+        }
+
+        void ActualizarRutaVisible()
+        {
+            var partida = juego?.BaseDatos.Partidas.FirstOrDefault(p => p.id == partidaId);
+            if (partida == null || Estado == Fase.Error) return;
+            string nombre = esV1 ? juego.Partidas.Tramo(partida, partida.tramo_actual_id).nombre : NombreMapa(MapaVisible);
+            mapa.text = nombre + " · Retraso: " + partida.retraso_min + " min";
+            mapa.fontSize = mapa.fontSizeMax = 21;
+            situacionesTexto.text = Estado == Fase.Consecuencia && !esV1 && estado.DestinoVisualConfirmado != null
+                ? "Próxima ruta: " + NombreMapa(estado.DestinoVisualConfirmado)
+                : "Tiempo simulado · Tus decisiones determinan el recorrido";
+            if (Estado == Fase.Situacion && !esV1 && situacion.alternativas.Any(a => a.tramo_destino_id != 0))
+                tipoFicha.text = "BIFURCACIÓN · ELIGE TU CAMINO";
         }
 
         static RectTransform Rectangulo(string nombre, Transform padre, float x, float y, float ancho, float alto)

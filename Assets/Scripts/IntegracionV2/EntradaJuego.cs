@@ -30,6 +30,9 @@ namespace LifeDrive.IntegracionV2
         }
         void Awake()
         {
+            // The Editor Game view can otherwise render this lightweight game without
+            // a frame limit. Cap the loop before constructing any player screens.
+            Application.targetFrameRate = 60;
             if (FindAnyObjectByType<FlujoJugadorPilotoV2>() != null) return;
 #if UNITY_EDITOR
             if (ClasicoEnPruebas && !string.IsNullOrEmpty(CarpetaPruebas))

@@ -223,7 +223,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -20,
-            "retraso_min": 0,
+            "retraso_min": 25,
             "explicacion": "Salir por afán deja condiciones críticas sin verificar. Completa la inspección antes de operar.",
             "tramo_destino_id": 103
           }
@@ -255,7 +255,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -15,
-            "retraso_min": 0,
+            "retraso_min": 30,
             "explicacion": "Una ruta más corta puede tener mayor exposición. Considera visibilidad, trazado y condiciones de paso antes de elegir.",
             "tramo_destino_id": 105
           }
@@ -287,7 +287,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -15,
-            "retraso_min": 0,
+            "retraso_min": 30,
             "explicacion": "Aplazar la verificación mantiene el riesgo sin controlar. Coordina una parada habilitada.",
             "tramo_destino_id": 107
           }
@@ -309,7 +309,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -20,
-            "retraso_min": 0,
+            "retraso_min": 25,
             "explicacion": "Exceder la velocidad con carga aumenta la distancia de frenado y el riesgo de volcamiento.",
             "tramo_destino_id": 0
           },
@@ -329,7 +329,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -20,
-            "retraso_min": 0,
+            "retraso_min": 20,
             "explicacion": "Las condiciones de la vía determinan la velocidad segura; ignorarlas provoca incidentes.",
             "tramo_destino_id": 0
           }
@@ -361,7 +361,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -15,
-            "retraso_min": 0,
+            "retraso_min": 25,
             "explicacion": "La presión de tiempo no compensa la mayor exposición. Respeta la demarcación y ajusta la velocidad a la visibilidad.",
             "tramo_destino_id": 109
           }
@@ -393,7 +393,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -15,
-            "retraso_min": 0,
+            "retraso_min": 25,
             "explicacion": "La distancia por sí sola no justifica mayor exposición. Ajusta velocidad y respeta la demarcación.",
             "tramo_destino_id": 111
           }
@@ -425,7 +425,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -20,
-            "retraso_min": 0,
+            "retraso_min": 35,
             "explicacion": "El aire frío no elimina la fatiga; solo el descanso la reduce.",
             "tramo_destino_id": 113
           }
@@ -457,7 +457,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -15,
-            "retraso_min": 0,
+            "retraso_min": 30,
             "explicacion": "El firme irregular puede afectar la sujeción de la carga. Verifica los amarres antes de continuar.",
             "tramo_destino_id": 115
           }
@@ -489,7 +489,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -20,
-            "retraso_min": 0,
+            "retraso_min": 45,
             "explicacion": "Conducir con una falla puede convertirla en un accidente.",
             "tramo_destino_id": 0
           },
@@ -499,7 +499,7 @@
             "es_acertada": false,
             "es_buena_practica": false,
             "puntos": -20,
-            "retraso_min": 0,
+            "retraso_min": 45,
             "explicacion": "Un vehículo detenido sin señales en la vía es un riesgo para los demás conductores.",
             "tramo_destino_id": 0
           }

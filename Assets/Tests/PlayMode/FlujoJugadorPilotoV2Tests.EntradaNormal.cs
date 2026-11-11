@@ -207,6 +207,16 @@ namespace LifeDrive.Tests
                     string destino = tramo < 4 && turno == situaciones[tramo].Length - 1 ? mapas[tramo + 1] : null;
                     int indice = destino != null && tramo < 3 ? (ruta >> (2 - tramo)) & 1 : 0;
                     var alternativa = piloto.Juego.Partidas.SituacionActual(piloto.Juego.BaseDatos.Partidas.Single()).alternativas[indice];
+                    bool bifurcacion = destino != null && tramo < 3;
+                    if (bifurcacion)
+                    {
+                        Assert.That(reproductor.BifurcacionVisible, Is.True, "Se deben ver los dos caminos antes de elegir.");
+                        var opciones = piloto.Juego.RecorridosV2.CaminosDisponibles(partidaId);
+                        Assert.That(opciones.Length, Is.EqualTo(2));
+                        Assert.That(opciones.Single(o => o.Numero == indice + 1).Destino, Is.EqualTo(destino));
+                        if (ruta == 0 || ruta == 7)
+                            yield return CapturaEntrada(Hojas[ruta] + "-" + mapas[tramo] + "-bifurcacion", "BifurcacionesNicolas");
+                    }
                     var boton = Boton("Respuesta " + (indice + 1));
                     Click(boton);
                     boton.onClick.Invoke(); // Incluso un callback repetido debe ser inocuo.
@@ -232,6 +242,21 @@ namespace LifeDrive.Tests
                     }
                     Assert.That(prueba.Estado, Is.EqualTo(Fase.Transicion));
                     Assert.That(prueba.MapaVisible, Is.EqualTo(mapas[tramo]));
+                    if (bifurcacion)
+                    {
+                        Assert.That(reproductor.UsandoDesvio, Is.EqualTo(!alternativa.es_acertada), "El camión debe circular por el ramal elegido.");
+                        if (ruta == 0 || ruta == 7)
+                        {
+                            // Observe actual movement on the road, not a teleported preview.
+                            float salida = reproductor.Distancia;
+                            float limiteMovimiento = Time.realtimeSinceStartup + 4;
+                            while (reproductor.Distancia < salida + 45 && prueba.MapaVisible == mapas[tramo] && Time.realtimeSinceStartup < limiteMovimiento)
+                                yield return null;
+                            Assert.That(prueba.MapaVisible, Is.EqualTo(mapas[tramo]));
+                            Assert.That(reproductor.Distancia, Is.GreaterThan(salida + 40));
+                            yield return CapturaEntrada(Hojas[ruta] + "-" + mapas[tramo] + "-camino-elegido", "BifurcacionesNicolas");
+                        }
+                    }
                     yield return EsperarEntradaConFundido(prueba, destino);
                     if (tramo == 0 && (ruta == 0 || ruta == 7))
                     {
