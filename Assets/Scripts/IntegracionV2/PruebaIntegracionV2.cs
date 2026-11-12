@@ -154,7 +154,7 @@ namespace LifeDrive.IntegracionV2
             }
             float hito = Hito(situacion.id);
             float restante = Mathf.Max(0, reproductor.Longitud * hito - reproductor.Distancia);
-            reproductor.Avanzar(Mathf.Min(Time.deltaTime, restante / reproductor.Velocidad));
+            reproductor.Avanzar(Mathf.Min(Time.deltaTime, restante / reproductor.VelocidadEfectiva));
             if (reproductor.Progreso < hito - .00001f) return;
             reproductor.Pausar();
             Estado = Fase.Situacion;
@@ -188,7 +188,7 @@ namespace LifeDrive.IntegracionV2
                 if (estado.DestinoVisualConfirmado == null) ConfirmarPresentacion();
                 else
                 {
-                    reproductor.TransicionarA(estado.DestinoVisualConfirmado);
+                    reproductor.TransicionarA(estado.DestinoVisualConfirmado, !estado.DecisionConfirmada.es_acertada);
                     Estado = Fase.Transicion;
                     ActualizarVista();
                 }

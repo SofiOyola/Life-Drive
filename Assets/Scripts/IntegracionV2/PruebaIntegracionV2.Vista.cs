@@ -231,6 +231,8 @@ namespace LifeDrive.IntegracionV2
             var presentada = juego?.BaseDatos.Decisiones.LastOrDefault(d => d.partida_id == partidaId &&
                 d.id == estado?.UltimaDecisionPresentadaId);
             reproductor.CaminoDeteriorado = presentada != null && !presentada.es_acertada;
+            if (!esV1 && Estado == Fase.Transicion && MapaVisible == estado?.DestinoVisualConfirmado)
+                reproductor.CaminoDeteriorado = !estado.DecisionConfirmada.es_acertada;
             if (esV1 || partidaId == 0 || Estado == Fase.Error || Estado == Fase.Entregada)
             { reproductor.LimpiarBifurcacion(); return; }
             var opciones = juego.RecorridosV2.CaminosDisponibles(partidaId);

@@ -20,6 +20,7 @@ namespace LifeDrive.Mapas.Demo
         float relojFundido;
         bool recorridoCompleto;
         int? siguienteExterno;
+        bool? deterioroDestino;
         int rutaSeleccionada, etapa;
         MapaVisual[][] rutas = new MapaVisual[0][];
         string[] nombresRutas = new string[0];
@@ -54,6 +55,11 @@ namespace LifeDrive.Mapas.Demo
         public bool AjusteLimites => recorrido != null && recorrido.AjusteLimites;
         public MapaVisual MapaActual => catalogo != null && catalogo.mapas != null && indice >= 0 && indice < catalogo.mapas.Length ? catalogo.mapas[indice] : null;
         public float Velocidad { get => velocidad; set => velocidad = Mathf.Clamp(value, 1, 160); }
+        public bool SobreCaminoDeteriorado => MostrarBifurcaciones && CaminoDeteriorado && MapaActual != null && MapaActual.fondoDeteriorado != null;
+        public float VelocidadEfectiva => Velocidad * (SobreCaminoDeteriorado ? .75f : 1f);
+        // Suspension moves with travelled distance, so pausing also freezes the body.
+        public float SuspensionVisual => SobreCaminoDeteriorado && Reproduciendo && !EnTransicion
+            ? Mathf.Sin(distancia * 1.3f) * Mathf.Sin(distancia * .27f) * .55f : 0f;
         public float CarrilDerecho
         {
             get => carrilDerecho;
@@ -105,12 +111,13 @@ namespace LifeDrive.Mapas.Demo
         }
 
         // The host supplies one confirmed edge. Standalone demo routes keep their original autoplay.
-        public void TransicionarA(string mapaId)
+        public void TransicionarA(string mapaId, bool? caminoDeterioradoDestino = null)
         {
             if (!ControlExterno || recorridoCompleto || EnTransicion || siguienteExterno.HasValue ||
                 MapaActual == null || !MapaActual.siguientes.Any(m => m.Id == mapaId))
                 throw new ArgumentException("Transición visual no permitida: " + mapaId);
             siguienteExterno = Array.FindIndex(catalogo.mapas, m => m.Id == mapaId);
+            deterioroDestino = caminoDeterioradoDestino;
             usandoDesvio = bifurcacion != null && mapaId == destinoDesvio;
             Reproducir();
         }
@@ -142,6 +149,7 @@ namespace LifeDrive.Mapas.Demo
         public void Reiniciar()
         {
             siguienteExterno = null;
+            deterioroDestino = null;
             fase = FaseFundido.Ninguna; relojFundido = 0;
             if (recorridoCompleto) AbrirEtapa(0);
             distancia = 0; Reproduciendo = false; Alinear();
@@ -167,6 +175,8 @@ namespace LifeDrive.Mapas.Demo
                             {
                                 indice = siguienteExterno.Value;
                                 siguienteExterno = null;
+                                if (deterioroDestino.HasValue) CaminoDeteriorado = deterioroDestino.Value;
+                                deterioroDestino = null;
                                 Construir(); distancia = 0; Alinear();
                             }
                             else AbrirEtapa(etapa + 1);
@@ -182,7 +192,7 @@ namespace LifeDrive.Mapas.Demo
                     }
                     continue;
                 }
-                float delta = Mathf.Min(segundos, Mathf.Max(0, Longitud - distancia) / Velocidad);
+                float delta = Mathf.Min(segundos, Mathf.Max(0, Longitud - distancia) / VelocidadEfectiva);
                 Mover(delta); segundos -= delta;
                 if (FinMapa)
                 {
@@ -194,7 +204,7 @@ namespace LifeDrive.Mapas.Demo
         }
         void Mover(float segundos)
         {
-            distancia = Mathf.Min(Longitud, distancia + Velocidad * segundos);
+            distancia = Mathf.Min(Longitud, distancia + VelocidadEfectiva * segundos);
             if (Longitud - distancia < .0001f) distancia = Longitud;
             var tangent = TangenteEnCamino(distancia);
             float objetivo = Mathf.Atan2(tangent.y, tangent.x) * Mathf.Rad2Deg;
@@ -227,7 +237,15 @@ namespace LifeDrive.Mapas.Demo
                     // Clip at map edges, never clamp/warp the body to hide a road mismatch.
                     GUI.BeginGroup(image);
                     var p = Posicion;
+                    // Let the full truck leave/enter through the edge during the existing fade.
+                    if (EnTransicion)
+                    {
+                        float t = Mathf.SmoothStep(0, 1, relojFundido / DuracionFundido);
+                        float salida = fase == FaseFundido.Saliendo ? t : -(1 - t);
+                        p += TangenteEnCamino(distancia) * salida * largoCamion;
+                    }
                     var centro = new Vector2(p.x / 480 * ancho, (1 - p.y / 270) * alto);
+                    centro.y += SuspensionVisual / 480 * ancho;
                     float ratio = camionUV.width * camion.texture.width / Mathf.Max(1, camionUV.height * camion.texture.height);
                     float width = largoCamion / 480 * ancho, height = width / Mathf.Max(.1f, ratio);
                     var saved = GUI.matrix;

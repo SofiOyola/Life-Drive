@@ -8,6 +8,35 @@ namespace LifeDrive.Tests
 {
     public class CaminoBifurcadoTests
     {
+        [Test]
+        public void TerrenoReduceVelocidadPausaYRecuperaAntesDeRevelarElMapa()
+        {
+            var go = new GameObject("Ensayo de movimiento");
+            try
+            {
+                var demo = go.AddComponent<DemoRecorrido>();
+                var so = new SerializedObject(demo);
+                so.FindProperty("catalogo").objectReferenceValue = AssetDatabase.LoadAssetAtPath<CatalogoMapas>("Assets/Mapas/CatalogoMapas.asset");
+                so.ApplyModifiedPropertiesWithoutUndo();
+                demo.ControlExterno = demo.MostrarBifurcaciones = demo.CaminoDeteriorado = true;
+                demo.MostrarMapa("R1B"); demo.Velocidad = 24; demo.Reproducir();
+                demo.Avanzar(1);
+                Assert.That(demo.Distancia, Is.EqualTo(18).Within(.001f));
+                demo.Pausar(); demo.Avanzar(10);
+                Assert.That(demo.Distancia, Is.EqualTo(18).Within(.001f));
+                Assert.That(demo.SuspensionVisual, Is.Zero);
+                demo.TransicionarA("R2C", false); demo.Avanzar(100);
+                Assert.That(demo.MapaActual.Id, Is.EqualTo("R2C"));
+                Assert.That(demo.OpacidadFundido, Is.EqualTo(1));
+                Assert.That(demo.CaminoDeteriorado, Is.False);
+                Assert.That(demo.VelocidadEfectiva, Is.EqualTo(24));
+                demo.Avanzar(1);
+                Assert.That(demo.EnTransicion, Is.False);
+                Assert.That(demo.Distancia, Is.Zero, "La entrada visual no debe saltarse preguntas.");
+            }
+            finally { Object.DestroyImmediate(go); }
+        }
+
         [TestCase("S0")][TestCase("R1A")][TestCase("R1B")]
         [TestCase("R2A")][TestCase("R2B")][TestCase("R2C")][TestCase("R2D")]
         public void ElDesvioConectaSinSaltosYConservaLaViaPrincipal(string id)
