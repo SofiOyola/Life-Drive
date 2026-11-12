@@ -217,8 +217,9 @@ namespace LifeDrive.Mapas.Demo
             }
             if (MapaActual != null && MapaActual.fondo != null)
             {
-                GUI.DrawTexture(image, MapaActual.fondo, ScaleMode.ScaleToFit);
-                DibujarBifurcacion(image);
+                var fondo = MostrarBifurcaciones && MapaActual.fondoBifurcacion != null
+                    ? MapaActual.fondoBifurcacion : MapaActual.fondo;
+                GUI.DrawTexture(image, fondo, ScaleMode.StretchToFill);
                 if (camion != null && recorrido != null)
                 {
                     // Clip at map edges, never clamp/warp the body to hide a road mismatch.

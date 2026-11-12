@@ -15,7 +15,9 @@ namespace LifeDrive.Tests
             var mapa = AssetDatabase.LoadAssetAtPath<MapaVisual>("Assets/Mapas/" + id + ".asset");
             var antes = (Vector2[])mapa.trayectoria.Clone();
             var principal = new RecorridoDemo(mapa, 6);
-            var desvio = new CaminoBifurcado(principal, .56f);
+            Assert.That(mapa.fondoBifurcacion, Is.Not.Null, "La bifurcación debe estar pintada en el mapa.");
+            Assert.That(mapa.trayectoriaDesvio.Length, Is.GreaterThanOrEqualTo(2));
+            var desvio = new CaminoBifurcado(principal, .56f, mapa.trayectoriaDesvio);
             Assert.That(Vector2.Distance(desvio.Posicion(0), principal.Posicion(desvio.Inicio)), Is.LessThan(.001f));
             Assert.That(Vector2.Dot(desvio.Tangente(0), principal.Tangente(desvio.Inicio)), Is.GreaterThan(.98f));
             Assert.That(desvio.Posicion(desvio.Longitud).x, Is.EqualTo(480).Within(.001f));

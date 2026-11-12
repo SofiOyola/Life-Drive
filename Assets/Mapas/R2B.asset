@@ -17,6 +17,17 @@ MonoBehaviour:
   descripcion: PROTOTIPO VISUAL. IA con S0, R1A y R1B como referencias. 480x270 escalado nearest-neighbor a 1920x1080. Trayectoria trazada sobre el PNG; ver R2Continuidad.md.
   categoria: 2
   fondo: {fileID: 2800000, guid: 8b29584a5000ed145935bb9ec75e67f7, type: 3}
+  fondoBifurcacion: {fileID: 2800000, guid: f0e75691b0fb11446801fe8d85e1941e, type: 3}
+  trayectoriaDesvio:
+  - {x: 0.5502392, y: 0.47351122}
+  - {x: 0.57416266, y: 0.4501319}
+  - {x: 0.5980861, y: 0.42887786}
+  - {x: 0.65789473, y: 0.3969969}
+  - {x: 0.71770334, y: 0.32260793}
+  - {x: 0.77751195, y: 0.21208721}
+  - {x: 0.83732057, y: 0.15257606}
+  - {x: 0.8971292, y: 0.12600859}
+  - {x: 1, y: 0.11219349}
   miniatura: {fileID: 2800000, guid: a1121d936f73929449c29847a48947d9, type: 3}
   origen: {fileID: 11400000, guid: 7c2d886d61b1b314fb3a544cbade0694, type: 2}
   siguientes:
@@ -53,3 +64,9 @@ MonoBehaviour:
   continuidad: "Entrada (0,.5) y salida (1,.5), rumbo este, ancho nominal 32 en 640x360. Enlace a R3C/R3D. Prototipo con tolerancia de raster de 3 px l\xF3gicos. Ver R2Continuidad.md."
   origenes:
   - {fileID: 11400000, guid: 7c2d886d61b1b314fb3a544cbade0694, type: 2}
+  zonaEntrega:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0

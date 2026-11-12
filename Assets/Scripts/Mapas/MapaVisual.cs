@@ -13,6 +13,9 @@ namespace LifeDrive.Mapas
         [TextArea] public string descripcion;
         public CategoriaMapa categoria;
         public Texture2D fondo;
+        public Texture2D fondoBifurcacion;
+        [Tooltip("Recorrido alternativo dibujado en el fondo, coordenadas normalizadas Y hacia arriba.")]
+        public Vector2[] trayectoriaDesvio = new Vector2[0];
         public Texture2D miniatura;
         public MapaVisual origen;
         public MapaVisual[] siguientes = new MapaVisual[0];

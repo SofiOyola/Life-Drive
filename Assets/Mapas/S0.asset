@@ -17,6 +17,15 @@ MonoBehaviour:
   descripcion: "PROTOTIPO VISUAL generado con IA. Cuadr\xEDcula 480x270, exportaci\xF3n nearest-neighbor 1920x1080. Pendiente corregir perspectiva cenital estricta y verificar ancho exacto antes de arte definitivo."
   categoria: 0
   fondo: {fileID: 2800000, guid: 36f33500b79d0c747824a52eab08ad29, type: 3}
+  fondoBifurcacion: {fileID: 2800000, guid: 644f7a855e14a194eb4505483b1b72df, type: 3}
+  trayectoriaDesvio:
+  - {x: 0.6279904, y: 0.5245208}
+  - {x: 0.68779904, y: 0.5935963}
+  - {x: 0.74760765, y: 0.6786122}
+  - {x: 0.80741626, y: 0.75300115}
+  - {x: 0.8672249, y: 0.8008226}
+  - {x: 0.9270335, y: 0.8295155}
+  - {x: 1, y: 0.83695436}
   miniatura: {fileID: 2800000, guid: 82dd9d35f1a91f4448058bb39afd2756, type: 3}
   origen: {fileID: 0}
   siguientes:
@@ -37,3 +46,9 @@ MonoBehaviour:
   caracteristicasVia: Asfalto seco, dos carriles, ancho 32 px en lienzo 640x360; bermas 4 px. Curvas amplias.
   continuidad: "Entrada oeste y salida este, tangentes al este. Franjas neutras en primer y \xFAltimo 18%. Ver ContinuidadVisual.md. No determina categor\xEDa de final."
   origenes: []
+  zonaEntrega:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0

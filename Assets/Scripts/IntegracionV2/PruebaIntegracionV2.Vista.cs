@@ -220,16 +220,14 @@ namespace LifeDrive.IntegracionV2
                 : (decision.es_acertada ? "Acción segura" : "Acción insegura");
             string reconocimiento = Gamificacion?.BuenasPracticas.Any(b => b.DecisionId == decision.id) == true
                 ? "\n\nBuena práctica registrada por el motor." : "";
-            string ruta = esV1 ? "" : estado.DestinoVisualConfirmado != null
-                ? "\n\nTomarás: " + NombreMapa(estado.DestinoVisualConfirmado) + ". El recorrido cambia al continuar."
-                : "\n\nEsta respuesta no cambia de carretera.";
-            return $"Tu elección: {decision.alternativa}\n\n{veredicto} · {decision.puntos_aplicados:+0;-0;0} pts · +{decision.retraso_aplicado} min de tiempo simulado\n\n{decision.consecuencia}{ruta}{reconocimiento}";
+            return $"Tu elección: {decision.alternativa}\n\n{veredicto} · {decision.puntos_aplicados:+0;-0;0} pts · +{decision.retraso_aplicado} min de tiempo simulado\n\n{decision.consecuencia}{reconocimiento}";
         }
 
         string NombreMapa(string id) => catalogo.mapas.FirstOrDefault(m => m != null && m.Id == id)?.nombre ?? id;
 
         void ActualizarBifurcacionVisible()
         {
+            reproductor.MostrarBifurcaciones = !esV1;
             if (esV1 || partidaId == 0 || Estado == Fase.Error || Estado == Fase.Entregada)
             { reproductor.LimpiarBifurcacion(); return; }
             var opciones = juego.RecorridosV2.CaminosDisponibles(partidaId);
@@ -237,11 +235,11 @@ namespace LifeDrive.IntegracionV2
             var desvio = opciones.FirstOrDefault(o => !o.EsPrincipal);
             if (opciones.Length != 2 || principal == null || desvio == null)
             { reproductor.LimpiarBifurcacion(); return; }
-            reproductor.ConfigurarBifurcacion(Hito(principal.SituacionId), principal.Destino, desvio.Destino, principal.Numero, desvio.Numero);
+            reproductor.ConfigurarBifurcacion(Hito(principal.SituacionId), principal.Destino, desvio.Destino);
             if (Estado == Fase.Situacion)
             {
                 titulo.text = "Elige por dónde seguir";
-                situacionesTexto.text = "Dos caminos visibles · El número de la señal corresponde a tu respuesta";
+                situacionesTexto.text = "Piensa en la situación y toma tu decisión";
             }
         }
 
@@ -249,12 +247,9 @@ namespace LifeDrive.IntegracionV2
         {
             var partida = juego?.BaseDatos.Partidas.FirstOrDefault(p => p.id == partidaId);
             if (partida == null || Estado == Fase.Error) return;
-            string nombre = esV1 ? juego.Partidas.Tramo(partida, partida.tramo_actual_id).nombre : NombreMapa(MapaVisible);
-            mapa.text = nombre + " · Retraso: " + partida.retraso_min + " min";
+            mapa.text = "Retraso acumulado: " + partida.retraso_min + " min";
             mapa.fontSize = mapa.fontSizeMax = 21;
-            situacionesTexto.text = Estado == Fase.Consecuencia && !esV1 && estado.DestinoVisualConfirmado != null
-                ? "Próxima ruta: " + NombreMapa(estado.DestinoVisualConfirmado)
-                : "Tiempo simulado · Tus decisiones determinan el recorrido";
+            situacionesTexto.text = "Tiempo simulado · Tus decisiones cuentan";
             if (Estado == Fase.Situacion && !esV1 && situacion.alternativas.Any(a => a.tramo_destino_id != 0))
                 tipoFicha.text = "BIFURCACIÓN · ELIGE TU CAMINO";
         }

@@ -17,6 +17,16 @@ MonoBehaviour:
   descripcion: "PROTOTIPO VISUAL generado con IA usando S0 como referencia obligatoria. Base 480x270, exportaci\xF3n nearest-neighbor 1920x1080. Pendiente ajuste fino de trayectoria y perspectiva compartida con S0."
   categoria: 1
   fondo: {fileID: 2800000, guid: 6d4bf986b289edf44b7824b3e1fed598, type: 3}
+  fondoBifurcacion: {fileID: 2800000, guid: cf58f9bce911c814ea53094a5654fa8b, type: 3}
+  trayectoriaDesvio:
+  - {x: 0.5980861, y: 0.41612548}
+  - {x: 0.65789473, y: 0.48413822}
+  - {x: 0.71770334, y: 0.56702876}
+  - {x: 0.77751195, y: 0.6594836}
+  - {x: 0.83732057, y: 0.7423741}
+  - {x: 0.8971292, y: 0.8040107}
+  - {x: 0.9569378, y: 0.8380171}
+  - {x: 1, y: 0.8465187}
   miniatura: {fileID: 2800000, guid: 48b4acdfde33c594a9fd39ebed8aec1c, type: 3}
   origen: {fileID: 11400000, guid: 40a837d8c1e141f45af776797d13ebb0, type: 2}
   siguientes:
