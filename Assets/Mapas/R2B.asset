@@ -18,6 +18,7 @@ MonoBehaviour:
   categoria: 2
   fondo: {fileID: 2800000, guid: 8b29584a5000ed145935bb9ec75e67f7, type: 3}
   fondoBifurcacion: {fileID: 2800000, guid: f0e75691b0fb11446801fe8d85e1941e, type: 3}
+  fondoDeteriorado: {fileID: 2800000, guid: e26b6b24586b8e646abb3678f6f1a02e, type: 3}
   trayectoriaDesvio:
   - {x: 0.5502392, y: 0.47351122}
   - {x: 0.57416266, y: 0.4501319}

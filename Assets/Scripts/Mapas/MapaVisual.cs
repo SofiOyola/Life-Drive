@@ -14,6 +14,7 @@ namespace LifeDrive.Mapas
         public CategoriaMapa categoria;
         public Texture2D fondo;
         public Texture2D fondoBifurcacion;
+        public Texture2D fondoDeteriorado;
         [Tooltip("Recorrido alternativo dibujado en el fondo, coordenadas normalizadas Y hacia arriba.")]
         public Vector2[] trayectoriaDesvio = new Vector2[0];
         public Texture2D miniatura;

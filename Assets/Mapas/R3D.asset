@@ -17,6 +17,9 @@ MonoBehaviour:
   descripcion: "PROTOTIPO VISUAL generado con IA tomando R2A/R2B como referencias PNG. Base 480x270 y exportaci\xF3n nearest-neighbor 1920x1080. Ver R3ABCDContinuidad.md."
   categoria: 3
   fondo: {fileID: 2800000, guid: ca839b4d695547e448516bb8d2f1d284, type: 3}
+  fondoBifurcacion: {fileID: 0}
+  fondoDeteriorado: {fileID: 2800000, guid: 8ad4709247c968445a23ed7b09f1f7e2, type: 3}
+  trayectoriaDesvio: []
   miniatura: {fileID: 2800000, guid: d25c1964de867214da4ecc94281da7d7, type: 3}
   origen: {fileID: 11400000, guid: ca448b15b02ad9340a6bb8d2b576e1d4, type: 2}
   siguientes:
@@ -92,3 +95,9 @@ MonoBehaviour:
   continuidad: "Entrada (0,.5) y salida (1,.5), rumbo este, ancho nominal 32 px sobre 640x360. DELIVERY solo mediante futura transici\xF3n de escena. Sin uni\xF3n f\xEDsica con otros R3. Ver R3ABCDContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: ca448b15b02ad9340a6bb8d2b576e1d4, type: 2}
+  zonaEntrega:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0

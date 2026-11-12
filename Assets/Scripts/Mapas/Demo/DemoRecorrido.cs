@@ -219,6 +219,8 @@ namespace LifeDrive.Mapas.Demo
             {
                 var fondo = MostrarBifurcaciones && MapaActual.fondoBifurcacion != null
                     ? MapaActual.fondoBifurcacion : MapaActual.fondo;
+                if (MostrarBifurcaciones && CaminoDeteriorado && MapaActual.fondoDeteriorado != null)
+                    fondo = MapaActual.fondoDeteriorado;
                 GUI.DrawTexture(image, fondo, ScaleMode.StretchToFill);
                 if (camion != null && recorrido != null)
                 {

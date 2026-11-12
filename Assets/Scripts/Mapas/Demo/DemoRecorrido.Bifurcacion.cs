@@ -8,6 +8,7 @@ namespace LifeDrive.Mapas.Demo
         string destinoDesvio, destinoPrincipal;
         bool usandoDesvio;
         public bool MostrarBifurcaciones { get; set; }
+        public bool CaminoDeteriorado { get; set; }
         public bool BifurcacionVisible => bifurcacion != null;
         public bool UsandoDesvio => usandoDesvio;
         public Vector2 SalidaDesvio => bifurcacion?.Posicion(bifurcacion.Longitud) ?? Vector2.zero;

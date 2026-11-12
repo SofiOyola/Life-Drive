@@ -24,6 +24,25 @@ namespace LifeDrive.Tests
         }
 
         [Test]
+        public void CadaErrorLlevaAPaisajeDeterioradoYCadaAciertoPermiteRecuperarse()
+        {
+            foreach (var enlace in paquete.asociaciones)
+            {
+                var respuesta = paquete.contenido.situaciones.Single(s => s.id == enlace.situacion_id)
+                    .alternativas.Single(a => a.id == enlace.alternativa_id);
+                var destino = catalogo.mapas.Single(m => m.Id == enlace.mapa_destino);
+                Assert.That(destino.fondoDeteriorado != null, Is.EqualTo(!respuesta.es_acertada),
+                    enlace.mapa_origen + " -> " + enlace.mapa_destino);
+                if (destino.fondoDeteriorado != null)
+                    Assert.That(destino.fondoDeteriorado, Is.Not.SameAs(destino.fondo));
+            }
+            foreach (var id in new[] { "R1B", "R2B", "R2D" })
+                Assert.That(paquete.asociaciones.Any(e => e.mapa_origen == id &&
+                    catalogo.mapas.Single(m => m.Id == e.mapa_destino).fondoDeteriorado == null), Is.True,
+                    "Siempre debe existir una salida de recuperación: " + id);
+        }
+
+        [Test]
         public void ValidaSieteBifurcacionesConDosRespuestasExplicitas()
         {
             Assert.DoesNotThrow(() => paquete.Validar(catalogo));

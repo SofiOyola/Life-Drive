@@ -17,6 +17,9 @@ MonoBehaviour:
   descripcion: PROTOTIPO VISUAL generado con IA, usando PNG de predecesor y R3 aprobados como referencias. 480x270 escalado nearest-neighbor a 1920x1080. Ver R3EFGHContinuidad.md.
   categoria: 3
   fondo: {fileID: 2800000, guid: 16259a8e4caf1c64bad836b22f6fa3f2, type: 3}
+  fondoBifurcacion: {fileID: 0}
+  fondoDeteriorado: {fileID: 2800000, guid: 0cb51abe0455a1d438752cc769745301, type: 3}
+  trayectoriaDesvio: []
   miniatura: {fileID: 2800000, guid: 1d3b626dd45d3764b815f9dbf84f99a4, type: 3}
   origen: {fileID: 11400000, guid: 42a4f7378f7bbff4a89e20af6c947565, type: 2}
   siguientes:
@@ -64,3 +67,9 @@ MonoBehaviour:
   continuidad: "Entrada (0,.5), salida (1,.5), tangentes hacia este; ancho nominal 32 px sobre 640x360. \xDAnico siguiente DELIVERY por futura transici\xF3n de escena. Ver R3EFGHContinuidad.md."
   origenes:
   - {fileID: 11400000, guid: 42a4f7378f7bbff4a89e20af6c947565, type: 2}
+  zonaEntrega:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
