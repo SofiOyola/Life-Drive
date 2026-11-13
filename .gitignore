@@ -31,3 +31,6 @@ CLAUDE.md
 
 # Salida regenerable de las pruebas Play Mode (capturas y PDF)
 /TestEvidence/
+
+# Informes del paquete Code Coverage (S4-07); se regeneran al medir
+/CodeCoverage/

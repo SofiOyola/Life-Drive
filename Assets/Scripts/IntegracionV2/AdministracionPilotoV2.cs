@@ -28,6 +28,7 @@ namespace LifeDrive.IntegracionV2
         public int JugadorSeleccionado { get; private set; }
         public int PartidaSeleccionada { get; private set; }
         public Resumen ResumenVisible { get; private set; }
+        public Indicadores IndicadoresJugadorVisibles { get; private set; }
         public List<Evento> EventosVisibles { get; private set; } = new List<Evento>();
         public string UltimoPdf { get; private set; }
         ServicioJuego Juego => piloto.Juego;
@@ -74,7 +75,7 @@ namespace LifeDrive.IntegracionV2
             if (!vista.login && JuegoSinAdmin(piloto))
             {
                 foreach (var canvas in FindObjectsByType<Canvas>()) canvas.enabled = false;
-                ResumenVisible = null; EventosVisibles.Clear(); UltimoPdf = null;
+                ResumenVisible = null; IndicadoresJugadorVisibles = null; EventosVisibles.Clear(); UltimoPdf = null;
                 piloto.Navegar("AdminLogin");
             }
         }
@@ -214,7 +215,7 @@ namespace LifeDrive.IntegracionV2
 
         void LimpiarResumen()
         {
-            ResumenVisible = null; EventosVisibles.Clear(); UltimoPdf = null;
+            ResumenVisible = null; IndicadoresJugadorVisibles = null; EventosVisibles.Clear(); UltimoPdf = null;
             vista.pdf.interactable = false; abrirPdf.gameObject.SetActive(false);
             vista.detalle.text = "";
         }
@@ -231,12 +232,13 @@ namespace LifeDrive.IntegracionV2
             var r = Juego.Desempeno.Resumen(PartidaSeleccionada);
             if (r.Jugador.id != JugadorSeleccionado) throw new ErrorJuego("La partida no corresponde al jugador seleccionado.");
             var eventos = Juego.Desempeno.Eventos(partidaId: PartidaSeleccionada);
+            IndicadoresJugadorVisibles = Juego.Desempeno.IndicadoresJugador(JugadorSeleccionado);
             ResumenVisible = r; EventosVisibles = eventos;
             seleccion.composicion.SetActive(false); desplazamiento.gameObject.SetActive(true); vista.detalle.alpha = 1;
             vista.detalle.text = r.Jugador.nombre + " · Partida #" + r.Partida.id + " · " + r.Partida.estado +
                 "\nPuntos de seguridad: " + r.Partida.puntos + " · Retraso: " + r.Partida.retraso_min + " min" +
                 "\nRecorrido: " + string.Join(" → ", r.RutaRecorrida) +
-                "\nKPI TDS, IEE, PPS y PCRS: pendientes del servicio de indicadores." +
+                "\n\n" + TextoIndicadores(r.Indicadores, IndicadoresJugadorVisibles) +
                 "\n\nDECISIONES Y CONSECUENCIAS\n" +
                 (r.Historial.Count == 0 ? "Sin decisiones guardadas." : string.Join("\n\n", r.Historial.Select(h =>
                     h.Decision.tipo + " · " + h.Decision.alternativa + "\n" + h.Decision.consecuencia +
@@ -247,6 +249,13 @@ namespace LifeDrive.IntegracionV2
             Canvas.ForceUpdateCanvases(); desplazamiento.verticalNormalizedPosition = 1;
             vista.mensaje.text = "Datos guardados del motor. Desplaza el detalle para leer decisiones y eventos completos.";
         }
+
+        // Valores del servicio de indicadores (S3-09); la interfaz solo les da formato.
+        static string TextoIndicadores(Indicadores partida, Indicadores acumulado) =>
+            "INDICADORES (S3-09) · esta partida | acumulado de " + acumulado.PartidasConsideradas + " partida(s) finalizada(s)\n" +
+            string.Join("\n", partida.Todos.Select((k, i) => k.Sigla + " · " + k.Nombre + ": " + k.Texto + " | " + acumulado.Todos[i].Texto)) +
+            (partida.ContenidoSinValidar || acumulado.ContenidoSinValidar
+                ? "\nValores provisionales: hay situaciones sin validar con la organización." : "");
 
         void GenerarPdf()
         {

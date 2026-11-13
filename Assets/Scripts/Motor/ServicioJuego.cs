@@ -68,7 +68,7 @@ namespace LifeDrive.Motor
             Eventos = new RegistroEventos(BaseDatos);
             Usuarios = new ServicioUsuarios(BaseDatos, Contenido, almacen.CargarAdministradores(), Eventos);
             Partidas = new ServicioPartidas(BaseDatos, Contenido, Usuarios, Eventos, paquete?.contenido, paquete?.Huella);
-            Desempeno = new ServicioDesempeno(BaseDatos, Contenido, Usuarios, Eventos, Partidas.Tramo);
+            Desempeno = new ServicioDesempeno(BaseDatos, Contenido, Usuarios, Eventos, Partidas.Tramo, Partidas.Situacion);
             if (paquete != null)
                 RecorridosV2 = new ReanudacionRecorridosV2(BaseDatos, Usuarios, Partidas, paquete, catalogoV2);
         }

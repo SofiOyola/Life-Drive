@@ -23,6 +23,7 @@ namespace LifeDrive.Motor
         public int RiesgosEnfrentados, BuenasPracticas, CambiosDeRuta;
         public List<string> RutaRecorrida = new List<string>();
         public List<PasoHistorial> Historial = new List<PasoHistorial>();
+        public Indicadores Indicadores;   // S3-09, de esta partida
     }
 
     public class FilaJugador
@@ -40,18 +41,49 @@ namespace LifeDrive.Motor
         readonly ServicioUsuarios usuarios;
         readonly RegistroEventos eventos;
         readonly Func<Partida, int, Tramo> resolverTramo;
+        readonly Func<Partida, int, Situacion> resolverSituacion;
 
         public ServicioDesempeno(BaseDatos db, Contenido contenido, ServicioUsuarios usuarios, RegistroEventos eventos)
             : this(db, contenido, usuarios, eventos, null) { }
 
         internal ServicioDesempeno(BaseDatos db, Contenido contenido, ServicioUsuarios usuarios,
-            RegistroEventos eventos, Func<Partida, int, Tramo> resolverTramo)
+            RegistroEventos eventos, Func<Partida, int, Tramo> resolverTramo, Func<Partida, int, Situacion> resolverSituacion = null)
         {
             this.db = db;
             this.contenido = contenido;
             this.usuarios = usuarios;
             this.eventos = eventos;
             this.resolverTramo = resolverTramo;
+            this.resolverSituacion = resolverSituacion;
+        }
+
+        // Una situación sin validar, o que ya no se encuentra en el contenido, vuelve provisional el indicador.
+        bool SituacionValidada(Partida partida, int id)
+        {
+            try
+            {
+                var s = partida.contenido_version == 2 && resolverSituacion != null
+                    ? resolverSituacion(partida, id)
+                    : contenido.situaciones.FirstOrDefault(x => x.id == id);
+                return s != null && s.validada;
+            }
+            catch (ErrorJuego) { return false; }   // paquete V2 distinto del de la partida
+        }
+
+        Indicadores CalcularIndicadores(List<Partida> partidas)
+        {
+            var ids = new HashSet<int>(partidas.Select(p => p.id));
+            var decisiones = db.Decisiones.Where(d => ids.Contains(d.partida_id)).ToList();
+            var r = CalculadoraIndicadores.Calcular(partidas, decisiones);
+            r.ContenidoSinValidar = decisiones.Any(d => !SituacionValidada(partidas.First(p => p.id == d.partida_id), d.situacion_id));
+            return r;
+        }
+
+        // S3-09: indicadores acumulados del jugador sobre sus partidas FINALIZADAS (las en curso no cuentan).
+        public Indicadores IndicadoresJugador(int jugadorId)
+        {
+            usuarios.Exigir(Accion.VerPartidasDeJugador);
+            return CalcularIndicadores(db.Partidas.Where(p => p.jugador_id == jugadorId && p.estado == EstadoPartida.Finalizada).ToList());
         }
 
         string NombreTramo(Partida partida, int id) => partida.contenido_version == 2 && resolverTramo != null
@@ -86,6 +118,7 @@ namespace LifeDrive.Motor
                 foreach (var t in new[] { origen, destino })
                     if (r.RutaRecorrida.Count == 0 || r.RutaRecorrida[r.RutaRecorrida.Count - 1] != t) r.RutaRecorrida.Add(t);
             }
+            r.Indicadores = CalcularIndicadores(new List<Partida> { p });
             return r;
         }
 
@@ -124,7 +157,7 @@ namespace LifeDrive.Motor
             usuarios.Exigir(Accion.GenerarReporte);
             var r = Resumen(partidaId);
             if (r.Partida.estado != EstadoPartida.Finalizada) throw new ErrorJuego("La partida aún no ha finalizado");
-            var pdf = GeneradorReportes.GenerarPdf(r);
+            var pdf = GeneradorReportes.GenerarPdf(r, IndicadoresJugador(r.Jugador.id));
             db.Ejecutar(() => eventos.Registrar(TipoEvento.ReporteGenerado, usuarios.Actual, partidaId, detalle: $"Jugador {r.Jugador.cedula}"));
             return pdf;
         }

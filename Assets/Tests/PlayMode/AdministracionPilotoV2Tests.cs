@@ -183,6 +183,13 @@ namespace LifeDrive.Tests
             var decisiones = datos.Decisiones.Where(d => d.partida_id == p.id).ToArray();
             Assert.That(panel.ResumenVisible.Historial.Select(h => h.Decision.id), Is.EqualTo(decisiones.Select(d => d.id)));
             foreach (var d in decisiones) Assert.That(Vista().detalle.text, Does.Contain(d.consecuencia));
+            // S3-09: el panel muestra los cuatro KPI del servicio, de la partida y del acumulado del jugador.
+            Assert.That(Vista().detalle.text, Does.Contain("INDICADORES (S3-09)"));
+            Assert.That(Vista().detalle.text, Does.Not.Contain("pendientes del servicio de indicadores"));
+            var acumulado = piloto.Juego.Desempeno.IndicadoresJugador(p.jugador_id);
+            Assert.That(panel.IndicadoresJugadorVisibles.PartidasConsideradas, Is.EqualTo(acumulado.PartidasConsideradas));
+            for (int i = 0; i < acumulado.Todos.Count; i++)
+                Assert.That(Vista().detalle.text, Does.Contain(panel.ResumenVisible.Indicadores.Todos[i].Texto + " | " + acumulado.Todos[i].Texto));
             Assert.That(panel.EventosVisibles, Is.Not.Empty);
             Assert.That(panel.EventosVisibles.All(e => e.partida_id == p.id && (e.jugador_id == 0 || e.jugador_id == p.jugador_id)), Is.True);
         }

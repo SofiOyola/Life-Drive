@@ -62,6 +62,8 @@ namespace LifeDrive.Motor
 
         public Tramo Tramo(Partida partida, int id) => ContenidoDe(partida).tramos.First(t => t.id == id);
 
+        internal Situacion Situacion(Partida partida, int id) => ContenidoDe(partida).situaciones.FirstOrDefault(s => s.id == id);
+
         Contenido ContenidoDe(Partida partida)
         {
             var disponible = ContenidoDe(partida.contenido_version);
