@@ -74,7 +74,8 @@ namespace LifeDrive.IntegracionV2
         {
             AjustarVista();
             AnimarVolante();
-            if (salidaAbierta || reconocimientosAbiertos || pausa || (Estado != Fase.EnMarcha && Estado != Fase.Transicion)) return;
+            if (configuracionAbierta) ActualizarEtiquetaMusica(); // la tecla M puede cambiarla con el panel abierto
+            if (salidaAbierta || configuracionAbierta || reconocimientosAbiertos || pausa || (Estado != Fase.EnMarcha && Estado != Fase.Transicion)) return;
             Ejecutar(Avanzar);
         }
 
@@ -163,7 +164,7 @@ namespace LifeDrive.IntegracionV2
 
         void Responder(int indice)
         {
-            if (salidaAbierta || Estado != Fase.Situacion || indice >= situacion.alternativas.Length) return;
+            if (salidaAbierta || configuracionAbierta || Estado != Fase.Situacion || indice >= situacion.alternativas.Length) return;
             Estado = Fase.Consecuencia;
             DeshabilitarRespuestas();
             Ejecutar(() =>
@@ -181,7 +182,7 @@ namespace LifeDrive.IntegracionV2
 
         void Continuar()
         {
-            if (salidaAbierta || Estado != Fase.Consecuencia) return;
+            if (salidaAbierta || configuracionAbierta || Estado != Fase.Consecuencia) return;
             Ejecutar(() =>
             {
                 if (esV1) { PrepararSiguienteV1(); return; }

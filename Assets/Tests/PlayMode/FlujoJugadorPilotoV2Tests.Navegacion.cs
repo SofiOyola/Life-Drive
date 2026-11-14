@@ -226,7 +226,7 @@ namespace LifeDrive.Tests
             Activar(); yield return Registrar(7);
             var prueba = Object.FindAnyObjectByType<PruebaIntegracionV2>();
             yield return Esperar(prueba, Fase.Situacion); Click(Boton("Respuesta 1")); Click(Boton("Continuar"));
-            Assert.That(prueba.Estado, Is.EqualTo(Fase.EnMarcha)); Click(Boton("Pausa"));
+            Assert.That(prueba.Estado, Is.EqualTo(Fase.EnMarcha)); Click(Boton("Configuración")); Click(Boton("Pausa"));
             Assert.That(prueba.Pausada, Is.True);
             int eventos = piloto.Juego.BaseDatos.Eventos.Count;
             float posicion = prueba.ProgresoMapa;
@@ -234,7 +234,7 @@ namespace LifeDrive.Tests
             Click(Boton("Seguir en la operación")); yield return new WaitForSecondsRealtime(.15f);
             Assert.That(prueba.Pausada, Is.True); Assert.That(prueba.ProgresoMapa, Is.EqualTo(posicion));
             Assert.That(piloto.Juego.BaseDatos.Eventos.Count, Is.EqualTo(eventos));
-            Click(Boton("Pausa")); Assert.That(prueba.Pausada, Is.False);
+            Click(Boton("Configuración")); Click(Boton("Pausa")); Assert.That(prueba.Pausada, Is.False);
         }
     }
 }

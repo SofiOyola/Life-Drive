@@ -44,7 +44,8 @@ namespace LifeDrive.IntegracionV2
                 t != panel && t != vista.revisar.transform && t != vista.volver.transform &&
                 t != vista.acento.transform && t != nuevaOperacion.transform &&
                 t != vista.titulo.transform && t != vista.aviso.transform &&
-                t.name != "Fondo" && t.name != "Modo" && t.name != "Ayuda de teclado").ToArray();
+                t.name != "Fondo" && t.name != "Modo" && t.name != "Ayuda de teclado" &&
+                t.GetComponent<ConfiguracionPantalla>() == null).ToArray(); // el botón Configuración se ve también con las métricas abiertas
             foreach (RectTransform elemento in elementosResumen)
                 elemento.anchoredPosition += new Vector2(0, 64);
 

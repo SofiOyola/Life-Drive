@@ -55,7 +55,7 @@ namespace LifeDrive.IntegracionV2
             relleno.anchoredPosition = new Vector2(720, -65.5f);
             puntos = Texto(superior.transform, "Puntos", 1060, 10, 245, 62, "0 pts", 27, true);
             variacionTexto = Texto(superior.transform, "Variación guardada", 1060, 76, 245, 26, "Sin respuestas", 18);
-            pausaBoton = Boton(superior.transform, "Pausa", "Pausar", 1330, 24, 190, 58, AlternarPausa, out pausaTexto);
+            ConstruirConfiguracion(superior.transform); // «Configuración» ocupa la ranura de Pausar; pausa, reiniciar vista y música van dentro
 
             var bitacora = Caja("Bitácora", marco, 1094, 144, 482, 637, Panel);
             tipoFicha = Texto(bitacora.transform, "Sección", 24, 16, 425, 34, "BITÁCORA DEL RECORRIDO", 22, true, Dorado);
@@ -97,8 +97,8 @@ namespace LifeDrive.IntegracionV2
             situacionesTexto = Texto(pie.transform, "Situaciones resueltas", 24, 38, 690, 30, "", 19, false, Suave);
             reconocimientosBoton = Boton(pie.transform, "Reconocimientos", "Reconocimientos", 724, 10, 510, 54,
                 AlternarReconocimientos, out reconocimientosTexto);
-            reinicio = Boton(pie.transform, "Reinicio visual", alResultado == null ? "Reiniciar vista" : "Reintentar", 1266, 10, 262, 54,
-                ReiniciarVista, out _);
+            // En el modo jugador «Reintentar» sigue a la vista cuando hay un error (es una recuperación, no un ajuste).
+            if (alResultado != null) reinicio = Boton(pie.transform, "Reinicio visual", "Reintentar", 1266, 10, 262, 54, ReiniciarVista, out _);
             mapa.gameObject.SetActive(true);
             situacionesTexto.gameObject.SetActive(true);
             ConstruirReconocimientos(bitacora.gameObject);
@@ -162,13 +162,17 @@ namespace LifeDrive.IntegracionV2
             puntos.text = Estado == Fase.Error ? "Puntos no disponibles" : (partida?.puntos ?? 0) + " pts de seguridad";
             mapa.text = esV1 && partida != null ? "TRAMO: " + juego.Partidas.Tramo(partida,partida.tramo_actual_id).nombre : "MAPA " + (MapaVisible ?? "S0");
             ActualizarGamificacion();
+            GestorAudio.Sincronizar(Estado == Fase.Situacion, pausa); // música de decisión mientras hay una situación abierta; se pausa con el juego
             if (alResultado != null) reconocimientosTexto.text = "Reconocimientos";
             inicio.gameObject.SetActive(alResultado == null && Estado == Fase.Preparada || Estado == Fase.Error && partidaId == 0);
-            reinicio.gameObject.SetActive(partidaId != 0 && (alResultado == null || Estado == Fase.Error));
+            if (alResultado == null) reinicio.interactable = partidaId != 0; // dentro del panel de configuración
+            else reinicio.gameObject.SetActive(partidaId != 0 && Estado == Fase.Error);
+            if (reinicioConfig != null) reinicioConfig.interactable = partidaId != 0;
             continuar.gameObject.SetActive(Estado == Fase.Consecuencia);
             nuevaPrueba.gameObject.SetActive(Estado == Fase.Entregada);
-            pausaBoton.gameObject.SetActive(Estado == Fase.EnMarcha || Estado == Fase.Transicion);
-            pausaTexto.text = pausa ? "Reanudar" : "Pausar";
+            pausaBoton.interactable = (Estado == Fase.EnMarcha || Estado == Fase.Transicion) && !reconocimientosAbiertos;
+            pausaTexto.text = pausa ? "Reanudar recorrido" : "Pausar recorrido";
+            ActualizarEtiquetaMusica();
             bool consecuencia = Estado == Fase.Consecuencia;
             lecturaFicha.viewport.sizeDelta = new Vector2(434, consecuencia ? 380 : 190);
             lecturaFicha.viewport.anchoredPosition = new Vector2(241, -118 - (consecuencia ? 380 : 190) / 2f);
@@ -250,6 +254,8 @@ namespace LifeDrive.IntegracionV2
 
         void ActualizarRutaVisible()
         {
+            // Solo el pie del jugador. La pantalla independiente de pruebas conserva su contador de situaciones y el estado de entrega.
+            if (alResultado == null) return;
             var partida = juego?.BaseDatos.Partidas.FirstOrDefault(p => p.id == partidaId);
             if (partida == null || Estado == Fase.Error) return;
             mapa.text = "Retraso acumulado: " + partida.retraso_min + " min";

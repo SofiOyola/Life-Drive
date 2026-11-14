@@ -127,16 +127,71 @@ namespace LifeDrive.Tests
         }
 
         [UnityTest]
+        public IEnumerator LaMusicaAcompanaElRecorridoLaDecisionYLaPausa()
+        {
+            yield return AbrirEscena();
+            var gestor = GestorAudio.Instancia;
+            Assert.That(gestor.PistaActual, Is.EqualTo(GestorAudio.Pista.Ruta));
+
+            ClickAjuste("Pausa"); yield return null; yield return null;
+            Assert.That(gestor.Pausado, Is.True, "Pausar el juego pausa la música.");
+            ClickAjuste("Pausa"); yield return null; yield return null;
+            Assert.That(gestor.Pausado, Is.False);
+
+            yield return Esperar(Fase.Situacion); yield return null; yield return null;
+            Assert.That(gestor.PistaActual, Is.EqualTo(GestorAudio.Pista.Decision), "La situación abierta cambia a la música de decisión.");
+            Click(BuscarBoton("Respuesta 1")); yield return null; yield return null;
+            Assert.That(gestor.PistaActual, Is.EqualTo(GestorAudio.Pista.Ruta), "Al decidir vuelve la música del recorrido.");
+        }
+
+        [UnityTest]
+        public IEnumerator ConfiguracionReunePausaReinicioYMusica()
+        {
+            yield return AbrirEscena();
+            var gestor = GestorAudio.Instancia;
+            var panel = prueba.GetComponentsInChildren<Transform>(true).Single(t => t.name == "Configuración (fondo)").gameObject;
+            Assert.That(panel.activeSelf, Is.False, "El panel empieza cerrado.");
+            Assert.That(BuscarBoton("Pausa").gameObject.activeInHierarchy, Is.False, "La pausa ya no está suelta en la cabecera.");
+
+            Click("Configuración");
+            yield return Captura("Configuracion-abierta");
+            Assert.That(panel.activeSelf, Is.True);
+            Assert.That(prueba.ConfiguracionAbierta, Is.True);
+            float progreso = prueba.ProgresoMapa;
+            yield return new WaitForSecondsRealtime(.3f);
+            Assert.That(prueba.ProgresoMapa, Is.EqualTo(progreso), "Con el panel abierto el camión no avanza.");
+
+            bool silenciadoAntes = gestor.Silenciado;
+            try
+            {
+                Click("Música del juego");
+                Assert.That(gestor.Silenciado, Is.Not.EqualTo(silenciadoAntes));
+                Assert.That(BuscarBoton("Música del juego").GetComponentInChildren<TMP_Text>().text,
+                    Is.EqualTo(gestor.Silenciado ? "Música: silenciada" : "Música: activa"));
+            }
+            finally { gestor.Silenciado = silenciadoAntes; }
+
+            Click("Pausa");
+            Assert.That(prueba.Pausada, Is.True);
+            Assert.That(panel.activeSelf, Is.False, "Pausar cierra el panel y el título muestra la pausa.");
+            ClickAjuste("Pausa");
+            Assert.That(prueba.Pausada, Is.False);
+
+            Click("Configuración"); Click("Cerrar configuración");
+            Assert.That(prueba.ConfiguracionAbierta, Is.False);
+        }
+
+        [UnityTest]
         public IEnumerator RestauraHitosYPuedePausarYReiniciarLaPresentacion()
         {
             yield return AbrirEscena();
             var idPartida = LeerDatos().Partidas.Single().id;
-            Click("Pausa");
+            ClickAjuste("Pausa");
             float progreso = prueba.ProgresoMapa;
             yield return null;
             Assert.That(prueba.Pausada, Is.True);
             Assert.That(prueba.ProgresoMapa, Is.EqualTo(progreso));
-            Click("Pausa");
+            ClickAjuste("Pausa");
             yield return AbrirEscena();
             Assert.That(prueba.MapaVisible, Is.EqualTo("S0"));
             yield return ResponderYContinuar(1);
@@ -154,8 +209,8 @@ namespace LifeDrive.Tests
                 {
                     Assert.That(prueba.Estado, Is.EqualTo(Fase.Transicion));
                     yield return null;
-                    Click("Pausa");
-                    Click("Reinicio visual");
+                    ClickAjuste("Pausa");
+                    ClickAjuste("Reinicio visual");
                     Assert.That(prueba.Estado, Is.EqualTo(Fase.Consecuencia));
                     Click("Continuar");
                     yield return AbrirEscena();
@@ -234,7 +289,7 @@ namespace LifeDrive.Tests
             Assert.That(prueba.Gamificacion.Puntos, Is.EqualTo(20));
             Assert.That(prueba.Gamificacion.BuenasPracticas.Length, Is.EqualTo(1));
             Assert.That(LeerDatos().Eventos.Count(e => e.tipo == TipoEvento.BuenaPractica), Is.EqualTo(1));
-            Click("Reinicio visual");
+            ClickAjuste("Reinicio visual");
             Assert.That(prueba.Gamificacion.BuenasPracticas.Length, Is.EqualTo(1));
             Assert.That(LeerDatos().Decisiones.Count, Is.EqualTo(1));
         }
@@ -258,6 +313,17 @@ namespace LifeDrive.Tests
         Button BuscarBoton(string nombre) => prueba.GetComponentsInChildren<Button>(true)
             .Single(b => b.name == nombre);
         void Click(string nombre) => Click(BuscarBoton(nombre));
+        // Pausa, reinicio de vista y música están dentro del panel «Configuración» (Pausa y Reiniciar lo cierran).
+        static IEnumerator Captura(string nombre)
+        {
+            yield return new WaitForEndOfFrame();
+            var imagen = ScreenCapture.CaptureScreenshotAsTexture();
+            var destino = Path.GetFullPath(Path.Combine(Application.dataPath, "../TestEvidence/ConfiguracionV2"));
+            Directory.CreateDirectory(destino);
+            File.WriteAllBytes(Path.Combine(destino, nombre + ".png"), imagen.EncodeToPNG());
+            Object.Destroy(imagen);
+        }
+        void ClickAjuste(string nombre) { Click("Configuración"); Click(nombre); }
         static void Click(Button boton) => ExecuteEvents.Execute(boton.gameObject,
             new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left },
             ExecuteEvents.pointerClickHandler);

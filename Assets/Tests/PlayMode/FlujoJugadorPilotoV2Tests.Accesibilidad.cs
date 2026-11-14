@@ -37,10 +37,12 @@ namespace LifeDrive.Tests
             {
                 Resolucion(resolucion == 1920); Activar(); yield return Pantalla("Inicio");
                 var vista = Object.FindAnyObjectByType<PersonalizacionRegistroUI>();
+                yield return EsperarConfiguracion("Inicio");
                 Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(vista.jugar.gameObject));
                 Assert.That(vista.jugar.transform.Find("Foco accesible").gameObject.activeSelf, Is.True);
                 yield return teclas.Pulsar(Key.Tab, true);
-                Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(vista.administrador.gameObject));
+                Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Boton("Configuración").gameObject),
+                    "«Configuración» es el último elemento de Inicio: Mayús+Tab desde Jugar da la vuelta hasta él.");
                 yield return teclas.Pulsar(Key.Tab); yield return CapturaAccesibilidad("Inicio-foco");
                 yield return teclas.Pulsar(Key.Enter); yield return Pantalla("Registro");
                 vista = Object.FindAnyObjectByType<PersonalizacionRegistroUI>();
@@ -118,7 +120,93 @@ namespace LifeDrive.Tests
                 yield return teclas.Pulsar(Key.LeftArrow);
                 Assert.That(resultado.filasDecisiones[0].text, Is.EqualTo(seguridad));
                 yield return CapturaAccesibilidad("Resultado-foco");
+                yield return EsperarConfiguracion("Resultado");
+                Click(Boton("Configuración")); yield return null;
+                Assert.That(Boton("Música del juego").gameObject.activeInHierarchy, Is.True);
+                yield return CapturaAccesibilidad("Resultado-configuracion");
+                yield return teclas.Pulsar(Key.Escape);
+                Assert.That(Object.FindObjectsByType<Button>().Any(b => b.name == "Cerrar configuración"), Is.False, "Escape cierra el panel.");
                 yield return teclas.IrA(resultado.volver); yield return teclas.Pulsar(Key.Enter); yield return Pantalla("Inicio");
+            }
+        }
+
+        static IEnumerator EsperarConfiguracion(string donde = "")
+        {
+            // El botón lo añade el gestor de audio cuando la interfaz de la pantalla ya existe.
+            for (int i = 0; i < 60 && Object.FindObjectsByType<Button>().All(b => b.name != "Configuración"); i++) yield return null;
+            Assert.That(Object.FindObjectsByType<Button>().Any(b => b.name == "Configuración"), Is.True, "Debe haber un botón Configuración (" + donde + ").");
+        }
+
+        [UnityTest]
+        public IEnumerator AccesibilidadConfiguracionEnInicioYRegistroConElEstiloDeCadaPantalla()
+        {
+            using (var teclas = new TeclasPilotoPruebas())
+            {
+                Resolucion(true); Activar(); yield return Pantalla("Inicio");
+                yield return EsperarConfiguracion();
+                var gestor = GestorAudio.Instancia; bool antes = gestor.Silenciado;
+                try
+                {
+                    var inicio = Object.FindAnyObjectByType<PersonalizacionRegistroUI>();
+                    var abrir = Boton("Configuración");
+                    // Mismo tipo de botón que los de la pantalla: misma fuente y el mismo componente de efecto.
+                    Assert.That(abrir.GetComponentInChildren<TMP_Text>().font, Is.SameAs(inicio.administrador.GetComponentInChildren<TMP_Text>().font));
+                    Assert.That(abrir.GetComponent<RespuestaBotonUI>(), Is.Not.Null);
+                    Assert.That(abrir.transform.parent.GetComponentInParent<Canvas>().rootCanvas, Is.SameAs(inicio.jugar.GetComponentInParent<Canvas>().rootCanvas));
+                    Click(abrir); yield return null;
+                    Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Boton("Cerrar configuración").gameObject), "El foco entra al panel.");
+                    yield return CapturaAccesibilidad("Inicio-configuracion");
+                    Click(Boton("Música del juego"));
+                    Assert.That(gestor.Silenciado, Is.Not.EqualTo(antes));
+                    Assert.That(Boton("Música del juego").GetComponentInChildren<TMP_Text>().text,
+                        Is.EqualTo(gestor.Silenciado ? "Música: silenciada" : "Música: activa"));
+                    Click(Boton("Música del juego"));
+                    Assert.That(gestor.Silenciado, Is.EqualTo(antes));
+                    yield return teclas.Pulsar(Key.Escape);
+                    Assert.That(Object.FindObjectsByType<Button>().Any(b => b.name == "Cerrar configuración"), Is.False, "Escape cierra el panel.");
+                    Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Boton("Configuración").gameObject));
+
+                    Click(inicio.jugar); yield return Pantalla("Registro");
+                    yield return EsperarConfiguracion();
+                    var registro = Object.FindAnyObjectByType<PersonalizacionRegistroUI>();
+                    Assert.That(Boton("Configuración").GetComponentInChildren<TMP_Text>().font, Is.SameAs(registro.volver.GetComponentInChildren<TMP_Text>().font));
+                    yield return CapturaAccesibilidad("Registro-configuracion-cerrada");
+                    Click(Boton("Configuración")); yield return null;
+                    yield return CapturaAccesibilidad("Registro-configuracion");
+                    Click(Boton("Cerrar configuración"));
+                    Assert.That(Object.FindObjectsByType<Button>().Any(b => b.name == "Cerrar configuración"), Is.False);
+                }
+                finally { gestor.Silenciado = antes; }
+            }
+        }
+
+        [UnityTest]
+        public IEnumerator AccesibilidadConfiguracionConTecladoMusicaYEscape()
+        {
+            using (var teclas = new TeclasPilotoPruebas())
+            {
+                Resolucion(true); Activar(); yield return Registrar(7);
+                var prueba = Object.FindAnyObjectByType<PruebaIntegracionV2>();
+                yield return Esperar(prueba, Fase.Situacion);
+                var abrir = Boton("Configuración");
+                yield return teclas.IrA(abrir); yield return teclas.Pulsar(Key.Enter);
+                Assert.That(prueba.ConfiguracionAbierta, Is.True);
+                yield return null;
+                Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Boton("Cerrar configuración").gameObject), "El foco entra al panel.");
+                yield return CapturaAccesibilidad("Configuracion-abierta");
+
+                var gestor = GestorAudio.Instancia; bool antes = gestor.Silenciado;
+                try
+                {
+                    yield return teclas.IrA(Boton("Música del juego")); yield return teclas.Pulsar(Key.Enter);
+                    Assert.That(gestor.Silenciado, Is.Not.EqualTo(antes), "Enter sobre «Música» la silencia o la reactiva.");
+                }
+                finally { gestor.Silenciado = antes; }
+
+                yield return teclas.Pulsar(Key.Escape);
+                Assert.That(prueba.ConfiguracionAbierta, Is.False, "Escape cierra el panel.");
+                Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(abrir.gameObject), "El foco vuelve al botón Configuración.");
+                Assert.That(prueba.Estado, Is.EqualTo(Fase.Situacion), "Abrir y cerrar los ajustes no toca la partida.");
             }
         }
 

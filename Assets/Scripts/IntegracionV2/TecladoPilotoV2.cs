@@ -109,11 +109,17 @@ namespace LifeDrive.IntegracionV2
             var botones = FindObjectsByType<Button>();
             var salir = botones.FirstOrDefault(b => b.name == "Seguir en la operación" && b.gameObject.activeInHierarchy);
             var cerrar = botones.FirstOrDefault(b => b.name == "Cerrar reconocimientos" && b.gameObject.activeInHierarchy);
-            GameObject ambito = salir != null ? salir.transform.parent.gameObject : cerrar != null ? cerrar.transform.parent.gameObject : null;
+            var ajustes = botones.FirstOrDefault(b => b.name == "Cerrar configuración" && b.gameObject.activeInHierarchy);
+            var configuracion = botones.FirstOrDefault(b => b.name == "Configuración" && b.gameObject.activeInHierarchy); // Inicio, Registro y Resultado
+            GameObject ambito = salir != null ? salir.transform.parent.gameObject : cerrar != null ? cerrar.transform.parent.gameObject :
+                ajustes != null ? ajustes.transform.parent.gameObject : null;
             if (ambito != null)
             {
-                Agregar(salir != null ? salir : cerrar);
+                Agregar(salir != null ? salir : cerrar != null ? cerrar : ajustes);
                 if (salir != null) Agregar(botones.FirstOrDefault(b => b.name == "Confirmar Inicio"));
+                if (ajustes != null)
+                    foreach (var nombre in new[] { "Pausa", "Reiniciar vista", "Reinicio visual", "Música del juego" })
+                        Agregar(botones.FirstOrDefault(b => b.name == nombre && b.gameObject.activeInHierarchy));
             }
             else
             {
@@ -121,13 +127,13 @@ namespace LifeDrive.IntegracionV2
                 var admin = FindAnyObjectByType<VistaAdministrativaDemo>(FindObjectsInactive.Include);
                 if (registro != null)
                 {
-                    if (!registro.registro) { Agregar(registro.jugar); Agregar(registro.administrador); }
+                    if (!registro.registro) { Agregar(registro.jugar); Agregar(registro.administrador); Agregar(configuracion); }
                     else
                     {
                         Agregar(registro.nombre); Agregar(registro.documento);
                         foreach (var b in botones.Where(b => b.name.StartsWith("Ficha piloto ")).OrderBy(b => b.name)) Agregar(b);
                         foreach (var b in registro.estilos.Concat(registro.piel).Concat(registro.ojos).Concat(registro.cabello).Concat(registro.traje)) Agregar(b);
-                        Agregar(botones.FirstOrDefault(b => b.name == "Recuperar apariencia")); Agregar(registro.comprobar); Agregar(registro.volver);
+                        Agregar(botones.FirstOrDefault(b => b.name == "Recuperar apariencia")); Agregar(registro.comprobar); Agregar(registro.volver); Agregar(configuracion);
                     }
                 }
                 else if (admin != null)
@@ -152,6 +158,7 @@ namespace LifeDrive.IntegracionV2
                         Agregar(resultado.revisar);
                         foreach (var b in resultado.selectores) Agregar(b);
                         Agregar(resultado.volver);
+                        Agregar(configuracion);
                     }
                     else
                     {

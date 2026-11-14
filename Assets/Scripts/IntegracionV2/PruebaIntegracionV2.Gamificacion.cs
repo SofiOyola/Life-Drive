@@ -44,11 +44,11 @@ namespace LifeDrive.IntegracionV2
 
         void AlternarReconocimientos()
         {
-            if (salidaAbierta) return;
+            if (salidaAbierta || configuracionAbierta) return;
             reconocimientosAbiertos = !reconocimientosAbiertos;
             panelReconocimientos.SetActive(reconocimientosAbiertos);
             bitacoraGamificacion.SetActive(!reconocimientosAbiertos);
-            pausaBoton.interactable = !reconocimientosAbiertos;
+            pausaBoton.interactable = !reconocimientosAbiertos && (Estado == Fase.EnMarcha || Estado == Fase.Transicion);
             // Presentation is suspended by Update. No decision, event, reward or manual-pause change.
         }
 

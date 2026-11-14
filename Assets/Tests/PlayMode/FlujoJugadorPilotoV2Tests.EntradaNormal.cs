@@ -44,7 +44,7 @@ namespace LifeDrive.Tests
                 Is.EqualTo(clasico ? "Recorrido clásico activo." : "Piloto de carreteras activo."));
             Assert.That(Path.GetFullPath(piloto.CarpetaDatos),Is.EqualTo(Path.GetFullPath(carpeta)));
             Assert.That(Object.FindObjectsByType<TMP_Text>().Any(t=>t.text.Contains("SIN CONEXIÓN AL MOTOR")),Is.False);
-            Assert.That(Object.FindObjectsByType<Button>().Length, Is.EqualTo(2));
+            Assert.That(Object.FindObjectsByType<Button>().Count(b => b.name != "Configuración"), Is.EqualTo(2)); // Jugar y Administradores; Configuración la añade el gestor de audio
         }
         IEnumerator RegistroEntrada()
         {
@@ -250,8 +250,12 @@ namespace LifeDrive.Tests
                             // Observe actual movement on the road, not a teleported preview.
                             float salida = reproductor.Distancia;
                             float limiteMovimiento = Time.realtimeSinceStartup + 4;
+                            // A 28x y con el Editor a pocos cuadros por segundo, un solo cuadro recorre todo el mapa
+                            // (deltaTime de varios segundos) y no se puede observar el avance. Se mira a velocidad normal.
+                            float escalaAceleradaPrevia = Time.timeScale; Time.timeScale = 1;
                             while (reproductor.Distancia < salida + 45 && prueba.MapaVisible == mapas[tramo] && Time.realtimeSinceStartup < limiteMovimiento)
                                 yield return null;
+                            Time.timeScale = escalaAceleradaPrevia;
                             Assert.That(prueba.MapaVisible, Is.EqualTo(mapas[tramo]));
                             Assert.That(reproductor.Distancia, Is.GreaterThan(salida + 40));
                             yield return CapturaEntrada(Hojas[ruta] + "-" + mapas[tramo] + "-camino-elegido", "BifurcacionesNicolas");
