@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>{{{ PRODUCT_NAME }}}</title>
+    <link rel="icon" href="data:,">
+    <style>
+      html, body { margin: 0; height: 100%; background: #18291c; overflow: hidden; }
+      body { display: flex; align-items: center; justify-content: center; font-family: system-ui, "Segoe UI", sans-serif; }
+      /* El juego está diseñado en 16:9: ocupa la ventana sin recortarse y deja franjas del color del juego. */
+      #juego { position: relative; width: min(100vw, calc(100vh * 16 / 9)); aspect-ratio: 16 / 9; background: #18291c; }
+      #unity-canvas { display: block; width: 100%; height: 100%; background: #18291c; outline: none; }
+      #carga { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+               gap: 18px; color: #f5ebcf; background: #18291c; text-align: center; padding: 24px; box-sizing: border-box; }
+      #carga h1 { margin: 0; font-size: clamp(28px, 6vw, 64px); letter-spacing: .12em; color: #dfc169; }
+      #carga p { margin: 0; font-size: clamp(14px, 2vw, 22px); color: #c2c9a8; }
+      #barra { width: min(60%, 520px); height: 14px; border-radius: 7px; background: #526538; overflow: hidden; }
+      #avance { width: 0; height: 100%; background: #dfc169; transition: width .15s linear; }
+      #error { color: #efaa82; font-size: clamp(14px, 2vw, 20px); max-width: 640px; }
+    </style>
+  </head>
+  <body>
+    <div id="juego">
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
+      <div id="carga">
+        <h1>LIFE DRIVE</h1>
+        <p id="mensaje">Cargando el juego… la primera vez puede tardar un poco.</p>
+        <div id="barra"><div id="avance"></div></div>
+        <p id="error"></p>
+      </div>
+    </div>
+    <script>
+      const canvas = document.querySelector("#unity-canvas");
+      const carga = document.querySelector("#carga");
+
+      function fallo(texto) {
+        document.querySelector("#mensaje").textContent = "No se pudo iniciar el juego.";
+        document.querySelector("#barra").style.display = "none";
+        document.querySelector("#error").textContent = texto;
+        carga.style.display = "flex";
+      }
+
+      const config = {
+        arguments: [],
+        dataUrl: "Build/{{{ DATA_FILENAME }}}",
+        frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+        codeUrl: "Build/{{{ CODE_FILENAME }}}",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "{{{ COMPANY_NAME }}}",
+        productName: "{{{ PRODUCT_NAME }}}",
+        productVersion: "{{{ PRODUCT_VERSION }}}",
+        // Las partidas guardadas (persistentDataPath) se conservan en el navegador al recargar o volver otro día.
+        autoSyncPersistentDataPath: true,
+        showBanner: (mensaje, tipo) => { if (tipo === "error") fallo(mensaje); else console.warn(mensaje); }
+      };
+
+      const lector = document.createElement("script");
+      lector.src = "Build/{{{ LOADER_FILENAME }}}";
+      lector.onload = () => {
+        createUnityInstance(canvas, config, (progreso) => {
+          document.querySelector("#avance").style.width = (100 * progreso) + "%";
+          if (progreso >= 1) carga.style.display = "none";
+        }).catch((e) => fallo(String(e)));
+      };
+      lector.onerror = () => fallo("No se encontró el cargador del juego. Revisa que la carpeta Build se haya publicado completa.");
+      document.body.appendChild(lector);
+
+    </script>
+  </body>
+</html>

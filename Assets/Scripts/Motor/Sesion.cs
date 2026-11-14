@@ -1,6 +1,7 @@
 // Punto de entrada compartido por todas las escenas: crea el ServicioJuego una sola vez
 // con las carpetas reales de Unity y recuerda la partida abierta entre escenas.
 using System.IO;
+using LifeDrive.Datos;
 using UnityEngine;
 
 namespace LifeDrive.Motor
@@ -12,7 +13,7 @@ namespace LifeDrive.Motor
         // Lanza ErrorJuego si ruta.json tiene errores o la base de datos no abre:
         // la pantalla de inicio lo muestra en vez de dejar jugar.
         public static ServicioJuego Juego => juego ??= new ServicioJuego(
-            Path.Combine(Application.streamingAssetsPath, "Contenido"),
+            RutasContenido.Carpeta,
             Application.persistentDataPath);
 
         public static int PartidaId;   // partida en curso o la que se acaba de terminar

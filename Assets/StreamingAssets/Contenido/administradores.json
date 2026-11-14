@@ -1,3 +1,10 @@
 {
-  "administradores": []
+    "administradores": [
+        {
+            "usuario": "admin",
+            "sal": "SJdEn0RMrzFQ0tnoNspttQ==",
+            "hash": "QqfNqX63Vdo0Xbn4z5l/sFtWZIMj/z+FedknXzz6YL8=",
+            "iteraciones": 100000
+        }
+    ]
 }

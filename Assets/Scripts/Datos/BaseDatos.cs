@@ -141,8 +141,14 @@ namespace LifeDrive.Datos
                 t.version = VersionEsquema;
             var temporal = archivo + ".tmp";
             File.WriteAllText(temporal, JsonUtility.ToJson(t, true));
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // En la web no se usa File.Replace: se conserva la copia .bak y se mueve el temporal.
+            if (File.Exists(archivo)) { File.Copy(archivo, archivo + ".bak", true); File.Delete(archivo); }
+            File.Move(temporal, archivo);
+#else
             if (File.Exists(archivo)) File.Replace(temporal, archivo, archivo + ".bak");
             else File.Move(temporal, archivo);
+#endif
         }
 
         // Si el archivo está dañado se aparta (nunca se sobrescribe) y se usa la copia .bak.

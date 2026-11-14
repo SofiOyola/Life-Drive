@@ -86,8 +86,8 @@ namespace LifeDrive.IntegracionV2
             {
                 if (juego == null)
                 {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-                    var contenido = Path.Combine(Application.streamingAssetsPath, "Contenido");
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_WEBGL
+                    var contenido = RutasContenido.Carpeta;
                     var abierto = new ServicioJuego(contenido, CarpetaDatos, catalogo);
                     abierto.Usuarios.RegistrarJugador("Conductor de prueba V2", "990002", 1);
                     juego = abierto;

@@ -36,7 +36,7 @@ namespace LifeDrive.Mapas.InterfazVisual
             comprobar.onClick.AddListener(ComprobarDatos);
             try
             {
-                var contenido = new Almacen(Path.Combine(Application.streamingAssetsPath, "Contenido")).CargarContenido();
+                var contenido = new Almacen(RutasContenido.Carpeta).CargarContenido();
                 var personajes = contenido.personajes.OrderBy(p => p.id).ToArray();
                 if (personajes.Length != 4 || !personajes.Select(p => p.id).SequenceEqual(new[] { 1, 2, 3, 4 }) || tarjetas.Length != 4)
                     throw new InvalidOperationException("El catálogo de retratos necesita revisar sus cuatro IDs de contenido.");

@@ -149,7 +149,7 @@ namespace LifeDrive.IntegracionV2
                 () => Ejecutar(() =>
                 {
                     if (UltimoPdf == null || !File.Exists(UltimoPdf)) throw new ErrorJuego("Genera primero el PDF de esta partida.");
-                    Application.OpenURL(new Uri(UltimoPdf).AbsoluteUri);
+                    ArchivosWeb.Abrir(UltimoPdf); // en la web lo descarga el navegador
                 }));
             PrepararDesplazamiento();
             Ejecutar(Buscar);

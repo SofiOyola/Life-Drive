@@ -73,7 +73,7 @@ namespace LifeDrive.UI
                 Directory.CreateDirectory(Sesion.CarpetaReportes);
                 var ruta = Path.Combine(Sesion.CarpetaReportes, $"lifedrive-partida-{partidaId}.pdf");
                 File.WriteAllBytes(ruta, juego.Desempeno.ReportePdf(partidaId));
-                Application.OpenURL("file:///" + ruta.Replace('\\', '/'));
+                ArchivosWeb.Abrir(ruta); // en la web lo descarga el navegador
                 Mostrar($"Reporte guardado en {ruta}");
             }
             catch (IOException e) { Mostrar("No se pudo guardar el reporte: " + e.Message + ". Intenta de nuevo."); }

@@ -35,7 +35,7 @@ namespace LifeDrive.Mapas.InterfazVisual
             revisar.onClick.AddListener(AlternarDecisiones);
             try
             {
-                personajes = new Almacen(Path.Combine(Application.streamingAssetsPath, "Contenido")).CargarContenido().personajes;
+                personajes = new Almacen(RutasContenido.Carpeta).CargarContenido().personajes;
                 if (ejemplos.Length != 3 || ejemplos.Any(e => e == null || !personajes.Any(p => p.id == e.personajeId) || e.decisiones.Length != filasDecisiones.Length || e.insignias.Any(id => !definiciones.reconocimientos.Any(d => d.id == id))))
                     throw new InvalidOperationException("Revisar los tres conjuntos de datos DEMO, personajes o insignias.");
                 for (int i = 0; i < selectores.Length; i++) { int opcion = i; selectores[i].onClick.AddListener(() => Mostrar(opcion)); }

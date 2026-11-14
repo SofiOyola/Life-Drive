@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using LifeDrive.Datos;
 using LifeDrive.Mapas;
 using LifeDrive.Mapas.InterfazVisual;
 using LifeDrive.Motor;
@@ -27,7 +28,7 @@ namespace LifeDrive.IntegracionV2
         readonly Dictionary<TMP_FontAsset, TMP_FontAsset> fuentes = new Dictionary<TMP_FontAsset, TMP_FontAsset>();
         readonly LifeDrive.Mapas.Demo.IconosReconocimientoDemo iconosResultado = new LifeDrive.Mapas.Demo.IconosReconocimientoDemo();
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_WEBGL
         public static FlujoJugadorPilotoV2 Activar(CatalogoMapas catalogo, string sesion, Action<string> navegar,
             bool abrirInicio = true, string carpetaEnsayo = null)
         {
@@ -61,10 +62,18 @@ namespace LifeDrive.IntegracionV2
             string revision;
             using (var hash = System.Security.Cryptography.SHA256.Create())
                 revision = BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(
-                    Path.Combine(Application.streamingAssetsPath, "Contenido", "ruta-v2-candidata.json"))))
+                    Path.Combine(RutasContenido.Carpeta, "ruta-v2-candidata.json"))))
                     .Replace("-", "").Substring(0, 16);
-            return PrepararContenidoAislado(Path.Combine(Application.temporaryCachePath, "LifeDrive-FlujoJugadorV2", sesion + "-" + revision));
+            return PrepararContenidoAislado(Path.Combine(RaizPiloto, "LifeDrive-FlujoJugadorV2", sesion + "-" + revision));
         }
+
+        // En la web la carpeta temporal no sobrevive a recargar la página: se usa el almacenamiento persistente del navegador.
+        static string RaizPiloto =>
+#if UNITY_WEBGL && !UNITY_EDITOR
+            Application.persistentDataPath;
+#else
+            Application.temporaryCachePath;
+#endif
 
         static string PrepararContenidoAislado(string carpeta)
         {
@@ -73,8 +82,13 @@ namespace LifeDrive.IntegracionV2
             foreach (var nombre in new[] { "ruta.json", "ruta-v2-candidata.json" })
             {
                 var destino = Path.Combine(contenido, nombre);
-                if (!File.Exists(destino)) File.Copy(Path.Combine(Application.streamingAssetsPath, "Contenido", nombre), destino);
+                if (!File.Exists(destino)) File.Copy(Path.Combine(RutasContenido.Carpeta, nombre), destino);
             }
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // En la web no existe la herramienta del Editor para crear cuentas del piloto: se usan las del juego publicado
+            // (Life Drive > Administradores). Se copian siempre para que una cuenta nueva llegue al recargar la página.
+            File.Copy(Path.Combine(RutasContenido.Carpeta, "administradores.json"), Path.Combine(contenido, "administradores.json"), true);
+#endif
             return contenido;
         }
 #endif
@@ -137,7 +151,7 @@ namespace LifeDrive.IntegracionV2
                     vista.administrador.onClick.RemoveAllListeners();
                     vista.administrador.onClick.AddListener(() => { Juego.Usuarios.CerrarSesion(); Navegar("AdminLogin"); });
                     vista.mensaje.text = "Inicia o retoma tu recorrido.";
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_WEBGL
                     vista.mensaje.text = EsPilotoV2 ? "Piloto de carreteras activo." : "Recorrido clásico activo.";
 #endif
                     if (regresoDePartida) vista.mensaje.text = "Operación conservada. Pulsa Jugar e ingresa los mismos datos para retomarla.";

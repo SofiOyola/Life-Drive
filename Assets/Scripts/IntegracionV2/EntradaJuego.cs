@@ -47,7 +47,7 @@ namespace LifeDrive.IntegracionV2
                 return;
             }
 #endif
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_WEBGL
             flujo = FlujoJugadorPilotoV2.Activar(catalogoV2, "sesion-local", Cargar,
                 abrirInicio: false, carpetaEnsayo: CarpetaEnsayo());
 #else
