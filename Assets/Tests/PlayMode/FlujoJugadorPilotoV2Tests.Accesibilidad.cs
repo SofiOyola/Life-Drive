@@ -39,7 +39,7 @@ namespace LifeDrive.Tests
                 var vista = Object.FindAnyObjectByType<PersonalizacionRegistroUI>();
                 yield return EsperarConfiguracion("Inicio");
                 Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(vista.jugar.gameObject));
-                Assert.That(vista.jugar.transform.Find("Foco accesible").gameObject.activeSelf, Is.True);
+                Assert.That(vista.jugar.transform.Find("Foco accesible"), Is.Null, "Sin recuadro amarillo de foco.");
                 yield return teclas.Pulsar(Key.Tab, true);
                 Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Boton("Configuración").gameObject),
                     "«Configuración» es el último elemento de Inicio: Mayús+Tab desde Jugar da la vuelta hasta él.");
@@ -226,8 +226,8 @@ namespace LifeDrive.Tests
                 Assert.That(texto.fontSize, Is.EqualTo(25)); Assert.That(texto.isTextTruncated, Is.False);
                 Assert.That(scroll.content.rect.height, Is.GreaterThan(scroll.viewport.rect.height));
                 yield return teclas.IrA(scroll.GetComponent<Selectable>());
-                Assert.That(scroll.transform.Find("Foco accesible").gameObject.activeSelf, Is.True);
-                Assert.That(scroll.transform.Find("Foco accesible").GetComponent<RectTransform>().offsetMin.x, Is.GreaterThanOrEqualTo(0));
+                Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(scroll.gameObject));
+                Assert.That(scroll.transform.Find("Foco accesible"), Is.Null, "Sin recuadro amarillo de foco.");
                 for (int i = 0; i < 50 && scroll.verticalNormalizedPosition > .001f; i++) yield return teclas.Pulsar(Key.PageDown);
                 Assert.That(scroll.verticalNormalizedPosition, Is.LessThan(.001f));
                 yield return CapturaAccesibilidad("Texto-sintetico-final");
@@ -247,7 +247,7 @@ namespace LifeDrive.Tests
             yield return new WaitForSecondsRealtime(.4f);
             var texto = vista.administrador.GetComponentInChildren<TMP_Text>();
             Assert.That(TecladoPilotoV2.Contraste(texto.color, vista.administrador.targetGraphic.color), Is.GreaterThanOrEqualTo(4.5f));
-            Assert.That(vista.administrador.transform.Find("Foco accesible").gameObject.activeSelf, Is.True);
+            Assert.That(vista.administrador.transform.Find("Foco accesible"), Is.Null, "Sin recuadro amarillo de foco.");
             yield return CapturaAccesibilidad("Contraste-foco");
         }
     }

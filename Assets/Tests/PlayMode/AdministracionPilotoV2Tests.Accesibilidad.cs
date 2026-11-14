@@ -46,8 +46,8 @@ namespace LifeDrive.Tests
                 yield return null;
                 var scroll = Object.FindAnyObjectByType<ScrollRect>();
                 yield return teclas.IrA(scroll.GetComponent<Selectable>()); yield return teclas.Pulsar(Key.PageDown);
-                Assert.That(scroll.transform.Find("Foco accesible").gameObject.activeSelf, Is.True);
-                Assert.That(scroll.transform.Find("Foco accesible").GetComponent<RectTransform>().offsetMin.x, Is.GreaterThanOrEqualTo(0));
+                Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(scroll.gameObject));
+                Assert.That(scroll.transform.Find("Foco accesible"), Is.Null, "Sin recuadro amarillo de foco.");
                 Assert.That(scroll.verticalNormalizedPosition, Is.LessThan(.999f));
                 yield return Captura("Teclado-desempeno");
                 yield return teclas.IrA(Vista().pdf); yield return teclas.Pulsar(Key.Space);

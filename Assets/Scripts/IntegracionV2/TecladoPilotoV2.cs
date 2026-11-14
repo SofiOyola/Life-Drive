@@ -14,8 +14,7 @@ namespace LifeDrive.IntegracionV2
     [DefaultExecutionOrder(-200)]
     public sealed class TecladoPilotoV2 : MonoBehaviour
     {
-        static readonly Color Bosque = new Color32(24, 41, 28, 255), Crema = new Color32(245, 235, 207, 255), Oro = new Color32(223, 193, 105, 255);
-        readonly Dictionary<Selectable, GameObject> bordes = new Dictionary<Selectable, GameObject>();
+        static readonly Color Bosque = new Color32(24, 41, 28, 255), Crema = new Color32(245, 235, 207, 255);
         readonly List<Selectable> orden = new List<Selectable>();
         EventSystem eventos;
         bool navegacionAnterior;
@@ -75,8 +74,6 @@ namespace LifeDrive.IntegracionV2
                     if (teclado.pageUpKey.wasPressedThisFrame) lectura.verticalNormalizedPosition = Mathf.Clamp01(lectura.verticalNormalizedPosition + paso);
                 }
             }
-            foreach (var par in bordes)
-                if (par.Key != null && par.Value != null) par.Value.SetActive(par.Key.gameObject == eventos.currentSelectedGameObject && par.Key.IsInteractable() && orden.Contains(par.Key));
             foreach (var boton in FindObjectsByType<Button>())
             {
                 if (boton.targetGraphic == null) continue;
@@ -104,7 +101,7 @@ namespace LifeDrive.IntegracionV2
         {
             var escena = SceneManager.GetActiveScene();
             bool nuevaEscena = escena != escenaAnterior;
-            if (nuevaEscena) { bordes.Clear(); guia = null; escenaAnterior = escena; faseAnterior = null; ambitoAnterior = null; }
+            if (nuevaEscena) { guia = null; escenaAnterior = escena; faseAnterior = null; ambitoAnterior = null; }
             orden.Clear(); lectura = null;
             var botones = FindObjectsByType<Button>();
             var salir = botones.FirstOrDefault(b => b.name == "Seguir en la operación" && b.gameObject.activeInHierarchy);
@@ -189,20 +186,7 @@ namespace LifeDrive.IntegracionV2
         {
             if (s == null || !s.isActiveAndEnabled || !s.IsInteractable() || orden.Contains(s)) return;
             orden.Add(s);
-            if (bordes.ContainsKey(s)) return;
-            var existente = s.transform.Find("Foco accesible");
-            var borde = existente != null ? existente.gameObject : new GameObject("Foco accesible", typeof(RectTransform));
-            if (existente == null)
-            {
-                var rect = (RectTransform)borde.transform; rect.SetParent(s.transform, false);
-                rect.anchorMin = Vector2.zero; rect.anchorMax = Vector2.one; rect.offsetMin = new Vector2(-4,-4); rect.offsetMax = new Vector2(4,4);
-                if (s.GetComponent<RectMask2D>() != null) { rect.offsetMin = new Vector2(3,3); rect.offsetMax = new Vector2(-3,-3); }
-                Linea(rect, Vector2.zero, new Vector2(1,0), new Vector2(0,0), new Vector2(0,3));
-                Linea(rect, new Vector2(0,1), Vector2.one, new Vector2(0,-3), Vector2.zero);
-                Linea(rect, Vector2.zero, new Vector2(0,1), Vector2.zero, new Vector2(3,0));
-                Linea(rect, new Vector2(1,0), Vector2.one, new Vector2(-3,0), Vector2.zero);
-            }
-            borde.SetActive(false); bordes.Add(s,borde);
+            // Sin recuadro de foco (decisión de Javier, 2026-11-14): el botón con foco solo se aclara y crece un poco (RespuestaBotonUI).
             var feedback = s.GetComponent<RespuestaBotonUI>();
             if (feedback != null && Mathf.Max(Contraste(Crema, feedback.hover), Contraste(Bosque, feedback.hover)) < 4.5f)
                 feedback.hover = Color.Lerp(feedback.hover, Bosque, .25f);
@@ -215,13 +199,6 @@ namespace LifeDrive.IntegracionV2
             var control = lectura.GetComponent<Selectable>();
             if (control == null) { control = lectura.gameObject.AddComponent<Selectable>(); control.transition = Selectable.Transition.None; }
             Agregar(control);
-        }
-
-        static void Linea(Transform padre, Vector2 min, Vector2 max, Vector2 inferior, Vector2 superior)
-        {
-            var imagen = new GameObject("Borde", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
-            imagen.transform.SetParent(padre, false); imagen.color = Oro; imagen.raycastTarget = false;
-            var r = imagen.rectTransform; r.anchorMin = min; r.anchorMax = max; r.offsetMin = inferior; r.offsetMax = superior;
         }
 
         void CrearGuia()
@@ -261,7 +238,6 @@ namespace LifeDrive.IntegracionV2
         {
             // The pilot releases its temporary fonts on teardown. Remove our canvas text before its next rebuild.
             if (guia != null) { guia.transform.parent.gameObject.SetActive(false); Destroy(guia.transform.parent.gameObject); }
-            foreach (var borde in bordes.Values) if (borde != null) { borde.SetActive(false); Destroy(borde); }
             RestaurarEventos();
         }
 
